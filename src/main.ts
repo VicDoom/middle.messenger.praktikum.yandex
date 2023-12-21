@@ -5,11 +5,22 @@ import Handlebars from "handlebars";
 
 Object.entries({ ...Layouts, ...Components }).forEach(([name, component]) => {
   Handlebars.registerPartial(name, component);
-})
+});
+
+Handlebars.registerHelper("defaultValue", function (value, defaultValue) {
+  var out = value || defaultValue;
+  return new Handlebars.SafeString(out);
+});
+
+Handlebars.registerHelper("ifEquals", function(arg1, arg2, options) {
+  return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+});
 
 const PageList = {
   "page404": { source: Pages.Page404, context: "404!!!" },
   "page500": { source: Pages.Page500 },
+  "login": { source: Pages.LoginPage },
+  "register": { source: Pages.RegisterPage },
 };
 
 function navigate(page) {
@@ -22,4 +33,14 @@ function navigate(page) {
 console.log(Layouts);
 console.log(Components);
 console.log(Pages);
-document.addEventListener("DOMContentLoaded", () => navigate("page500"));
+document.addEventListener("DOMContentLoaded", () => navigate("register"));
+
+document.addEventListener("click", (e) => {
+  //@ts-ignore
+  const page = e.target?.getAttribute("page");
+  if (page) {
+    navigate(page);
+    e.preventDefault();
+    e.stopImmediatePropagation();
+  }
+});

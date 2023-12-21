@@ -1,0 +1,26 @@
+.button {
+    width: 280px;
+    height: 37px;
+    font-size: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--blue);
+    color: var(--white);
+    border-radius: 8px;
+    &:hover {
+        cursor: pointer;
+        background-color: var(--blue-dark);
+    }
+    &__link {
+        text-decoration: none;
+        background-color: var(--white);
+        width: auto;
+        height: auto;
+        color: var(--blue);
+        font-size: 11px;
+        &:hover {
+            background-color: var(--white);
+        }
+    }
+}

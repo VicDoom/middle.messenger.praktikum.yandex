@@ -1,8 +1,18 @@
 @import url("./components/link/link.css");
+@import url("./components/input/input.css");
+@import url("./components/button/button.css");
 @import url("./layouts/center-layout/center-layout.css");
+@import url("./layouts/form-layout/form-layout.css");
+@import url("./pages/login/login.css");
+@import url("./pages/register/register.css");
 
 :root {
+  --white: #ffffff;
   --blue: #3369F3;
+  --blue-light: #729eeb;
+  --blue-dark: #1351ee;
+  --grey: #999999;
+  --red: #FF2F2F;
 }
 
 html {
@@ -19,6 +29,15 @@ body, h1, h2, h3, h4, h5, h6, p, ol, ul {
     padding: 0;
     font-weight: normal;
     font-family: 'Inter';
+}
+
+#app {
+  height: 100%;
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
 }
   
 ol, ul {
@@ -46,3 +65,32 @@ img {
     padding-bottom: 40px;
   }
 }
+
+.form-info {
+  width: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &__inputs, &__buttons {
+    width: 100%;
+  }
+  &__inputs {
+    & > div {
+      padding-bottom: 8px;
+    }
+  }
+  &__buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    justify-content: flex-end;
+    flex-grow: 1;
+  }
+  &__title {
+    font-size: 20px;
+    line-height: 20px;
+    padding-bottom: 32px;
+  }
+}
+

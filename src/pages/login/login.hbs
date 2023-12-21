@@ -1,0 +1,32 @@
+{{#> CenterLayout }}
+    {{#> FormLayout }}
+        <div class="form-info login-page">
+            <div class="form-info__title">Войти</div>
+            <div class="form-info__inputs">
+                {{> Input 
+                    label="Логин" 
+                    value="Nikita"
+                    id="login"
+                    placeholder="введите логин"
+                }}
+                {{> Input 
+                    label="Пароль" 
+                    value=""
+                    id="password"
+                    placeholder="введите пароль"
+                    type="password"
+                }}
+            </div>
+            <div class="form-info__buttons">
+                {{> Button
+                text="Авторизоваться"
+                }}
+                {{> Button
+                    text="Нет аккаунта?"
+                    page="register"
+                    type="link"
+                }}
+            </div>
+        </div>
+    {{/ FormLayout }}
+{{/ CenterLayout }}
