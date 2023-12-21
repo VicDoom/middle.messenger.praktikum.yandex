@@ -1,0 +1,27 @@
+{
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": "latest"
+  },
+  "rules": {
+    "max-len": ["error", { "code": 120 }],
+    "no-unused-vars": "warn",
+    "no-console": "warn",
+    "quotes": ["error", "double"],
+    "jsx-quotes": ["error", "prefer-double"],
+    "prefer-const": "error",
+    "indent": ["error", 2],
+    "comma-dangle": ["error", "always-multiline"],
+    "semi": ["warn", "always"],
+    "import/order": ["warn", {
+      "groups": ["builtin", "external", "internal", "parent", "sibling", "index"]
+    }],
+    "sort-imports": ["error", {
+      "ignoreCase": false,
+      "ignoreDeclarationSort": true,
+      "ignoreMemberSort": false,
+      "allowSeparatedGroups": false
+    }],
+    "object-curly-spacing": ["error", "always"]
+  }
+}
