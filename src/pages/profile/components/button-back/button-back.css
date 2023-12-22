@@ -1,0 +1,14 @@
+.button-back {
+    height: 100%;
+    background-color: var(--grey-light);
+    box-shadow: 1px 0px 3px var(--grey-light);
+    width: 64px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 1s;
+    &:hover {
+        background-color: var(--grey-primary);
+        transition: 1s;
+    }
+}

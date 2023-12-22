@@ -1,0 +1,85 @@
+<div class="profile-page">
+    {{> ButtonBack }}
+    {{#> CenterLayout}}
+        <div class="profile-page__content">
+            <div class="profile-page__avatar">
+                <div class="profile-page__avatar-image">
+                    <img src="src/assets/icons/icon-avatar.svg" alt="avatar">
+                    <div class="profile-page__avatar-image-text">
+                        Поменять аватар
+                    </div>
+                </div>
+                <div class="profile-page__avatar-name">
+                    {{first_name}}
+                </div>
+            </div>
+            <div class="profile-page__inputs">
+                {{> Input 
+                    label="Почта" 
+                    value="soup@mail.ru"
+                    id="email"
+                    placeholder="введите почту"
+                    style-type="profile"
+                    disabled="true"
+                }}
+                {{> Input 
+                    label="Логин" 
+                    value="Nikita"
+                    id="login"
+                    placeholder="введите логин"
+                    style-type="profile"
+                    disabled="true"
+                }}
+                {{> Input 
+                    label="Имя" 
+                    value="Никита"
+                    id="first_name"
+                    placeholder="введите имя"
+                    style-type="profile"
+                    disabled="true"
+                }}
+                {{> Input 
+                    label="Фамилия" 
+                    value="Кушнарёв"
+                    id="second_name"
+                    placeholder="введите фамилию"
+                    style-type="profile"
+                    disabled="true"
+                }}
+                {{> Input 
+                    label="Имя в чате" 
+                    value="Никита"
+                    id="display_name"
+                    placeholder="введите имя"
+                    style-type="profile"
+                    disabled="true"
+                }}
+                {{> Input 
+                    label="Телефон" 
+                    value="+78005553535"
+                    id="phone"
+                    placeholder="введите номер телефона"
+                    style-type="profile"
+                    disabled="true"
+                }}
+            </div>
+            <div class="profile-page__buttons">
+                {{> Button
+                    type="link"
+                    text="Изменить данные"
+                }}
+                {{> Divider }}
+                {{> Button
+                    type="link"
+                    text="Изменить пароль"
+                }}
+                {{> Divider }}
+                {{> Button
+                    type="link"
+                    text="Выйти"
+                    color="red"
+                }}
+            </div>
+        </div>
+    {{/CenterLayout}}
+</div>

@@ -22,5 +22,8 @@
         &:hover {
             background-color: var(--white);
         }
+        & ~ .button--red {
+            color: var(--red);
+        }
     }
 }

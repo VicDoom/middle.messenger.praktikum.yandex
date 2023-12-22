@@ -1,10 +1,12 @@
-<div class="input">
+<div class="input {{#if disabled}}input--disabled{{/if}} input--{{style-type}}">
     <label for="{{id}}" class="input__label">{{label}}</label>
     <input 
         type="{{defaultValue type "text"}}"
         value="{{value}}"
         placeholder="{{placeholder}}"
-        class="input__field {{#if helper-text}}input__field--error{{/if}}"
+        class="input__field{{#if helper-text}} input__field--error{{/if}}"
+        name={{id}}
+        {{#if disabled}}disabled{{/if}}
     />
     {{#if helper-text}}
         <label for="{{id}}" class="input__helper">{{helper-text}}</label>

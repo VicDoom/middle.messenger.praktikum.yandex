@@ -1,10 +1,13 @@
 @import url("./components/link/link.css");
 @import url("./components/input/input.css");
 @import url("./components/button/button.css");
+@import url("./components/divider/divider.css");
 @import url("./layouts/center-layout/center-layout.css");
 @import url("./layouts/form-layout/form-layout.css");
 @import url("./pages/login/login.css");
 @import url("./pages/register/register.css");
+@import url("./pages/profile/profile.css");
+@import url("./pages/profile/components/button-back/button-back.css");
 
 :root {
   --white: #ffffff;
@@ -12,6 +15,8 @@
   --blue-light: #729eeb;
   --blue-dark: #1351ee;
   --grey: #999999;
+  --grey-primary: #cac4c4;
+  --grey-light: #FBFBFB;
   --red: #FF2F2F;
 }
 

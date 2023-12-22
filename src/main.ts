@@ -1,9 +1,10 @@
 import * as Pages from "./pages/index";
 import * as Layouts from "./layouts/index";
 import * as Components from "./components/index";
+import * as ProfileComponents from "./pages/profile/components/index";
 import Handlebars from "handlebars";
 
-Object.entries({ ...Layouts, ...Components }).forEach(([name, component]) => {
+Object.entries({ ...Layouts, ...Components, ...ProfileComponents }).forEach(([name, component]) => {
   Handlebars.registerPartial(name, component);
 });
 
@@ -21,6 +22,7 @@ const PageList = {
   "page500": { source: Pages.Page500 },
   "login": { source: Pages.LoginPage },
   "register": { source: Pages.RegisterPage },
+  "profile": { source: Pages.ProfilePage, context: { first_name: "Никита", second_name: "Кушнарёв" } },
 };
 
 function navigate(page) {
@@ -33,7 +35,7 @@ function navigate(page) {
 console.log(Layouts);
 console.log(Components);
 console.log(Pages);
-document.addEventListener("DOMContentLoaded", () => navigate("register"));
+document.addEventListener("DOMContentLoaded", () => navigate("profile"));
 
 document.addEventListener("click", (e) => {
   //@ts-ignore

@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    /* gap: 8px; */
     &__field {
         border: none;
         border-bottom: 2px solid var(--blue-light);
@@ -26,5 +25,29 @@
     &__helper {
         font-size: 10px;
         color: var(--red);
+    }
+
+    &--profile {
+        position: relative;
+        & .input__field {
+            border-bottom: 2px solid var(--grey);
+            text-align: end;
+        }
+        & .input__label {
+            top: 25%;
+            position: absolute;
+            background-color: var(--white);
+            color: var(--black);
+            padding: 0 8px 0 0;
+            font-size: 13px;
+        }
+    }
+
+    &--disabled {
+        & .input__field {
+            background-color: var(--white);
+            color: var(--grey);
+            border-bottom: 2px solid var(--grey);
+        }
     }
 }
