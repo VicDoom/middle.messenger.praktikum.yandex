@@ -1,19 +1,10 @@
-<div class="profile-page">
-    {{> ButtonBack }}
+<div class="profile-page profile-page--edit-fields">
+    {{> ButtonBack page="profile" }}
     {{#> CenterLayout}}
         <div class="profile-page__content">
             <div class="profile-page__avatar">
-                <div 
-                    class="profile-page__avatar-image"
-                    onclick="getElementById('profile-modal-add-avatar').classList.add('modal--opened')"
-                >
+                <div class="profile-page__avatar-image">
                     <img src="src/assets/icons/icon-avatar.svg" alt="avatar">
-                    <div class="profile-page__avatar-image-text">
-                        Поменять аватар
-                    </div>
-                </div>
-                <div class="profile-page__avatar-name">
-                    {{first_name}}
                 </div>
             </div>
             <div class="profile-page__inputs">
@@ -23,7 +14,6 @@
                     id="email"
                     placeholder="введите почту"
                     style-type="profile"
-                    disabled="true"
                 }}
                 {{> Input 
                     label="Логин" 
@@ -31,7 +21,6 @@
                     id="login"
                     placeholder="введите логин"
                     style-type="profile"
-                    disabled="true"
                 }}
                 {{> Input 
                     label="Имя" 
@@ -39,7 +28,6 @@
                     id="first_name"
                     placeholder="введите имя"
                     style-type="profile"
-                    disabled="true"
                 }}
                 {{> Input 
                     label="Фамилия" 
@@ -47,7 +35,6 @@
                     id="second_name"
                     placeholder="введите фамилию"
                     style-type="profile"
-                    disabled="true"
                 }}
                 {{> Input 
                     label="Имя в чате" 
@@ -55,7 +42,6 @@
                     id="display_name"
                     placeholder="введите имя"
                     style-type="profile"
-                    disabled="true"
                 }}
                 {{> Input 
                     label="Телефон" 
@@ -63,40 +49,13 @@
                     id="phone"
                     placeholder="введите номер телефона"
                     style-type="profile"
-                    disabled="true"
                 }}
             </div>
             <div class="profile-page__buttons">
                 {{> Button
-                    type="link"
-                    text="Изменить данные"
-                    page="profile-edit-fields"
-                }}
-                {{> Divider }}
-                {{> Button
-                    type="link"
-                    text="Изменить пароль"
-                    page="profile-edit-password"
-                }}
-                {{> Divider }}
-                {{> Button
-                    type="link"
-                    text="Выйти"
-                    color="red"
+                    text="Сохранить"
                 }}
             </div>
         </div>
     {{/CenterLayout}}
-    {{#> Modal id="profile-modal-add-avatar" }}
-        <div class="profile-modal-add-avatar__title">{{modal_avatar_title}}</div>
-        {{> Button text="Выбрать файл на компьютере" type="link" }}
-        <div "profile-modal-add-avatar__control">
-            {{> Button text="Поменять" page="profile"}}
-            {{#if avatar_error}}
-                <div class="profile-modal-add-avatar__error">
-                    Нужно выбрать файл
-                </div>
-            {{/if}}
-        </div>
-    {{/ Modal }}
 </div>

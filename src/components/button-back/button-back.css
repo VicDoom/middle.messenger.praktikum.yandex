@@ -11,4 +11,9 @@
         background-color: var(--grey-primary);
         transition: 1s;
     }
+    & > div {
+        &:hover {
+            cursor: pointer;
+        }
+    }
 }

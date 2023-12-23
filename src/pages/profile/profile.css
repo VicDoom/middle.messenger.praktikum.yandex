@@ -2,6 +2,7 @@
     height: 100%;
     display: grid;
     grid-template-columns: 1fr 11fr;
+    position: relative;
     &__content {
         width: 510px;
     }
@@ -54,5 +55,21 @@
         flex-direction: column;
         gap: 8px;
         align-items: flex-start;
+    }
+}
+
+#profile-modal-add-avatar {
+    & .modal__content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+
+        & .profile-modal-add-avatar__error {
+            font-size: 11px;
+            color: var(--red);
+            text-align: center;
+            padding-top: 8px;
+        }
     }
 }

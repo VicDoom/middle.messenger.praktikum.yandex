@@ -1,10 +1,9 @@
 import * as Pages from "./pages/index";
 import * as Layouts from "./layouts/index";
 import * as Components from "./components/index";
-import * as ProfileComponents from "./pages/profile/components/index";
 import Handlebars from "handlebars";
 
-Object.entries({ ...Layouts, ...Components, ...ProfileComponents }).forEach(([name, component]) => {
+Object.entries({ ...Layouts, ...Components }).forEach(([name, component]) => {
   Handlebars.registerPartial(name, component);
 });
 
@@ -22,7 +21,12 @@ const PageList = {
   "page500": { source: Pages.Page500 },
   "login": { source: Pages.LoginPage },
   "register": { source: Pages.RegisterPage },
-  "profile": { source: Pages.ProfilePage, context: { first_name: "Никита", second_name: "Кушнарёв" } },
+  "profile": { 
+    source: Pages.ProfilePage, 
+    context: { first_name: "Никита", modal_avatar_title: "Загрузите файл", avatar_error: false },
+  },
+  "profile-edit-fields": { source: Pages.ProfileEditFieldsPage },
+  "profile-edit-password": { source: Pages.ProfileEditPasswordPage },
 };
 
 function navigate(page) {
