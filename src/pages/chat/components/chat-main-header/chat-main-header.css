@@ -1,6 +1,7 @@
 .chat-main-header {
     display: flex;
     justify-content: space-between;
+    position: relative;
     padding: 16px 0px;
     &__profile {
         display: flex;

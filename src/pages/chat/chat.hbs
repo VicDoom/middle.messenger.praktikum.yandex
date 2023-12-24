@@ -14,4 +14,18 @@
         {{> Divider}}
         {{> ChatMainControls}}
     </div>
+    {{#> Modal id="modal-add-user"}}
+        <div class="chat-page__modal">
+            <div>Добавить пользователя</div>
+            {{> Input label="Логин" id="login-add-user"}}
+            {{> Button text="Добавить"}}
+        </div>
+    {{/ Modal}}
+    {{#> Modal id="modal-delete-user"}}
+        <div class="chat-page__modal">
+            <div>Удалить пользователя</div>
+            {{> Input label="Логин" id="login-delete-user"}}
+            {{> Button text="Удалить"}}
+        </div>
+    {{/ Modal}}
 </div>

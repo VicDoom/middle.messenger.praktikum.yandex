@@ -1,0 +1,14 @@
+.chat-control {
+    display: inline-block;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    text-align: center;
+    & > img {
+        vertical-align: middle;
+    }
+    &:hover {
+        cursor: pointer;
+        background-color: var(--grey-background);
+    }
+}

@@ -4,6 +4,7 @@
 @import url("./components/divider/divider.css");
 @import url("./components/button-back/button-back.css");
 @import url("./components/modal/modal.css");
+@import url("./components/popup/popup.css");
 @import url("./layouts/center-layout/center-layout.css");
 @import url("./layouts/form-layout/form-layout.css");
 @import url("./pages/login/login.css");

@@ -4,3 +4,4 @@ export { Button } from "./button";
 export { Divider } from "./divider";
 export { ButtonBack } from "./button-back";
 export { Modal } from "./modal";
+export { Popup } from "./popup";
