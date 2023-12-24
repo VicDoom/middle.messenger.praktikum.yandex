@@ -1,3 +1,6 @@
 # Веб-мессенджер
 
-### pr первого спринта: <вставить сюда пр с ветки sprint_1 c названием Sprint 1>
+- Netlify домен: https://dainty-cajeta-8052e6.netlify.app
+- pr первого спринта: https://github.com/VicDoom/middle.messenger.praktikum.yandex/pull/1
+
+- Запуск проекта: `npm run start`
