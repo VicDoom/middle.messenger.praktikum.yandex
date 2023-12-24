@@ -39,7 +39,8 @@
             font-weight: 500;
             line-height: 13px;
             color: var(--grey);
-            padding-bottom: 8px;
+            padding-bottom: 12px;
+            text-align: end;
         }
         &-number {
             height: 20px;
