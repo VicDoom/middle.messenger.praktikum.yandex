@@ -1,0 +1,56 @@
+.chat-element {
+    &__content {
+        height: 70px;
+        display: grid;
+        grid-template-columns: 2fr 9fr 1fr;
+        grid-gap: 8px;
+        padding: 8px 0px;
+        &:hover {
+            background-color: var(--blue-extra-light);
+            cursor: pointer;
+        }
+    }
+    &__avatar {
+        height: 50px;
+        width: 50px;
+        background-color: var(--grey-background);
+        border-radius: 50%;
+    }
+    &__message {
+        &-user {
+            font-size: 13px;
+            line-height: 13px;
+            font-weight: 600;
+            padding-bottom: 4px;
+        }
+        &-text {
+            height: 30px;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 15px;
+            color: var(--grey);
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+    &__info {
+        &-date {
+            font-size: 9px;
+            font-weight: 500;
+            line-height: 13px;
+            color: var(--grey);
+            padding-bottom: 8px;
+        }
+        &-number {
+            height: 20px;
+            width: 20px;
+            font-size: 12px;
+            line-height: 20px;
+            color: var(--white);
+            background-color: var(--blue);
+            border-radius: 50%;
+            text-align: center;
+            margin-left: auto;
+        }
+    }
+}

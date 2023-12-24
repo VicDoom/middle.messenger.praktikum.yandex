@@ -1,0 +1,22 @@
+@import url("./components/chat-navigation-header/chat-navigation-header.css");
+@import url("./components/chat-list/chat-list.css");
+@import url("./components/chat-element/chat-element.css");
+@import url("./components/chat-main-header/chat-main-header.css");
+@import url("./components/chat-main-controls/chat-main-controls.css");
+@import url("./components/chat-control/chat-control.css");
+@import url("./components/chat-main-body/chat-main-body.css");
+
+.chat-page {
+    display: grid;
+    grid-template-columns: 3fr 9fr;
+    &-navigation {
+        background-color: var(--grey-light);
+        border: 1px solid var(--grey-background);
+        padding: 16px 16px 0px;
+    }
+    &-main {
+        display: flex;
+        flex-direction: column;
+        padding: 0px 16px 8px;
+    }
+}

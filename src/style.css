@@ -11,15 +11,18 @@
 @import url("./pages/profile/profile.css");
 @import url("./pages/profile-edit-password/profile-edit-password.css");
 @import url("./pages/profile-edit-fields/profile-edit-fields.css");
+@import url("./pages/chat/chat.css");
 
 :root {
   --white: #ffffff;
   --blue: #3369F3;
   --blue-light: #729eeb;
   --blue-dark: #1351ee;
+  --blue-extra-light: #E4EDFD;
   --grey: #999999;
   --grey-primary: #cac4c4;
   --grey-light: #FBFBFB;
+  --grey-background: #EAEAEA;
   --red: #FF2F2F;
 }
 

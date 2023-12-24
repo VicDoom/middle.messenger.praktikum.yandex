@@ -1,0 +1,17 @@
+<div class="chat-page">
+    <div class="chat-page-navigation">
+        <div class="chat-page-navigation__header">
+            {{>ChatNavigationHeader}}
+        </div>
+        <div class="chat-page-navigation__chat-list">
+            {{> ChatList messages=chat_elements}}
+        </div>
+    </div>
+    <div class="chat-page-main">
+        {{> ChatMainHeader current_user=current_chat.user}}
+        {{> Divider}}
+        {{> ChatMainBody messages=current_chat.messages}}
+        {{> Divider}}
+        {{> ChatMainControls}}
+    </div>
+</div>

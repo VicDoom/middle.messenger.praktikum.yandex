@@ -1,0 +1,23 @@
+.chat-main-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 0px;
+    &__profile {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        &-avatar {
+            height: 35px;
+            width: 35px;
+            background-color: var(--grey-background);
+            border-radius: 50%;
+        }
+        &-name {
+            font-weight: 700;
+        }
+    }
+    &__expand {
+        height: 25px !important;
+        width: 25px !important;
+    }
+}

@@ -1,0 +1,13 @@
+<div class="chat-main-header">
+    <div class="chat-main-header__profile">
+        <div class="chat-main-header__profile-avatar"></div>
+        <div class="chat-main-header__profile-name">
+            {{current_user}}
+        </div>
+    </div>
+    <div class="chat-main-header__controls">
+        {{#> ChatControl style="chat-main-header__expand"}}
+            <img src="/src/assets/icons/icon-expand.svg" alt="expand">
+        {{/ ChatControl}}
+    </div>
+</div>
