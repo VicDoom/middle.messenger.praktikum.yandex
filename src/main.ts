@@ -55,10 +55,6 @@ function navigate(page) {
   container.innerHTML = Handlebars.compile(source)(context);
 }
 
-console.log(Layouts);
-console.log(Components);
-console.log(Pages);
-console.log(ChatComponents);
 document.addEventListener("DOMContentLoaded", () => navigate("chat"));
 
 document.addEventListener("click", (e) => {
