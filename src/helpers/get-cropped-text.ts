@@ -1,4 +1,4 @@
-export const getCroppedText = (text) => {
+export const getCroppedText = (text: string): string => {
   if (text.length < 51) {
     return text;
   };

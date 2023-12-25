@@ -10,20 +10,26 @@ Object.entries({ ...Layouts, ...Components, ...ChatComponents }).forEach(([name,
   Handlebars.registerPartial(name, component);
 });
 
-Handlebars.registerHelper("defaultValue", function (value, defaultValue) {
+Handlebars.registerHelper("defaultValue", function (value: string, defaultValue: string) {
   var out = value || defaultValue;
   return new Handlebars.SafeString(out);
 });
 
-Handlebars.registerHelper("ifEquals", function(arg1, arg2, options) {
+Handlebars.registerHelper("ifEquals", function(arg1: string, arg2: string, options: any) {
+  //@ts-expect-error
   return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
 });
 
-Handlebars.registerHelper("ifNotEqual", function(arg1, arg2, options) {
+Handlebars.registerHelper("ifNotEqual", function(arg1: string, arg2: string, options: any) {
+  //@ts-expect-error
   return (arg1 != arg2) ? options.fn(this) : options.inverse(this);
 });
 
-const PageList = {
+interface IPageList {
+  [key: string]: { source: string, context?: string | object }
+}
+
+const PageList: IPageList = {
   "page404": { source: Pages.Page404, context: "404!!!" },
   "page500": { source: Pages.Page500 },
   "login": { source: Pages.LoginPage },
@@ -48,7 +54,7 @@ const PageList = {
   },
 };
 
-function navigate(page) {
+function navigate(page: string) {
   const { source, context } = PageList[page];
   const container = document.getElementById("app");
   if (!container) return;
@@ -58,7 +64,7 @@ function navigate(page) {
 document.addEventListener("DOMContentLoaded", () => navigate("chat"));
 
 document.addEventListener("click", (e) => {
-  //@ts-ignore
+  //@ts-expect-error
   const page = e.target?.getAttribute("page");
   if (page) {
     navigate(page);

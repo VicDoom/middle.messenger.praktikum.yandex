@@ -1,17 +1,18 @@
 {
     "compilerOptions": {
-      "target": "ES2020",
-      "useDefineForClassFields": true,
-      "module": "ESNext",
-      "lib": ["ES2020", "DOM", "DOM.Iterable"],
+      "target": "ES2015",
+      "useDefineForClassFields": false,
+      "module": "ES2015",
+      "lib": ["ES2020", "WebWorker.ImportScripts", "DOM", "DOM.Iterable"],
       "skipLibCheck": true,
   
       /* Bundler mode */
-      "moduleResolution": "bundler",
-      "allowImportingTsExtensions": true,
+      "moduleResolution": "node",
+      /* "allowImportingTsExtensions": true, */
       "resolveJsonModule": true,
       "isolatedModules": true,
       "noEmit": true,
+      "allowSyntheticDefaultImports": true,
   
       /* Linting */
       "strict": true,
