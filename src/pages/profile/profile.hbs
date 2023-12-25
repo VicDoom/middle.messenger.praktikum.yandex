@@ -1,5 +1,5 @@
 <div class="profile-page">
-    {{> ButtonBack }}
+    {{> ButtonBack page="chat" }}
     {{#> CenterLayout}}
         <div class="profile-page__content">
             <div class="profile-page__avatar">
@@ -83,6 +83,23 @@
                     type="link"
                     text="Выйти"
                     color="red"
+                    page="login"
+                }}
+                {{> Divider }}
+                <div>Временные кнопки для перехода на 404 и 500 страницы, будут удалены после ревью</div>
+                {{> Divider }}
+                {{> Button
+                    type="link"
+                    text="404 ошибка"
+                    color="red"
+                    page="page404"
+                }}
+                {{> Divider }}
+                {{> Button
+                    type="link"
+                    text="500 ошибка"
+                    color="red"
+                    page="page500"
                 }}
             </div>
         </div>

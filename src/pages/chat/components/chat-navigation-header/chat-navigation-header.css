@@ -7,7 +7,7 @@
         justify-content: flex-end;
         padding-bottom: 16px;
         &-wrapper {
-            display: inline-block;
+            display: block;
             cursor: pointer;
             & > span {
                 padding-right: 4px;
