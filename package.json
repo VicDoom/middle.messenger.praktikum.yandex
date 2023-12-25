@@ -17,6 +17,8 @@
     "vite-plugin-eslint": "1.8.1"
   },
   "dependencies": {
+    "@typescript-eslint/eslint-plugin": "6.15.0",
+    "@typescript-eslint/parser": "6.15.0",
     "autoprefixer": "10.4.16",
     "postcss": "8.4.32",
     "postcss-custom-properties": "13.3.3",
