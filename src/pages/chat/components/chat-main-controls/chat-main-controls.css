@@ -9,7 +9,7 @@
     }
     &__input {
         width: 100%;
-        & > input {
+        & > &-component {
             outline: none;
             height: 32px;
             width: 100%;

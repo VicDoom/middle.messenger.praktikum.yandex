@@ -22,3 +22,17 @@
         width: 25px !important;
     }
 }
+
+.popup-change-lobby {
+    &__control {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px;
+        border-radius: 12px;
+        &:hover {
+            cursor: pointer;
+            background-color: var(--grey-background);
+        }
+    }
+}

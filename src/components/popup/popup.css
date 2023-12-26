@@ -13,17 +13,6 @@
         top: 100%;
         right: 0;
     }
-    & > div {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 8px;
-        border-radius: 12px;
-        &:hover {
-            cursor: pointer;
-            background-color: var(--grey-background);
-        }
-    }
     &--opened {
         display: flex;
     }

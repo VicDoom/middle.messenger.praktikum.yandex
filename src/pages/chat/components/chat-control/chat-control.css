@@ -4,7 +4,7 @@
     width: 25px;
     border-radius: 50%;
     text-align: center;
-    & > img {
+    & > &__icon {
         vertical-align: middle;
     }
     &:hover {

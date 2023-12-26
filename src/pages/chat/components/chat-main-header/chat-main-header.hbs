@@ -10,9 +10,10 @@
             class="chat-main-header__control-wrapper"
             onclick="getElementById('popup-change-lobby').classList.toggle('popup--opened')"
         >
-            {{#> ChatControl style="chat-main-header__expand"}}
-                <img src={{icons "icon-expand"}} alt="expand">
-            {{/ ChatControl}}
+            {{> ChatControl 
+                style="chat-main-header__expand"
+                icon-name="icon-expand"
+            }}
         </div>
     </div>
     {{#> Popup id="popup-change-lobby" position="bottom-left"}}

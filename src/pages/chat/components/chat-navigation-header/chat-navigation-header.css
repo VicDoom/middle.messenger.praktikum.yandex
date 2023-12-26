@@ -9,10 +9,10 @@
         &-wrapper {
             display: block;
             cursor: pointer;
-            & > span {
-                padding-right: 4px;
-                font-size: 12px;
-            }
+        }
+        &-label {
+            padding-right: 4px;
+            font-size: 12px;
         }
     }
 }
@@ -40,7 +40,7 @@
         &:focus+.chat-navigation-search-label {
             pointer-events: none;
             left: 16px;
-            & > span {
+            .chat-navigation-search-label__text {
                 display: none;
             }
         }
