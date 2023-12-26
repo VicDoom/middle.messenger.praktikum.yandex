@@ -11,7 +11,7 @@
             onclick="getElementById('popup-change-lobby').classList.toggle('popup--opened')"
         >
             {{#> ChatControl style="chat-main-header__expand"}}
-                <img src="/src/assets/icons/icon-expand.svg" alt="expand">
+                <img src={{icons "icon-expand"}} alt="expand">
             {{/ ChatControl}}
         </div>
     </div>
@@ -20,14 +20,14 @@
             class="popup-change-lobby__control"
             onclick="getElementById('modal-add-user').classList.toggle('modal--opened')"
         >
-            <img src="/src/assets/icons/icon-add.svg" alt="add">
+            <img src={{icons "icon-add"}} alt="add">
             <span>Добавить пользователя</span>
         </div>
         <div 
             class="popup-change-lobby__control"
             onclick="getElementById('modal-delete-user').classList.toggle('modal--opened')"
         >
-            <img src="/src/assets/icons/icon-delete.svg" alt="delete">
+            <img src={{icons "icon-delete"}} alt="delete">
             <span>Удалить пользователя</span>
         </div>
     {{/ Popup}}

@@ -2,7 +2,7 @@
     <div class="modal__background"></div>
     <div class="modal__content">
         <div class="modal__close" onclick="getElementById('{{id}}').classList.remove('modal--opened')">
-            <img src="/src/assets/icons/icon-close.svg" alt="close">
+            <img src={{icons "icon-close"}} alt="close">
         </div>
         {{> @partial-block}}
     </div>
