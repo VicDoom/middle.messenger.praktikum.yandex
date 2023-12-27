@@ -7,12 +7,14 @@
   },
   "type": "module",
   "scripts": {
-    "start": "vite",
+    "dev": "vite",
     "build": "vite build",
+    "start": "vite build & node server.cjs",
     "preview": "vite preview",
     "express": "node server.cjs"
   },
   "devDependencies": {
+    "dotenv": "16.3.1",
     "eslint": "8.56.0",
     "vite": "5.0.8",
     "vite-plugin-eslint": "1.8.1"
