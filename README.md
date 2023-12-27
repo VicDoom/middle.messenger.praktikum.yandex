@@ -5,9 +5,10 @@
 
 - figma-макет: https://www.figma.com/file/jF5fFFzgGOxQeB4CmKWTiE/Chat_external_link?type=design&node-id=0-1&mode=design&t=wABy2UGYlYgz33Um-0
 
-- Запуск проекта: `npm run start`
+- Запуск проекта в режиме разработки: `npm run dev`
 - Собрать проект: `npm run build`
-- Предпросмотр билда без сборки: `npm run review`
+- Собрать проект и запустить приложение: `npm run start`
+- Предпросмотр билда без сборки: `npm run preview`
 - Запустить express сервер для раздачи статики: `npm run express`
 
 Результат первого спринта: верстка чата с возможностью перехода по страницам. Некоторые моменты были специально опущены из-за экономии времени (например попап кнопки добавления файлов на странице чата).
