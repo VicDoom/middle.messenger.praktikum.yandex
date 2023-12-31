@@ -1,0 +1,19 @@
+.popup {
+    display: none;
+    position: absolute;
+    padding: 16px;
+    box-shadow: 1px 0px 3px var(--grey-light);
+    background-color: var(--white);
+    border: 1px solid var(--grey-background);
+    flex-direction: column;
+    gap: 8px;
+    justify-content: flex-start;
+    border-radius: 4px;
+    &--bottom-left {
+        top: 100%;
+        right: 0;
+    }
+    &--opened {
+        display: flex;
+    }
+}

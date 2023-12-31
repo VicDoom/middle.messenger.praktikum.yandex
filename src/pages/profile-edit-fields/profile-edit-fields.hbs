@@ -1,0 +1,61 @@
+<div class="profile-page profile-page--edit-fields">
+    {{> ButtonBack page="profile" }}
+    {{#> CenterLayout}}
+        <div class="profile-page__content">
+            <div class="profile-page__avatar">
+                <div class="profile-page__avatar-image">
+                    <img src={{icons "icon-avatar"}} alt="avatar">
+                </div>
+            </div>
+            <div class="profile-page__inputs">
+                {{> Input 
+                    label="Почта" 
+                    value="soup@mail.ru"
+                    id="email"
+                    placeholder="введите почту"
+                    style-type="profile"
+                }}
+                {{> Input 
+                    label="Логин" 
+                    value="Nikita"
+                    id="login"
+                    placeholder="введите логин"
+                    style-type="profile"
+                }}
+                {{> Input 
+                    label="Имя" 
+                    value="Никита"
+                    id="first_name"
+                    placeholder="введите имя"
+                    style-type="profile"
+                }}
+                {{> Input 
+                    label="Фамилия" 
+                    value="Кушнарёв"
+                    id="second_name"
+                    placeholder="введите фамилию"
+                    style-type="profile"
+                }}
+                {{> Input 
+                    label="Имя в чате" 
+                    value="Никита"
+                    id="display_name"
+                    placeholder="введите имя"
+                    style-type="profile"
+                }}
+                {{> Input 
+                    label="Телефон" 
+                    value="+78005553535"
+                    id="phone"
+                    placeholder="введите номер телефона"
+                    style-type="profile"
+                }}
+            </div>
+            <div class="profile-page__buttons">
+                {{> Button
+                    text="Сохранить"
+                }}
+            </div>
+        </div>
+    {{/CenterLayout}}
+</div>

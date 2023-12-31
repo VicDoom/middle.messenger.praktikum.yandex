@@ -1,0 +1,11 @@
+.profile-page--edit-fields {
+    & .profile-page__avatar-image {
+        &:hover {
+            background-color: var(--grey-light);
+            cursor: auto;
+        }
+    }
+    & .profile-page__buttons {
+        align-items: center;
+    }
+}

@@ -1,0 +1,107 @@
+@import url("./components/link/link.css");
+@import url("./components/input/input.css");
+@import url("./components/button/button.css");
+@import url("./components/divider/divider.css");
+@import url("./components/button-back/button-back.css");
+@import url("./components/modal/modal.css");
+@import url("./components/popup/popup.css");
+@import url("./layouts/center-layout/center-layout.css");
+@import url("./layouts/form-layout/form-layout.css");
+@import url("./pages/login/login.css");
+@import url("./pages/register/register.css");
+@import url("./pages/profile/profile.css");
+@import url("./pages/profile-edit-password/profile-edit-password.css");
+@import url("./pages/profile-edit-fields/profile-edit-fields.css");
+@import url("./pages/chat/chat.css");
+
+:root {
+  --white: #ffffff;
+  --blue: #3369F3;
+  --blue-light: #729eeb;
+  --blue-dark: #1351ee;
+  --blue-extra-light: #E4EDFD;
+  --grey: #999999;
+  --grey-primary: #cac4c4;
+  --grey-light: #FBFBFB;
+  --grey-background: #EAEAEA;
+  --red: #FF2F2F;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 16px;
+}
+  
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+  
+body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+    font-family: 'Inter';
+}
+
+#app {
+  height: 100%;
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
+}
+  
+ol, ul {
+    list-style: none;
+}
+  
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.page-info {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &__title {
+    font-size: 40px;
+    line-height: 40px;
+    padding-bottom: 16px;
+  }
+  &__text {
+    font-size: 20px;
+    line-height: 20px;
+    padding-bottom: 40px;
+  }
+}
+
+.form-info {
+  width: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &__inputs, &__buttons {
+    width: 100%;
+  }
+  &__inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  &__buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    justify-content: flex-end;
+    flex-grow: 1;
+  }
+  &__title {
+    font-size: 20px;
+    line-height: 20px;
+    padding-bottom: 32px;
+  }
+}

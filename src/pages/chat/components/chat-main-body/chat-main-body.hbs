@@ -1,0 +1,14 @@
+<div class="chat-main-body">
+    {{#each messages}}
+        <div 
+            class="chat-main-body__message{{#ifEquals isYours true}} chat-main-body__message--yours{{/ifEquals}}"
+        >
+            <div class="chat-main-body__message-text">
+                {{message}}
+            </div>
+            <div class="chat-main-body__message-date">
+                {{date}}
+            </div>
+        </div>
+    {{/each}}
+</div>

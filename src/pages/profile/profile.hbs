@@ -1,0 +1,119 @@
+<div class="profile-page">
+    {{> ButtonBack page="chat" }}
+    {{#> CenterLayout}}
+        <div class="profile-page__content">
+            <div class="profile-page__avatar">
+                <div 
+                    class="profile-page__avatar-image"
+                    onclick="getElementById('profile-modal-add-avatar').classList.add('modal--opened')"
+                >
+                    <img src={{icons "icon-avatar"}} alt="avatar">
+                    <div class="profile-page__avatar-image-text">
+                        Поменять аватар
+                    </div>
+                </div>
+                <div class="profile-page__avatar-name">
+                    {{first_name}}
+                </div>
+            </div>
+            <div class="profile-page__inputs">
+                {{> Input 
+                    label="Почта" 
+                    value="soup@mail.ru"
+                    id="email"
+                    placeholder="введите почту"
+                    style-type="profile"
+                    disabled="true"
+                }}
+                {{> Input 
+                    label="Логин" 
+                    value="Nikita"
+                    id="login"
+                    placeholder="введите логин"
+                    style-type="profile"
+                    disabled="true"
+                }}
+                {{> Input 
+                    label="Имя" 
+                    value="Никита"
+                    id="first_name"
+                    placeholder="введите имя"
+                    style-type="profile"
+                    disabled="true"
+                }}
+                {{> Input 
+                    label="Фамилия" 
+                    value="Кушнарёв"
+                    id="second_name"
+                    placeholder="введите фамилию"
+                    style-type="profile"
+                    disabled="true"
+                }}
+                {{> Input 
+                    label="Имя в чате" 
+                    value="Никита"
+                    id="display_name"
+                    placeholder="введите имя"
+                    style-type="profile"
+                    disabled="true"
+                }}
+                {{> Input 
+                    label="Телефон" 
+                    value="+78005553535"
+                    id="phone"
+                    placeholder="введите номер телефона"
+                    style-type="profile"
+                    disabled="true"
+                }}
+            </div>
+            <div class="profile-page__buttons">
+                {{> Button
+                    type="link"
+                    text="Изменить данные"
+                    page="profile-edit-fields"
+                }}
+                {{> Divider }}
+                {{> Button
+                    type="link"
+                    text="Изменить пароль"
+                    page="profile-edit-password"
+                }}
+                {{> Divider }}
+                {{> Button
+                    type="link"
+                    text="Выйти"
+                    color="red"
+                    page="login"
+                }}
+                {{> Divider }}
+                <div>Временные кнопки для перехода на 404 и 500 страницы, будут удалены после ревью</div>
+                {{> Divider }}
+                {{> Button
+                    type="link"
+                    text="404 ошибка"
+                    color="red"
+                    page="page404"
+                }}
+                {{> Divider }}
+                {{> Button
+                    type="link"
+                    text="500 ошибка"
+                    color="red"
+                    page="page500"
+                }}
+            </div>
+        </div>
+    {{/CenterLayout}}
+    {{#> Modal id="profile-modal-add-avatar" }}
+        <div class="profile-modal-add-avatar__title">{{modal_avatar_title}}</div>
+        {{> Button text="Выбрать файл на компьютере" type="link" }}
+        <div "profile-modal-add-avatar__control">
+            {{> Button text="Поменять" page="profile"}}
+            {{#if avatar_error}}
+                <div class="profile-modal-add-avatar__error">
+                    Нужно выбрать файл
+                </div>
+            {{/if}}
+        </div>
+    {{/ Modal }}
+</div>

@@ -1,0 +1,31 @@
+<div class="chat-page">
+    <div class="chat-page-navigation">
+        <div class="chat-page-navigation__header">
+            {{>ChatNavigationHeader}}
+        </div>
+        <div class="chat-page-navigation__chat-list">
+            {{> ChatList messages=chat_elements}}
+        </div>
+    </div>
+    <div class="chat-page-main">
+        {{> ChatMainHeader current_user=current_chat.user}}
+        {{> Divider}}
+        {{> ChatMainBody messages=current_chat.messages}}
+        {{> Divider}}
+        {{> ChatMainControls}}
+    </div>
+    {{#> Modal id="modal-add-user"}}
+        <div class="chat-page__modal">
+            <div>Добавить пользователя</div>
+            {{> Input label="Логин" id="login-add-user"}}
+            {{> Button text="Добавить"}}
+        </div>
+    {{/ Modal}}
+    {{#> Modal id="modal-delete-user"}}
+        <div class="chat-page__modal">
+            <div>Удалить пользователя</div>
+            {{> Input label="Логин" id="login-delete-user"}}
+            {{> Button text="Удалить"}}
+        </div>
+    {{/ Modal}}
+</div>

@@ -1,0 +1,64 @@
+{{#> CenterLayout }}
+    {{#> FormLayout }}
+        <div class="form-info register-page">
+            <div class="form-info__title">Регистрация</div>
+            <div class="form-info__inputs">
+                {{> Input 
+                    label="Почта" 
+                    value="soup@mail.ru"
+                    id="email"
+                    placeholder="введите почту"
+                }}
+                {{> Input 
+                    label="Логин" 
+                    value="Nikita"
+                    id="login"
+                    placeholder="введите логин"
+                }}
+                {{> Input 
+                    label="Имя" 
+                    value="Никита"
+                    id="first_name"
+                    placeholder="введите имя"
+                }}
+                {{> Input 
+                    label="Фамилия" 
+                    value="Кушнарёв"
+                    id="second_name"
+                    placeholder="введите фамилию"
+                }}
+                {{> Input 
+                    label="Телефон" 
+                    value="+78005553535"
+                    id="phone"
+                    placeholder="введите номер телефона"
+                }}
+                {{> Input 
+                    label="Пароль" 
+                    value=""
+                    id="password"
+                    placeholder="введите пароль"
+                    type="password"
+                }}
+                {{> Input 
+                    label="Пароль (еще раз)" 
+                    value=""
+                    id="password2"
+                    placeholder="повторите пароль"
+                    type="password"
+                }}
+            </div>
+            <div class="form-info__buttons">
+                {{> Button
+                    text="Зарегистрироваться"
+                    page="register"
+                }}
+                {{> Button
+                    text="Войти"
+                    page="login"
+                    type="link"
+                }}
+            </div>
+        </div>
+    {{/ FormLayout }}
+{{/ CenterLayout }}

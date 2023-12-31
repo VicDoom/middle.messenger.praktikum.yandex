@@ -1,0 +1,20 @@
+<div id={{id}} class="chat-element">
+    {{> Divider}}
+    <div class="chat-element__content">
+        <div class="chat-element__avatar"></div>
+        <div class="chat-element__message">
+            <div class="chat-element__message-user">
+                {{user}}
+            </div>
+            <div class="chat-element__message-text">
+                {{message}}
+            </div>
+        </div>
+        <div class="chat-element__info">
+            <div class="chat-element__info-date">{{date}}</div>
+            {{#ifNotEqual messageNumber 0}}
+                <div class="chat-element__info-number">{{messageNumber}}</div>
+            {{/ifNotEqual}}
+        </div>
+    </div>
+</div>
