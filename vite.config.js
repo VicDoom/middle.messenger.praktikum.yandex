@@ -12,7 +12,7 @@ export default defineConfig({
   plugins: [
     //@ts-expect-error
     handlebars(),
-    // eslint(),
+    eslint(),
   ],
   css: {
     postcss: {
