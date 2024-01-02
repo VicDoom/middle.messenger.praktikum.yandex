@@ -17,10 +17,7 @@
       "noUnusedParameters": true,
       "noImplicitAny": true,
       "sourceMap": true,
-      "strictNullChecks": true
+      "strictNullChecks": true,
     },
-    "include": [
-      "src",
-      "index.d.ts",
-    ],
+    "include": ["src"],
 }
