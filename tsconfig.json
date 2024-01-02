@@ -15,13 +15,12 @@
       "strict": true,
       "noUnusedLocals": true,
       "noUnusedParameters": true,
-      "noFallthroughCasesInSwitch": true,
       "noImplicitAny": true,
       "sourceMap": true,
-      "strictNullChecks": true,
+      "strictNullChecks": true
     },
     "include": [
       "src",
       "index.d.ts",
     ],
-  }
+}
