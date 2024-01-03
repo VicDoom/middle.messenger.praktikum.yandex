@@ -19,5 +19,8 @@
       "sourceMap": true,
       "strictNullChecks": true,
     },
-    "include": ["src"],
+    "include": [
+      "src",
+      "index.d.ts",
+    ]
 }
