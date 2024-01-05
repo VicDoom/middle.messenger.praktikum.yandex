@@ -39,13 +39,11 @@ Handlebars.registerHelper("defaultValue", function (value: string, defaultValue:
   return new Handlebars.SafeString(out);
 });
 
-Handlebars.registerHelper("ifEquals", function(arg1: string, arg2: string, options: any) {
-  //@ts-expect-error
+Handlebars.registerHelper("ifEquals", (arg1: string, arg2: string, options) => {
   return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
 });
 
-Handlebars.registerHelper("ifNotEqual", function(arg1: string, arg2: string, options: any) {
-  //@ts-expect-error
+Handlebars.registerHelper("ifNotEqual", (arg1: string, arg2: string, options) => {
   return (arg1 != arg2) ? options.fn(this) : options.inverse(this);
 });
 
@@ -92,8 +90,7 @@ function navigate(page: string) {
 document.addEventListener("DOMContentLoaded", () => navigate("login"));
 
 document.addEventListener("click", (e) => {
-  //@ts-expect-error
-  const page = e.target?.getAttribute("page");
+  const page = (e.target as HTMLTextAreaElement)?.getAttribute("page");
   if (page) {
     navigate(page);
     e.preventDefault();
