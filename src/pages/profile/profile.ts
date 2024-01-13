@@ -3,14 +3,11 @@ import { navigate } from "../../core/navigate";
 import { Validator } from "../../helpers";
 import { USER_INFO } from "../../mocks";
 
-interface InputEventType {
-  target: { value: string },
-}
-
 export class ProfilePage extends Block<{}> {
   constructor() {
     super({
       navigateProfileEditPage: () => navigate("profile-edit-fields"),
+      navigatePasswordEditPage: () => navigate("profile-edit-password"),
       navigatePage404: () => navigate("page404"),
       navigatePage500: () => navigate("page500"),
       validateLoginField: (value: string) => Validator.login(value),
@@ -99,7 +96,7 @@ export class ProfilePage extends Block<{}> {
                         {{{ Button
                             type="link"
                             label="Изменить пароль"
-                            page="profile-edit-password"
+                            onClick=navigatePasswordEditPage
                         }}}
                         {{{ Divider }}}
                         {{{ Button

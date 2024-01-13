@@ -14,6 +14,7 @@ interface IInputProps {
   placeholder: string;
   styleType: string;
   disabled: boolean;
+  type?: string;
   validate: (value: string) => boolean;
   onBlur: () => void;
   events?: { [name: string]: () => void };
@@ -42,7 +43,7 @@ export class Input extends Block<IInputProps, IInputRefs, HTMLInputElement> {
 
   componentDidMount(): void {
     if (this.refs.input.element) {
-      this.refs.input.element.value = this.props.value;
+      this.refs.input.element.value = this.props.value ?? "";
     }
   }
 
@@ -59,10 +60,10 @@ export class Input extends Block<IInputProps, IInputRefs, HTMLInputElement> {
 
 
   protected render(): string {
-    const { label, id, placeholder, disabled, styleType } = this.props;
-    const type = styleType || "text";
+    const { label, id, placeholder, disabled, styleType, type } = this.props;
+    const style = styleType || "text";
     return (`
-      <div class="input ${disabled ? "input--disabled" : ""} input--${styleType}">
+      <div class="input ${disabled ? "input--disabled" : ""} input--${style}">
         <label for="${id}" class="input__label">${label}</label>
         {{{ CoreInput
             type="${type}"

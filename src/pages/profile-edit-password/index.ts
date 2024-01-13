@@ -1,1 +1,2 @@
-export { default as ProfileEditPasswordPage } from "./profile-edit-password.hbs?raw";
+import "./profile-edit-password.css";
+export { ProfileEditPasswordPage as default } from "./profile-edit-password";

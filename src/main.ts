@@ -17,4 +17,4 @@ registerComponent("Input", Components.Input);
 
 registerHandlebarsHelpers();
 
-document.addEventListener("DOMContentLoaded", () => navigate("profile-edit-fields"));
+document.addEventListener("DOMContentLoaded", () => navigate("profile-edit-password"));

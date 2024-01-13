@@ -7,6 +7,6 @@ export const PageList = {
   // "register": Pages.RegisterPage,
   "profile": Pages.ProfilePage, 
   "profile-edit-fields": Pages.ProfileEditFieldsPage,
-  // "profile-edit-password": Pages.ProfileEditPasswordPage,
+  "profile-edit-password": Pages.ProfileEditPasswordPage,
   // "chat": Pages.ChatPage,
 };
