@@ -1,15 +1,15 @@
 import { Input } from "../../components/input";
-import { Block, IProps } from "../../core/Block";
+import { Block } from "../../core/Block";
 import { navigate } from "../../core/navigate";
 import { Validator } from "../../helpers/validator";
 
-type IProfileEditPasswordPageRefs = {
+type TProfileEditPasswordPageRefs = {
   old_password: Input
   new_password: Input
   repeat_new_password: Input
 }
 
-export class ProfileEditPasswordPage extends Block<{}, IProfileEditPasswordPageRefs> {
+export class ProfileEditPasswordPage extends Block<{}, TProfileEditPasswordPageRefs> {
   constructor() {
     super({
       navigateBack: () => navigate("profile"),

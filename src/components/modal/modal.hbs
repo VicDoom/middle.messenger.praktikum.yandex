@@ -1,7 +1,7 @@
 <div id={{id}} class="modal">
     <div class="modal__background"></div>
     <div class="modal__content">
-        <div class="modal__close" onclick="getElementById('{{id}}').classList.remove('modal--opened')">
+        <div class="modal__close" onclick="getElementById('{{id}}').style.display='none'">
             <img src={{icons "icon-close"}} alt="close">
         </div>
         {{> @partial-block}}

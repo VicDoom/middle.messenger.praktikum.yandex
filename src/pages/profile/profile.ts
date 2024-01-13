@@ -1,9 +1,16 @@
+import { Button } from "../../components/button";
+import { AvatarModal } from "./components";
 import { Block } from "../../core/Block";
 import { navigate } from "../../core/navigate";
 import { Validator } from "../../helpers";
 import { USER_INFO } from "../../mocks";
 
-export class ProfilePage extends Block<{}> {
+type IProfilePageRefs = {
+  changeAvatarModal: AvatarModal
+  getAvatarButton: Button
+}
+
+export class ProfilePage extends Block<{}, IProfilePageRefs> {
   constructor() {
     super({
       navigateProfileEditPage: () => navigate("profile-edit-fields"),
@@ -11,6 +18,8 @@ export class ProfilePage extends Block<{}> {
       navigatePage404: () => navigate("page404"),
       navigatePage500: () => navigate("page500"),
       validateLoginField: (value: string) => Validator.login(value),
+      openAvatarModal: () => this.refs.changeAvatarModal.show(),
+      closeAvatarModal: () => this.refs.changeAvatarModal.hide(),
     });
   }
 
@@ -21,15 +30,7 @@ export class ProfilePage extends Block<{}> {
             {{#> CenterLayout}}
                 <div class="profile-page__content">
                     <div class="profile-page__avatar">
-                        <div 
-                            class="profile-page__avatar-image"
-                            onclick="getElementById('profile-modal-add-avatar').classList.add('modal--opened')"
-                        >
-                            <img src={{icons "icon-avatar"}} alt="avatar">
-                            <div class="profile-page__avatar-image-text">
-                                Поменять аватар
-                            </div>
-                        </div>
+                        {{{ AvatarButton onClick=openAvatarModal }}}
                         <div class="profile-page__avatar-name">
                             ${USER_INFO.first_name}
                         </div>
@@ -124,20 +125,8 @@ export class ProfilePage extends Block<{}> {
                     </div>
                 </div>
             {{/CenterLayout}}
+            {{{ AvatarModal ref="changeAvatarModal" }}}
         </div>
       `);
   }
 }
-
-// {{#> Modal id="profile-modal-add-avatar" }}
-//                 <div class="profile-modal-add-avatar__title">{{modal_avatar_title}}</div>
-//                 {{{ Button label="Выбрать файл на компьютере" type="link" }}}
-//                 <div "profile-modal-add-avatar__control">
-//                     {{{ Button label="Поменять" page="profile" }}}
-//                     {{#if avatar_error}}
-//                         <div class="profile-modal-add-avatar__error">
-//                             Нужно выбрать файл
-//                         </div>
-//                     {{/if}}
-//                 </div>
-//             {{/ Modal }}
