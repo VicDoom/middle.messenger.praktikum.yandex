@@ -22,7 +22,7 @@
         "ignoreMemberSort": false,
         "allowSeparatedGroups": false
       }],
-      "object-curly-spacing": ["error", "always"],
-      "@typescript-eslint/no-explicit-any": "warning"
+      "object-curly-spacing": ["error", "always"]
+      // "@typescript-eslint/no-explicit-any": "warning"
     }
   }
