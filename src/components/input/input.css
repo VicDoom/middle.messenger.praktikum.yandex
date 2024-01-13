@@ -25,6 +25,9 @@
     &__helper {
         font-size: 10px;
         color: var(--red);
+        &--disabled {
+            display: none;
+        }
     }
 
     &--profile {

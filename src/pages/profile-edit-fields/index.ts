@@ -1,1 +1,1 @@
-export { default as ProfileEditFieldsPage } from "./profile-edit-fields.hbs?raw";
+export { ProfileEditFieldsPage as default } from "./profile-edit-fields";

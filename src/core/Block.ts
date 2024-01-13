@@ -3,15 +3,19 @@ import { nanoid } from "nanoid";
 import Handlebars from "handlebars";
 
 export type RefType = {
-  [key: string]: Element | Block<object>
+  [key: string]: Element | HTMLInputElement | Block<IProps>
 }
 
-export interface BlockClass<P extends object, R extends RefType> extends Function {
-  new (props: P): Block<P, R>;
+export interface IProps {
+  events?: { [key: string]: (e: Event) => void }
+}
+
+export interface BlockClass<P extends IProps, R extends RefType, H extends HTMLElement> extends Function {
+  new (props: P): Block<P, R, H>;
   componentName?: string;
 }
 
-export class Block<Props extends object, Refs extends RefType = RefType> {
+export class Block<Props extends IProps, Refs extends RefType = {}, HTMLElementType extends HTMLElement = HTMLElement> {
   static EVENTS = {
     INIT: "init",
     FLOW_CDM: "flow:component-did-mount",
@@ -23,9 +27,9 @@ export class Block<Props extends object, Refs extends RefType = RefType> {
   public id = nanoid(6);
   protected props: Props;
   protected refs: Refs = {} as Refs;
-  private children: Block<object>[] = [];
+  private children: Block<IProps>[] = [];
   private eventBus: () => EventBus;
-  private _element: HTMLElement | null = null;
+  private _element: HTMLElementType | null = null;
 
   constructor(props: Props = {} as Props) {
     const eventBus = new EventBus();
@@ -125,7 +129,7 @@ export class Block<Props extends object, Refs extends RefType = RefType> {
   private _render() {
     const fragment = this.compile(this.render(), this.props);
 
-    const newElement = fragment.firstElementChild as HTMLElement;
+    const newElement = fragment.firstElementChild as HTMLElementType;
 
     if (this._element) {
       this._element.replaceWith(newElement);

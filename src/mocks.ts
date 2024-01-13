@@ -1,3 +1,12 @@
+const USER_INFO = {
+  email: "soup@mail.ru",
+  login: "Nikita",
+  first_name: "Никита",
+  second_name: "Кушнарёв",
+  display_name: "Никита",
+  phone: "+78005553535",
+}
+
 const CHAT_ELEMENTS = [
   {
     id: "chat_0",
@@ -184,4 +193,4 @@ const CURRENT_CHAT = {
   ],
 };
 
-export { CHAT_ELEMENTS, CURRENT_CHAT };
+export { USER_INFO, CHAT_ELEMENTS, CURRENT_CHAT };

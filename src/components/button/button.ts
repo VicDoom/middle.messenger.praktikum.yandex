@@ -1,7 +1,6 @@
 import { Block } from "../../core/Block";
 
 interface IButtonProps {
-  page: any,
   type?: "link" | "default"
   label?: string,
   color?: "red" | "default",
@@ -21,9 +20,9 @@ export class Button extends Block<IButtonProps> {
   }
 
   protected render(): string {
-    const { type, page, color, label } = this.props;
+    const { type, color, label } = this.props;
     return (`
-      <div class="button button__${type} button--${color}" page="${page}">
+      <div class="button button__${type} button--${color}">
         ${label}
       </div>
     `)

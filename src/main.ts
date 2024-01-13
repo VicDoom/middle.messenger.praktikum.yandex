@@ -11,7 +11,10 @@ Object.entries({ ...Layouts }).forEach(([name, component]) => {
 });
 
 registerComponent("Button", Components.Button);
+registerComponent("ButtonBack", Components.ButtonBack);
+registerComponent("Divider", Components.Divider);
+registerComponent("Input", Components.Input);
 
 registerHandlebarsHelpers();
 
-document.addEventListener("DOMContentLoaded", () => navigate("page500"));
+document.addEventListener("DOMContentLoaded", () => navigate("profile-edit-fields"));
