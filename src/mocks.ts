@@ -5,7 +5,7 @@ const USER_INFO = {
   second_name: "Кушнарёв",
   display_name: "Никита",
   phone: "+78005553535",
-}
+};
 
 const CHAT_ELEMENTS = [
   {

@@ -20,6 +20,6 @@ export class ErrorLine extends Block<ICoreInputProps> {
       >
         {{error}}
       </label>
-    `)
+    `);
   };
 }

@@ -11,4 +11,4 @@ export const Components = {
   ButtonBack,
   Divider,
   Input,
-}
+};

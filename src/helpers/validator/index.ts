@@ -10,4 +10,4 @@ export const Validator = {
   displayName,
   email,
   phone,
-}
+};

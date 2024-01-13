@@ -4,4 +4,4 @@ export const phone = (value?: string | null): string | boolean => {
     return "Телефон может начинаться с плюса и должен содержать от 10 до 15 цифр";
   }
   return false;
-}
+};

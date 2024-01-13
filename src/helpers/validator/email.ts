@@ -4,4 +4,4 @@ export const email = (value?: string | null): string | boolean => {
     return "Email должен быть корректным, например: na-_me@soup.ru";
   }
   return false;
-}
+};

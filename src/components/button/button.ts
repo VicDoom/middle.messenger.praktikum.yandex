@@ -16,7 +16,7 @@ export class Button extends Block<IButtonProps> {
   protected init(): void {
     this.props.events = {
       click: this.props.onClick ?? (() => {}),
-    }
+    };
   }
 
   protected render(): string {
@@ -25,6 +25,6 @@ export class Button extends Block<IButtonProps> {
       <div class="button button__${type} button--${color}">
         ${label}
       </div>
-    `)
+    `);
   }
 }

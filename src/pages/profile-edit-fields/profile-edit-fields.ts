@@ -122,6 +122,6 @@ export class ProfileEditFieldsPage extends Block<{}, IProfileEditFieldsPageRefs>
                 </div>
             {{/CenterLayout}}
         </div>  
-      `)
+      `);
   }
 }

@@ -4,4 +4,4 @@ export const displayName = (value?: string | null): string | boolean => {
     return "Строка не должна быть пустой";
   }
   return false;
-}
+};

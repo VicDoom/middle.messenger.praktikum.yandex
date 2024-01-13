@@ -4,4 +4,4 @@ export const name = (value?: string | null): string | boolean => {
     return "Допустимы только символы кириллицы и латиницы, первая буква - заглавная";
   }
   return false;
-}
+};
