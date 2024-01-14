@@ -18,6 +18,7 @@ export class ProfilePage extends Block<{}, IProfilePageRefs> {
       navigatePage404: () => navigate("page404"),
       navigatePage500: () => navigate("page500"),
       navigateChat: () => navigate("chat"),
+      navigateLoginPage: () => navigate("login"),
       validateLoginField: (value: string) => Validator.login(value),
       openAvatarModal: () => this.refs.changeAvatarModal.show(),
       closeAvatarModal: () => this.refs.changeAvatarModal.hide(),
@@ -105,7 +106,7 @@ export class ProfilePage extends Block<{}, IProfilePageRefs> {
                             type="link"
                             label="Выйти"
                             color="red"
-                            page="login"
+                            onClick=navigateLoginPage
                         }}}
                         {{{ Divider }}}
                         <div>Временные кнопки для перехода на 404 и 500 страницы, будут удалены после ревью</div>

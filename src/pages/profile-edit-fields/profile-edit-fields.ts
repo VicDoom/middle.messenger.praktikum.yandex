@@ -37,7 +37,7 @@ export class ProfileEditFieldsPage extends Block<{}, IProfileEditFieldsPageRefs>
         console.log({
           email, login, first_name, second_name, display_name, phone,
         });
-        navigate("profile")
+        navigate("profile");
       },
       validateLogin: Validator.login,
       validateName: Validator.name,

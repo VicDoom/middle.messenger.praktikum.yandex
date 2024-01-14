@@ -1,7 +1,7 @@
-import { Block } from "../../core/Block";
+import { Block, RefType } from "../../core/Block";
 import { registerComponent } from "../../core/register-component";
 import { CoreInput } from "./core-input";
-import { ErrorLine } from "./error-line";
+import { ErrorLine, ICoreInputProps } from "./error-line";
 
 registerComponent("CoreInput", CoreInput);
 registerComponent("ErrorLine", ErrorLine);
@@ -20,10 +20,10 @@ interface IInputProps {
   events?: { [name: string]: () => void };
 }
 
-interface IInputRefs {
+interface IInputRefs extends RefType {
   [key: string]: Element | Block<object>
   input: Block<{}, {}, HTMLInputElement>,
-  errorLine: Block<{}>,
+  errorLine: Block<ICoreInputProps>,
 }
 
 export class Input extends Block<IInputProps, IInputRefs, HTMLInputElement> {

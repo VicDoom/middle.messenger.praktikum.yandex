@@ -7,10 +7,10 @@ const METHODS = {
 
 function queryStringify(data?: Document | XMLHttpRequestBodyInit | null) {
   const results: string[] = [];
-	Object.entries(data as object).forEach(entry => {
-		const [key, value] = entry;
-		results.push(`${key}=${value.toString()}`);
-	})
+  Object.entries(data as object).forEach(entry => {
+    const [key, value] = entry;
+    results.push(`${key}=${value.toString()}`);
+	});
   return `?${results.join("&")}`;
 }
 
@@ -22,18 +22,18 @@ interface IOptions {
 
 export default class HTTPTransport {
   get = (url: string, options: IOptions) => {
-		return this.request(
-			`${url}${queryStringify(options.data)}`, 
-			{ ...options, method: METHODS.GET },
-			options.timeout
-		);
-	};
-
-  put = (url: string, options: IOptions) => {
-		return this.request(url, { ...options, method: METHODS.PUT }, options.timeout);
+    return this.request(
+      `${url}${queryStringify(options.data)}`, 
+      { ...options, method: METHODS.GET },
+      options.timeout,
+    );
   };
 
-	post = (url: string, options: IOptions) => {
+  put = (url: string, options: IOptions) => {
+    return this.request(url, { ...options, method: METHODS.PUT }, options.timeout);
+  };
+
+  post = (url: string, options: IOptions) => {
     return this.request(url, { ...options, method: METHODS.POST }, options.timeout);
   };
 
@@ -42,7 +42,7 @@ export default class HTTPTransport {
   };
 
   request = (url: string, options: IOptions, timeout = 5000) => {
-		const { method, data } = options;
+    const { method, data } = options;
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
@@ -61,6 +61,6 @@ export default class HTTPTransport {
       } else {
         xhr.send(data);
       }
-		});
-	};
+    });
+  };
 }

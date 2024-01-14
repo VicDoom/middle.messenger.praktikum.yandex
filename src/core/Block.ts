@@ -3,12 +3,12 @@ import { nanoid } from "nanoid";
 import Handlebars from "handlebars";
 
 export type RefType = {
-  [key: string]: Element | HTMLInputElement | Block<IProps>
+  [key: string]: Element | HTMLInputElement | Block<IProps, RefType>
 }
 
 export interface IProps {
-  [key: string | symbol]: number | string | object | undefined,
-  events?: { [key: string]: (e: Event | KeyboardEvent) => void },
+  // events?: { [key: string]: (e: Event | KeyboardEvent) => void },
+  events?: Record<string, (e: Event | KeyboardEvent) => void>
 }
 
 export interface BlockClass<P extends IProps, R extends RefType, H extends HTMLElement> extends Function {
@@ -19,7 +19,7 @@ export interface BlockClass<P extends IProps, R extends RefType, H extends HTMLE
 type TEmbed = (f: DocumentFragment) => void;
 
 export class Block<
-  Props extends IProps = {}, 
+  Props extends IProps, 
   Refs extends RefType = {}, 
   HTMLElementType extends HTMLElement = HTMLElement
 > {
@@ -34,7 +34,7 @@ export class Block<
   public id = nanoid(6);
   protected props: Props;
   protected refs: Refs = {} as Refs;
-  private children: Block<Props>[] = [];
+  private children: Block<IProps>[] = [];
   private eventBus: () => EventBus;
   private _element: HTMLElementType | null = null;
 
@@ -88,14 +88,14 @@ export class Block<
     Object.values(this.children).forEach(child => child.dispatchComponentDidMount());
   }
 
-  private _componentDidUpdate(oldProps: Props, newProps: Props) {
+  private _componentDidUpdate(oldProps: any, newProps: any) {
     if (this.componentDidUpdate(oldProps, newProps)) {
       this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
   }
 
   // переопределяется пользователем
-  protected componentDidUpdate(oldProps: Props, newProps: Props) {
+  protected componentDidUpdate(oldProps: unknown, newProps: unknown) {
     return true;
   }
 
@@ -120,7 +120,7 @@ export class Block<
 
   componentWillUnmount() {}
 
-  setProps = (nextProps: Props) => {
+  setProps = (nextProps: unknown) => {
     if (!nextProps) {
       return;
     }
@@ -190,7 +190,7 @@ export class Block<
     return this._element;
   }
 
-  _makePropsProxy(props: Props) {
+  _makePropsProxy(props: any) {
     // Ещё один способ передачи this, но он больше не применяется с приходом ES6+
     const self = this;
 
@@ -200,7 +200,7 @@ export class Block<
         const value = target[prop];
         return typeof value === "function" ? value.bind(target) : value;
       },
-      set(target: Props, prop: keyof typeof props, value) {
+      set(target, prop, value) {
         const oldTarget = { ...target };
         target[prop] = value;
 

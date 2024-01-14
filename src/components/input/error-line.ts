@@ -1,6 +1,6 @@
 import { Block, IProps } from "../../core/Block";
 
-interface ICoreInputProps extends IProps {
+export interface ICoreInputProps extends IProps {
   ref: string;
   error: string | boolean;
 }
