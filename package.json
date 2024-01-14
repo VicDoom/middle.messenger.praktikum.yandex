@@ -11,7 +11,8 @@
     "build": "vite build",
     "start": "vite build & node server.cjs",
     "preview": "vite preview",
-    "express": "node server.cjs"
+    "express": "node server.cjs",
+    "lint": "eslint . --ext .ts,.tsx"
   },
   "devDependencies": {
     "dotenv": "16.3.1",
