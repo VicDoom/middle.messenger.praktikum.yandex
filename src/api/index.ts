@@ -10,7 +10,7 @@ function queryStringify(data?: Document | XMLHttpRequestBodyInit | null) {
   Object.entries(data as object).forEach(entry => {
     const [key, value] = entry;
     results.push(`${key}=${value.toString()}`);
-	});
+  });
   return `?${results.join("&")}`;
 }
 
