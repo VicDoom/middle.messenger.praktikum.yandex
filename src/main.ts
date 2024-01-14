@@ -5,7 +5,6 @@ import Handlebars from "handlebars";
 import { registerHandlebarsHelpers } from "./core/register-handlebars-helpers";
 import { navigate } from "./core/navigate";
 import { registerComponent } from "./core/register-component";
-import HTTPTransport from "./api/index";
 
 Object.entries({ ...Layouts }).forEach(([name, component]) => {
   Handlebars.registerPartial(name, component);

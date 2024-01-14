@@ -95,7 +95,7 @@ export class Block<
   }
 
   // переопределяется пользователем
-  protected componentDidUpdate(oldProps: unknown, newProps: unknown) {
+  protected componentDidUpdate(_oldProps: unknown, _newProps: unknown) {
     return true;
   }
 
