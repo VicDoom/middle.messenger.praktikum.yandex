@@ -7,8 +7,8 @@
     "plugins": ["@typescript-eslint"],
     "rules": {
       "max-len": ["error", { "code": 120 }],
-      "no-unused-vars": "warn",
-      // "no-console": "warn",
+      // "no-unused-vars": "warn",
+      "no-console": "warn",
       "quotes": ["error", "double"],
       "jsx-quotes": ["error", "prefer-double"],
       "prefer-const": "error",
