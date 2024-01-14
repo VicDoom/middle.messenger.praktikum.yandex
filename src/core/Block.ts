@@ -7,7 +7,8 @@ export type RefType = {
 }
 
 export interface IProps {
-  events?: { [key: string]: (e: Event | KeyboardEvent) => void }
+  [key: string | symbol]: number | string | object | undefined,
+  events?: { [key: string]: (e: Event | KeyboardEvent) => void },
 }
 
 export interface BlockClass<P extends IProps, R extends RefType, H extends HTMLElement> extends Function {
@@ -15,7 +16,13 @@ export interface BlockClass<P extends IProps, R extends RefType, H extends HTMLE
   componentName?: string;
 }
 
-export class Block<Props extends IProps, Refs extends RefType = {}, HTMLElementType extends HTMLElement = HTMLElement> {
+type TEmbed = (f: DocumentFragment) => void;
+
+export class Block<
+  Props extends IProps = {}, 
+  Refs extends RefType = {}, 
+  HTMLElementType extends HTMLElement = HTMLElement
+> {
   static EVENTS = {
     INIT: "init",
     FLOW_CDM: "flow:component-did-mount",
@@ -27,7 +34,7 @@ export class Block<Props extends IProps, Refs extends RefType = {}, HTMLElementT
   public id = nanoid(6);
   protected props: Props;
   protected refs: Refs = {} as Refs;
-  private children: Block<IProps>[] = [];
+  private children: Block<Props>[] = [];
   private eventBus: () => EventBus;
   private _element: HTMLElementType | null = null;
 
@@ -81,14 +88,14 @@ export class Block<Props extends IProps, Refs extends RefType = {}, HTMLElementT
     Object.values(this.children).forEach(child => child.dispatchComponentDidMount());
   }
 
-  private _componentDidUpdate(oldProps: any, newProps: any) {
+  private _componentDidUpdate(oldProps: Props, newProps: Props) {
     if (this.componentDidUpdate(oldProps, newProps)) {
       this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
   }
 
   // переопределяется пользователем
-  protected componentDidUpdate(oldProps: any, newProps: any) {
+  protected componentDidUpdate(oldProps: Props, newProps: Props) {
     return true;
   }
 
@@ -113,7 +120,7 @@ export class Block<Props extends IProps, Refs extends RefType = {}, HTMLElementT
 
   componentWillUnmount() {}
 
-  setProps = (nextProps: any) => {
+  setProps = (nextProps: Props) => {
     if (!nextProps) {
       return;
     }
@@ -152,7 +159,7 @@ export class Block<Props extends IProps, Refs extends RefType = {}, HTMLElementT
     const temp = document.createElement("template");
 
     temp.innerHTML = html;
-    contextAndStubs.__children?.forEach(({ embed }: any) => {
+    contextAndStubs.__children?.forEach(({ embed }: { embed: TEmbed }) => {
       embed(temp.content);
     });
 
@@ -183,18 +190,18 @@ export class Block<Props extends IProps, Refs extends RefType = {}, HTMLElementT
     return this._element;
   }
 
-  _makePropsProxy(props: any) {
+  _makePropsProxy(props: Props) {
     // Ещё один способ передачи this, но он больше не применяется с приходом ES6+
     const self = this;
 
     return new Proxy(props, {
       get(target, prop) {
+        if (!(prop in target)) return;
         const value = target[prop];
         return typeof value === "function" ? value.bind(target) : value;
       },
-      set(target, prop, value) {
+      set(target: Props, prop: keyof typeof props, value) {
         const oldTarget = { ...target };
-
         target[prop] = value;
 
         // Запускаем обновление компоненты

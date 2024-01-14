@@ -1,8 +1,11 @@
 import { Block } from "../../core/Block";
+import { navigate } from "../../core/navigate";
 
 export class Page404 extends Block<{}> {
   constructor() {
-    super();
+    super({
+      onClick: () => navigate("chat"),
+    });
   }
 
   protected render(): string {
@@ -11,7 +14,7 @@ export class Page404 extends Block<{}> {
         <div class="page-info">
           <div class="page-info__title">404</div>
           <div class="page-info__text">Не туда попали</div>
-          {{{ Button page='chat' label="Назад к чатам" type="link" page="chat" }}}
+          {{{ Button page='chat' label="Назад к чатам" type="link" onClick=onClick }}}
         </div>
       {{/ CenterLayout}}
     `);

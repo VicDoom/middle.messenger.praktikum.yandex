@@ -4,7 +4,7 @@ import { navigate } from "../../core/navigate";
 export class Page500 extends Block<{}> {
   constructor() {
     super({
-      onClick: () => navigate("page404"),
+      onClick: () => navigate("chat"),
     });
   }
 
