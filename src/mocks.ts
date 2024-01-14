@@ -1,3 +1,5 @@
+import { IChatElement, ICurrentChat } from "./types";
+
 const USER_INFO = {
   email: "soup@mail.ru",
   login: "Nikita",
@@ -7,7 +9,7 @@ const USER_INFO = {
   phone: "+78005553535",
 };
 
-const CHAT_ELEMENTS = [
+const CHAT_ELEMENTS: IChatElement[] = [
   {
     id: "chat_0",
     user: "Андрей",
@@ -114,7 +116,7 @@ const CHAT_ELEMENTS = [
   },
 ];
 
-const CURRENT_CHAT = {
+const CURRENT_CHAT: ICurrentChat = {
   id: 0,
   user: "Тайлер Дерден",
   messages: [

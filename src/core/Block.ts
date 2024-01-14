@@ -7,7 +7,7 @@ export type RefType = {
 }
 
 export interface IProps {
-  events?: { [key: string]: (e: Event) => void }
+  events?: { [key: string]: (e: Event | KeyboardEvent) => void }
 }
 
 export interface BlockClass<P extends IProps, R extends RefType, H extends HTMLElement> extends Function {

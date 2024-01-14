@@ -5,6 +5,7 @@ import { email } from "./email";
 import { phone } from "./phone";
 import { password } from "./password";
 import { repeatPassword } from "./repeat-password";
+import { message } from "./message";
 
 export const Validator = {
   login,
@@ -14,4 +15,5 @@ export const Validator = {
   phone,
   password,
   repeatPassword,
+  message,
 };

@@ -1,1 +1,1 @@
-export { default as ChatMainControls } from "./chat-main-controls.hbs?raw";
+export { ChatMainControls } from "./chat-main-controls";

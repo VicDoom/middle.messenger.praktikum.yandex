@@ -1,1 +1,1 @@
-export { default as ChatMainBody } from "./chat-main-body.hbs?raw";
+export { ChatMainBody } from "./chat-main-body";

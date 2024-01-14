@@ -1,1 +1,1 @@
-export { default as ChatControl } from "./chat-control.hbs?raw";
+export { ChatControl } from "./chat-control";

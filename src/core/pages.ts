@@ -8,5 +8,5 @@ export const PageList = {
   "profile": Pages.ProfilePage, 
   "profile-edit-fields": Pages.ProfileEditFieldsPage,
   "profile-edit-password": Pages.ProfileEditPasswordPage,
-  // "chat": Pages.ChatPage,
+  "chat": Pages.ChatPage,
 };

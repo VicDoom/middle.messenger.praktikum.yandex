@@ -14,7 +14,14 @@ registerComponent("Button", Components.Button);
 registerComponent("ButtonBack", Components.ButtonBack);
 registerComponent("Divider", Components.Divider);
 registerComponent("Input", Components.Input);
+registerComponent("ChatControl", ChatComponents.ChatControl);
+registerComponent("ChatElement", ChatComponents.ChatElement);
+registerComponent("ChatList", ChatComponents.ChatList);
+registerComponent("ChatNavigationHeader", ChatComponents.ChatNavigationHeader);
+registerComponent("ChatMainBody", ChatComponents.ChatMainBody);
+registerComponent("ChatMainControls", ChatComponents.ChatMainControls);
+registerComponent("ChatMainHeader", ChatComponents.ChatMainHeader);
 
 registerHandlebarsHelpers();
 
-document.addEventListener("DOMContentLoaded", () => navigate("profile"));
+document.addEventListener("DOMContentLoaded", () => navigate("chat"));

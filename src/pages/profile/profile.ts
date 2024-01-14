@@ -17,6 +17,7 @@ export class ProfilePage extends Block<{}, IProfilePageRefs> {
       navigatePasswordEditPage: () => navigate("profile-edit-password"),
       navigatePage404: () => navigate("page404"),
       navigatePage500: () => navigate("page500"),
+      navigateChat: () => navigate("chat"),
       validateLoginField: (value: string) => Validator.login(value),
       openAvatarModal: () => this.refs.changeAvatarModal.show(),
       closeAvatarModal: () => this.refs.changeAvatarModal.hide(),
@@ -26,7 +27,7 @@ export class ProfilePage extends Block<{}, IProfilePageRefs> {
   protected render(): string {
     return (`
       <div class="profile-page">
-        {{{ ButtonBack page="chat" }}}
+        {{{ ButtonBack onClick=navigateChat }}}
             {{#> CenterLayout}}
                 <div class="profile-page__content">
                     <div class="profile-page__avatar">
