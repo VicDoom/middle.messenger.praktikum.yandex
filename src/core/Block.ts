@@ -88,7 +88,7 @@ export class Block<
     Object.values(this.children).forEach(child => child.dispatchComponentDidMount());
   }
 
-  private _componentDidUpdate(oldProps: any, newProps: any) {
+  private _componentDidUpdate(oldProps: unknown, newProps: unknown) {
     if (this.componentDidUpdate(oldProps, newProps)) {
       this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
@@ -147,6 +147,9 @@ export class Block<
     this._addEvents();
   }
 
+  // Используется any, тк возникает несколько основных кейсов:
+  // 1 - context ломает передачу пропсов в методе render
+  // 2 - невозможно перебрать значения contextAndStubs в forEach, чтобы значения были однородны
   private compile(template: string, context: any) {
     const contextAndStubs = { ...context, __refs: this.refs };
 
@@ -190,6 +193,9 @@ export class Block<
     return this._element;
   }
 
+  // any используется из-за конфликта prop и target: 
+  // даже с указанием, что prop является ключом target, 
+  // и заменой на нужный интерфейс Props в дженерике
   _makePropsProxy(props: any) {
     // Ещё один способ передачи this, но он больше не применяется с приходом ES6+
     const self = this;
