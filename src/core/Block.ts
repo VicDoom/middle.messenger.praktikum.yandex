@@ -58,6 +58,14 @@ export class Block<
     });
   }
 
+  _removeEvents() {
+    const { events = {} } = this.props;
+
+    Object.keys(events).forEach(eventName => {
+      this._element!.removeEventListener(eventName, events[eventName]);
+    });
+  }
+
   _registerEvents(eventBus: EventBus) {
     eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
@@ -88,14 +96,14 @@ export class Block<
     Object.values(this.children).forEach(child => child.dispatchComponentDidMount());
   }
 
-  private _componentDidUpdate(oldProps: unknown, newProps: unknown) {
+  private _componentDidUpdate(oldProps: Props, newProps: Props) {
     if (this.componentDidUpdate(oldProps, newProps)) {
       this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
   }
 
   // переопределяется пользователем
-  protected componentDidUpdate(_oldProps: unknown, _newProps: unknown) {
+  protected componentDidUpdate(_oldProps: Props, _newProps: Props) {
     return true;
   }
 
@@ -139,6 +147,7 @@ export class Block<
     const newElement = fragment.firstElementChild as HTMLElementType;
 
     if (this._element) {
+      this._removeEvents();
       this._element.replaceWith(newElement);
     }
 

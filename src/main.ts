@@ -24,4 +24,4 @@ registerComponent("ChatMainHeader", ChatComponents.ChatMainHeader);
 
 registerHandlebarsHelpers();
 
-document.addEventListener("DOMContentLoaded", () => navigate("chat"));
+document.addEventListener("DOMContentLoaded", () => navigate("profile"));

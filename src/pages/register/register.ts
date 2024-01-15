@@ -62,7 +62,8 @@ export class RegisterPage extends Block<{}, TRegisterPageRefs> {
         {{#> FormLayout }}
             <div class="form-info register-page">
                 <div class="form-info__title">Регистрация</div>
-                <div class="form-info__inputs">
+                <form id="register-form">
+                  <div class="form-info__inputs">
                     {{{ Input 
                         label="Почта" 
                         id="email"
@@ -114,12 +115,14 @@ export class RegisterPage extends Block<{}, TRegisterPageRefs> {
                         type="password"
                         validate=validateRepeatPassword
                     }}}
-                </div>
-                <div class="form-info__buttons">
+                  </div>
+                  <div class="form-info__buttons">
                     {{{ Button
                         label="Зарегистрироваться"
                         page="register"
                         onClick=onRegister
+                        action="submit"
+                        id="register-form"
                     }}}
                     {{{ Button
                         label="Войти"
@@ -127,7 +130,8 @@ export class RegisterPage extends Block<{}, TRegisterPageRefs> {
                         type="link"
                         onClick=navigateLogin
                     }}}
-                </div>
+                  </div>
+                </form>
             </div>
         {{/ FormLayout }}
       {{/ CenterLayout }}

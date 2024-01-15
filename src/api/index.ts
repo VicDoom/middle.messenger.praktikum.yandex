@@ -20,8 +20,10 @@ interface IOptions {
   timeout: number,
 }
 
+type THTTPMethod = (url: string, options: IOptions, timeout?: number) => Promise<unknown> 
+
 export default class HTTPTransport {
-  get = (url: string, options: IOptions) => {
+  get: THTTPMethod = (url, options) => {
     return this.request(
       `${url}${queryStringify(options.data)}`, 
       { ...options, method: METHODS.GET },
@@ -29,19 +31,19 @@ export default class HTTPTransport {
     );
   };
 
-  put = (url: string, options: IOptions) => {
+  put: THTTPMethod = (url, options) => {
     return this.request(url, { ...options, method: METHODS.PUT }, options.timeout);
   };
 
-  post = (url: string, options: IOptions) => {
+  post: THTTPMethod = (url, options) => {
     return this.request(url, { ...options, method: METHODS.POST }, options.timeout);
   };
 
-  delete = (url: string, options: IOptions) => {
+  delete: THTTPMethod = (url, options) => {
     return this.request(url, { ...options, method: METHODS.DELETE }, options.timeout);
   };
 
-  request = (url: string, options: IOptions, timeout = 5000) => {
+  request: THTTPMethod = (url, options, timeout = 5000) => {
     const { method, data } = options;
 
     return new Promise((resolve, reject) => {

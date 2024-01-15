@@ -58,68 +58,72 @@ export class ProfileEditFieldsPage extends Block<{}, IProfileEditFieldsPageRefs>
                             <img src={{icons "icon-avatar"}} alt="avatar">
                         </div>
                     </div>
-                    <div class="profile-page__inputs">
-                    {{{ Input 
-                        label="Почта" 
-                        value="${USER_INFO.email}"
-                        id="email"
-                        ref="email"
-                        placeholder="введите почту"
-                        styleType="profile"
-                        validate=validateEmail
-                    }}}
-                    {{{ Input 
-                        label="Логин" 
-                        value="${USER_INFO.login}"
-                        id="login"
-                        ref="login"
-                        placeholder="введите логин"
-                        styleType="profile"
-                        validate=validateLogin
-                    }}}
-                    {{{ Input 
-                        label="Имя" 
-                        value="${USER_INFO.first_name}"
-                        id="first_name"
-                        ref="first_name"
-                        placeholder="введите имя"
-                        styleType="profile"
-                        validate=validateName
-                    }}}
-                    {{{ Input 
-                        label="Фамилия" 
-                        value="${USER_INFO.second_name}"
-                        id="second_name"
-                        ref="second_name"
-                        placeholder="введите фамилию"
-                        styleType="profile"
-                        validate=validateName
-                    }}}
-                    {{{ Input 
-                        label="Имя в чате" 
-                        value="${USER_INFO.display_name}"
-                        id="display_name"
-                        ref="display_name"
-                        placeholder="введите имя"
-                        styleType="profile"
-                        validate=validateDisplayName
-                    }}}
-                    {{{ Input 
-                        label="Телефон" 
-                        value="${USER_INFO.phone}"
-                        id="phone"
-                        ref="phone"
-                        placeholder="введите номер телефона"
-                        styleType="profile"
-                        validate=validatePhone
-                    }}}
-                    </div>
-                    <div class="profile-page__buttons">
+                    <form class="profile-page__form" id="profile-edit-fields-page">
+                      <div class="profile-page__inputs">
+                      {{{ Input 
+                          label="Почта" 
+                          value="${USER_INFO.email}"
+                          id="email"
+                          ref="email"
+                          placeholder="введите почту"
+                          styleType="profile"
+                          validate=validateEmail
+                      }}}
+                      {{{ Input 
+                          label="Логин" 
+                          value="${USER_INFO.login}"
+                          id="login"
+                          ref="login"
+                          placeholder="введите логин"
+                          styleType="profile"
+                          validate=validateLogin
+                      }}}
+                      {{{ Input 
+                          label="Имя" 
+                          value="${USER_INFO.first_name}"
+                          id="first_name"
+                          ref="first_name"
+                          placeholder="введите имя"
+                          styleType="profile"
+                          validate=validateName
+                      }}}
+                      {{{ Input 
+                          label="Фамилия" 
+                          value="${USER_INFO.second_name}"
+                          id="second_name"
+                          ref="second_name"
+                          placeholder="введите фамилию"
+                          styleType="profile"
+                          validate=validateName
+                      }}}
+                      {{{ Input 
+                          label="Имя в чате" 
+                          value="${USER_INFO.display_name}"
+                          id="display_name"
+                          ref="display_name"
+                          placeholder="введите имя"
+                          styleType="profile"
+                          validate=validateDisplayName
+                      }}}
+                      {{{ Input 
+                          label="Телефон" 
+                          value="${USER_INFO.phone}"
+                          id="phone"
+                          ref="phone"
+                          placeholder="введите номер телефона"
+                          styleType="profile"
+                          validate=validatePhone
+                      }}}
+                      </div>
+                      <div class="profile-page__buttons">
                         {{{ Button
                             label="Сохранить"
                             onClick=onSave
+                            action="submit"
+                            form="profile-edit-fields-page"
                         }}}
-                    </div>
+                      </div>
+                    </form>
                 </div>
             {{/CenterLayout}}
         </div>  

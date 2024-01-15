@@ -18,6 +18,7 @@ export class LoginPage extends Block<{}, TLoginPageRefs> {
           return;
         }
         console.log({ login, password });
+        navigate("chat");
       },
       validateField: (value: string) => {
         return value.length ? false : "Поле не должно быть пустым";
@@ -31,7 +32,8 @@ export class LoginPage extends Block<{}, TLoginPageRefs> {
         {{#> FormLayout }}
             <div class="form-info login-page">
                 <div class="form-info__title">Войти</div>
-                <div class="form-info__inputs">
+                <form id="login-form">
+                  <div class="form-info__inputs">
                     {{{ Input 
                         label="Логин" 
                         id="login"
@@ -48,12 +50,14 @@ export class LoginPage extends Block<{}, TLoginPageRefs> {
                         type="password"
                         validate=validateField
                     }}}
-                </div>
-                <div class="form-info__buttons">
+                  </div>
+                  <div class="form-info__buttons">
                     {{{ Button
                         label="Авторизоваться"
                         page="chat"
                         onClick=onLogin
+                        action="submit"
+                        id="login-form"
                     }}}
                     {{{ Button
                         label="Нет аккаунта?"
@@ -61,7 +65,8 @@ export class LoginPage extends Block<{}, TLoginPageRefs> {
                         type="link"
                         onClick=navigateRegister
                     }}}
-                </div>
+                  </div>
+                </form>
             </div>
         {{/ FormLayout }}
       {{/ CenterLayout }}

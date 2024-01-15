@@ -43,7 +43,7 @@ body, h1, h2, h3, h4, h5, h6, p, ol, ul {
     font-family: 'Inter';
 }
 
-#app {
+main {
   height: 100%;
 }
 
@@ -83,6 +83,13 @@ img {
   display: flex;
   flex-direction: column;
   align-items: center;
+  & form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
   &__inputs, &__buttons {
     width: 100%;
   }

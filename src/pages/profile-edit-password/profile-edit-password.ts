@@ -50,7 +50,8 @@ export class ProfileEditPasswordPage extends Block<{}, TProfileEditPasswordPageR
                         <img src={{icons "icon-avatar"}} alt="avatar">
                     </div>
                 </div>
-                <div class="profile-page__inputs">
+                <form class="profile-page__form" id="profile-edit-password-form">
+                  <div class="profile-page__inputs">
                     {{{ Input 
                         label="Старый пароль" 
                         id="old_password"
@@ -78,13 +79,16 @@ export class ProfileEditPasswordPage extends Block<{}, TProfileEditPasswordPageR
                         type="password"
                         validate=validateRepeatPassword
                     }}}
-                </div>
-                <div class="profile-page__buttons">
+                  </div>
+                  <div class="profile-page__buttons">
                     {{{ Button
                         label="Сохранить"
                         onClick=onSave
+                        action="submit"
+                        form="profile-edit-password-form"
                     }}}
-                </div>
+                  </div>
+                </form>
             </div>
         {{/CenterLayout}}
       </div>
