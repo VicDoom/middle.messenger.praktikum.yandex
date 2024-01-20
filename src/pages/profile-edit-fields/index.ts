@@ -1,1 +1,2 @@
-export { default as ProfileEditFieldsPage } from "./profile-edit-fields.hbs?raw";
+import "./profile-edit-fields.css";
+export { ProfileEditFieldsPage as default } from "./profile-edit-fields";

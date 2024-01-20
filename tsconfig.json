@@ -6,22 +6,21 @@
       "lib": ["ES2020", "WebWorker.ImportScripts", "DOM", "DOM.Iterable"],
       "skipLibCheck": true,
   
-      /* Bundler mode */
       "moduleResolution": "node",
-      /* "allowImportingTsExtensions": true, */
       "resolveJsonModule": true,
       "isolatedModules": true,
       "noEmit": true,
       "allowSyntheticDefaultImports": true,
   
-      /* Linting */
       "strict": true,
       "noUnusedLocals": true,
       "noUnusedParameters": true,
-      "noFallthroughCasesInSwitch": true
+      "noImplicitAny": true,
+      "sourceMap": true,
+      "strictNullChecks": true
     },
     "include": [
       "src",
-      "index.d.ts",
-    ],
-  }
+      "index.d.ts"
+    ]
+}

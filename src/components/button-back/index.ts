@@ -1,1 +1,2 @@
-export { default as ButtonBack } from "./button-back.hbs?raw";
+import "./button-back.css";
+export { ButtonBack } from "./button-back";

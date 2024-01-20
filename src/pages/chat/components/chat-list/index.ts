@@ -1,1 +1,1 @@
-export { default as ChatList } from "./chat-list.hbs?raw";
+export { ChatList } from "./chat-list";

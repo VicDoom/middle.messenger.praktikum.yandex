@@ -1,1 +1,2 @@
-export { default as LoginPage } from "./login.hbs?raw";
+import "./login.css";
+export { LoginPage as default } from "./login";

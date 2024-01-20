@@ -1,1 +1,1 @@
-export { default as Divider } from "./divider.hbs?raw";
+export { Divider } from "./divider";

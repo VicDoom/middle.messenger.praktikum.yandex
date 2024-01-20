@@ -1,1 +1,1 @@
-export { default as ChatElement } from "./chat-element.hbs?raw";
+export { ChatElement } from "./chat-element";

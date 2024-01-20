@@ -10,9 +10,9 @@ export default defineConfig({
     outDir: "dist",
   },
   plugins: [
-    //@ts-expect-error
     handlebars(),
-    // eslint(),
+    eslint(),
+    // stylelint(),
   ],
   css: {
     postcss: {
