@@ -9,12 +9,31 @@ import {
   ChatPage, 
   LoginPage, 
   Page404, 
+  Page500,
   ProfileEditFieldsPage, 
   ProfileEditPasswordPage, 
   ProfilePage, 
   RegisterPage,
 } from "./pages";
-import page500 from "./pages/page-500";
+import { Store } from "./core/Store";
+import { AppState } from "./types";
+
+declare global {
+  interface Window {
+    store: Store<AppState>;
+  }
+
+  type Nullable<T> = T | null;
+}
+
+const initState: AppState = {
+  error: null,
+  user: null,
+  isOpenDialogChat: false,
+  chats: [],
+};
+
+window.store = new Store<AppState>(initState);
 
 Object.entries({ ...Layouts }).forEach(([name, component]) => {
   Handlebars.registerPartial(name, component);
@@ -23,6 +42,7 @@ Object.entries({ ...Layouts }).forEach(([name, component]) => {
 registerComponent("Button", Components.Button);
 registerComponent("ButtonBack", Components.ButtonBack);
 registerComponent("Divider", Components.Divider);
+registerComponent("ErrorMessage", Components.ErrorMessage);
 registerComponent("Input", Components.Input);
 registerComponent("ChatControl", ChatComponents.ChatControl);
 registerComponent("ChatElement", ChatComponents.ChatElement);
@@ -43,8 +63,8 @@ document.addEventListener("DOMContentLoaded", () => {
     .use("/register", RegisterPage)
     .use("/login", LoginPage)
     .use("/page-404", Page404)
-    .use("/page-500", page500)
+    .use("/page-500", Page500)
     .use("/chats", ChatPage)
     .start();
-  router.go("/profile");
+  router.go("/login");
 });

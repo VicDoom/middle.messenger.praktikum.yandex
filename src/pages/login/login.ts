@@ -1,10 +1,13 @@
 import { Input } from "../../components/input";
 import { Block } from "../../core/Block";
 import { DEFAULT_PROPS, Router } from "../../core/Router";
+import { AuthController } from "../../controllers";
+import { ErrorMessage } from "../../components/error-message";
 
 type TLoginPageRefs = {
   login: Input;
   password: Input;
+  error: ErrorMessage;
 }
 
 export class LoginPage extends Block<{}, TLoginPageRefs> {
@@ -18,8 +21,8 @@ export class LoginPage extends Block<{}, TLoginPageRefs> {
         if (!login || !password) {
           return;
         }
-        console.log({ login, password });
-        router.go("/chats");
+        
+        AuthController.login({ login, password }).catch(error => this.refs.error.setProps({ error }));
       },
       validateField: (value: string) => {
         return value.length ? false : "Поле не должно быть пустым";
@@ -36,7 +39,7 @@ export class LoginPage extends Block<{}, TLoginPageRefs> {
                 <form id="login-form">
                   <div class="form-info__inputs">
                     {{{ Input 
-                        label="Логин" 
+                        label="Логин"
                         id="login"
                         ref="login"
                         placeholder="введите логин"
@@ -44,7 +47,6 @@ export class LoginPage extends Block<{}, TLoginPageRefs> {
                     }}}
                     {{{ Input 
                         label="Пароль" 
-                        value=""
                         id="password"
                         ref="password"
                         placeholder="введите пароль"
@@ -53,6 +55,7 @@ export class LoginPage extends Block<{}, TLoginPageRefs> {
                     }}}
                   </div>
                   <div class="form-info__buttons">
+                    {{{ ErrorMessage error=error ref="error" }}}
                     {{{ Button
                         label="Авторизоваться"
                         page="chat"

@@ -54,16 +54,19 @@ export const DEFAULT_PROPS = {
 
 export class Router<R extends RefType, B extends Block<{}, R>> {
   private _rootQuery!: string;
-  //для реализации сингтона нужно задать статичное значение с передаваемыми типами 
-  //(ts запрещает такие значения)
-  //@ts-expect-error
+  // @ts-expect-error для реализации сингтона нужно задать статичное значение с передаваемыми типами 
+  // (ts запрещает такие значения)
   static __instance: Router<R, B>;
   private _currentRoute!: Route<R, B> | null;
   public routes!: Route<R, B>[];
   public history!: History;
 
-  constructor(props: IRouter) {
+  constructor(props?: IRouter) {
+    if (!props) {
+      props = DEFAULT_PROPS;
+    }
     const { rootQuery } = props;
+
     if (Router.__instance) {
       return Router.__instance;
     }
@@ -84,8 +87,7 @@ export class Router<R extends RefType, B extends Block<{}, R>> {
 
   start() {
     window.onpopstate = (event: PopStateEvent) => {
-      // в PopStateEvent содержится pathname, ошибка ts
-      // @ts-expect-error
+      // @ts-expect-error в PopStateEvent содержится pathname, ошибка ts
       this._onRoute(event.currentTarget?.location.pathname);
     };
     this._onRoute(window.location.pathname);
