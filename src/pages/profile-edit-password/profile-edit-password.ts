@@ -1,6 +1,6 @@
 import { Input } from "../../components/input";
 import { Block } from "../../core/Block";
-import { navigate } from "../../core/navigate";
+import { DEFAULT_PROPS, Router } from "../../core/Router";
 import { Validator } from "../../helpers/validator";
 
 type TProfileEditPasswordPageRefs = {
@@ -11,8 +11,9 @@ type TProfileEditPasswordPageRefs = {
 
 export class ProfileEditPasswordPage extends Block<{}, TProfileEditPasswordPageRefs> {
   constructor() {
+    const router = new Router(DEFAULT_PROPS);
     super({
-      navigateBack: () => navigate("profile"),
+      navigateBack: () => router.go("/profile"),
       onSave: () => {
         const oldPassword = this.refs.old_password.value();
         const newPassword = this.refs.new_password.value();
@@ -26,7 +27,7 @@ export class ProfileEditPasswordPage extends Block<{}, TProfileEditPasswordPageR
           return;
         }
         console.log({ oldPassword, newPassword, repeatNewPassword });
-        navigate("profile");
+        router.go("/profile");
       },
       validatePassword: Validator.password,
       validateRepeatPassword: (value: string) => { 

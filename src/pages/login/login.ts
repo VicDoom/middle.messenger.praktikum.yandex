@@ -1,6 +1,6 @@
 import { Input } from "../../components/input";
 import { Block } from "../../core/Block";
-import { navigate } from "../../core/navigate";
+import { DEFAULT_PROPS, Router } from "../../core/Router";
 
 type TLoginPageRefs = {
   login: Input;
@@ -9,8 +9,9 @@ type TLoginPageRefs = {
 
 export class LoginPage extends Block<{}, TLoginPageRefs> {
   constructor() {
+    const router = new Router(DEFAULT_PROPS);
     super({
-      navigateRegister: () => navigate("register"),
+      navigateRegister: () => router.go("/register"),
       onLogin: () => {
         const login = this.refs.login.value();
         const password = this.refs.password.value();
@@ -18,7 +19,7 @@ export class LoginPage extends Block<{}, TLoginPageRefs> {
           return;
         }
         console.log({ login, password });
-        navigate("chat");
+        router.go("/chats");
       },
       validateField: (value: string) => {
         return value.length ? false : "Поле не должно быть пустым";

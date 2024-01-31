@@ -1,9 +1,9 @@
 import { Button } from "../../components/button";
 import { AvatarModal } from "./components";
 import { Block } from "../../core/Block";
-import { navigate } from "../../core/navigate";
 import { Validator } from "../../helpers";
 import { USER_INFO } from "../../mocks";
+import { DEFAULT_PROPS, Router } from "../../core/Router";
 
 type IProfilePageRefs = {
   changeAvatarModal: AvatarModal
@@ -12,13 +12,14 @@ type IProfilePageRefs = {
 
 export class ProfilePage extends Block<{}, IProfilePageRefs> {
   constructor() {
+    const router = new Router(DEFAULT_PROPS);
     super({
-      navigateProfileEditPage: () => navigate("profile-edit-fields"),
-      navigatePasswordEditPage: () => navigate("profile-edit-password"),
-      navigatePage404: () => navigate("page404"),
-      navigatePage500: () => navigate("page500"),
-      navigateChat: () => navigate("chat"),
-      navigateLoginPage: () => navigate("login"),
+      navigateProfileEditPage: () => router.go("/profile/edit-fields"),
+      navigatePasswordEditPage: () => router.go("/profile/edit-password"),
+      navigatePage404: () => router.go("/page-404"),
+      navigatePage500: () => router.go("/page-500"),
+      navigateChat: () => router.go("/chats"),
+      navigateLoginPage: () => router.go("/login"),
       validateLoginField: (value: string) => Validator.login(value),
       openAvatarModal: () => this.refs.changeAvatarModal.show(),
       closeAvatarModal: () => this.refs.changeAvatarModal.hide(),

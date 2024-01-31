@@ -1,6 +1,6 @@
 import { Input } from "../../components/input";
 import { Block } from "../../core/Block";
-import { navigate } from "../../core/navigate";
+import { DEFAULT_PROPS, Router } from "../../core/Router";
 import { Validator } from "../../helpers";
 
 type TRegisterPageRefs = {
@@ -15,8 +15,9 @@ type TRegisterPageRefs = {
 
 export class RegisterPage extends Block<{}, TRegisterPageRefs> {
   constructor() {
+    const router = new Router(DEFAULT_PROPS);
     super({
-      navigateLogin: () => navigate("login"),
+      navigateLogin: () => router.go("/login"),
       validateEmail: Validator.email,
       validateLogin: Validator.login,
       validateName: Validator.name,
@@ -51,7 +52,7 @@ export class RegisterPage extends Block<{}, TRegisterPageRefs> {
           return;
         }
         console.log({ email, login, firstName, secondName, phone, password, repeatPassword });
-        navigate("login");
+        router.go("/login");
       },
     });
   }

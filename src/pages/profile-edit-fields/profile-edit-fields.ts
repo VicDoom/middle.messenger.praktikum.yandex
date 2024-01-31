@@ -1,8 +1,8 @@
 import { Input } from "../../components/input";
 import { Block } from "../../core/Block";
-import { navigate } from "../../core/navigate";
 import { USER_INFO } from "../../mocks";
 import { Validator } from "../../helpers/validator";
+import { DEFAULT_PROPS, Router } from "../../core/Router";
 
 type IProfileEditFieldsPageRefs = {
     email: Input
@@ -15,8 +15,9 @@ type IProfileEditFieldsPageRefs = {
 
 export class ProfileEditFieldsPage extends Block<{}, IProfileEditFieldsPageRefs> {
   constructor() {
+    const router = new Router(DEFAULT_PROPS);
     super({
-      navigateBack: () => navigate("profile"),
+      navigateBack: () => router.go("/profile"),
       onSave: () => {
         const email = this.refs.email.value();
         const login = this.refs.login.value();
@@ -37,7 +38,7 @@ export class ProfileEditFieldsPage extends Block<{}, IProfileEditFieldsPageRefs>
         console.log({
           email, login, first_name, second_name, display_name, phone,
         });
-        navigate("profile");
+        router.go("/profile");
       },
       validateLogin: Validator.login,
       validateName: Validator.name,
