@@ -3,4 +3,4 @@ import { AvatarButton, AvatarModal } from "./components";
 
 registerComponent("AvatarModal", AvatarModal);
 registerComponent("AvatarButton", AvatarButton);
-export { ProfilePage as default } from "./profile";
+export { default as ProfilePage } from "./profile";

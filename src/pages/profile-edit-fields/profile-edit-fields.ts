@@ -1,8 +1,11 @@
 import { Input } from "../../components/input";
 import { Block } from "../../core/Block";
-import { USER_INFO } from "../../mocks";
 import { Validator } from "../../helpers/validator";
 import { DEFAULT_PROPS, Router } from "../../core/Router";
+import { UserController } from "../../controllers";
+import { ErrorMessage } from "../../components/error-message";
+import connect from "../../utils/connect";
+import { UserDTO } from "../../api/types";
 
 type IProfileEditFieldsPageRefs = {
     email: Input
@@ -11,34 +14,35 @@ type IProfileEditFieldsPageRefs = {
     second_name: Input
     display_name: Input
     phone: Input
+    error: ErrorMessage
 }
 
-export class ProfileEditFieldsPage extends Block<{}, IProfileEditFieldsPageRefs> {
-  constructor() {
+class ProfileEditFieldsPage extends Block<{}, IProfileEditFieldsPageRefs> {
+  constructor(props: UserDTO) {
     const router = new Router(DEFAULT_PROPS);
     super({
+      ...props,
       navigateBack: () => router.go("/profile"),
       onSave: () => {
-        const email = this.refs.email.value();
-        const login = this.refs.login.value();
-        const first_name = this.refs.first_name.value();
-        const second_name = this.refs.second_name.value();
-        const display_name = this.refs.display_name.value();
-        const phone = this.refs.phone.value();
+        const editUser = {
+          email: this.refs.email.value()!,
+          login: this.refs.login.value()!,
+          first_name: this.refs.first_name.value()!,
+          second_name: this.refs.second_name.value()!,
+          display_name: this.refs.display_name.value()!,
+          phone: this.refs.phone.value()!,
+        }
         if (!(
-          !Validator.login(login) && 
-          !Validator.email(email) &&
-          !Validator.name(first_name) && 
-          !Validator.name(second_name) && 
-          !Validator.displayName(display_name) &&
-          !Validator.phone(phone)
+          !Validator.login(editUser.login) && 
+          !Validator.email(editUser.email) &&
+          !Validator.name(editUser.first_name) && 
+          !Validator.name(editUser.second_name) && 
+          !Validator.displayName(editUser.display_name) &&
+          !Validator.phone(editUser.phone)
         )) {
           return;
         }
-        console.log({
-          email, login, first_name, second_name, display_name, phone,
-        });
-        router.go("/profile");
+        UserController.editProfile(editUser).catch(error => this.refs.error.setProps({ error }));
       },
       validateLogin: Validator.login,
       validateName: Validator.name,
@@ -63,7 +67,7 @@ export class ProfileEditFieldsPage extends Block<{}, IProfileEditFieldsPageRefs>
                       <div class="profile-page__inputs">
                       {{{ Input 
                           label="Почта" 
-                          value="${USER_INFO.email}"
+                          value=user.email
                           id="email"
                           ref="email"
                           placeholder="введите почту"
@@ -72,7 +76,7 @@ export class ProfileEditFieldsPage extends Block<{}, IProfileEditFieldsPageRefs>
                       }}}
                       {{{ Input 
                           label="Логин" 
-                          value="${USER_INFO.login}"
+                          value=user.login
                           id="login"
                           ref="login"
                           placeholder="введите логин"
@@ -81,7 +85,7 @@ export class ProfileEditFieldsPage extends Block<{}, IProfileEditFieldsPageRefs>
                       }}}
                       {{{ Input 
                           label="Имя" 
-                          value="${USER_INFO.first_name}"
+                          value=user.firstName
                           id="first_name"
                           ref="first_name"
                           placeholder="введите имя"
@@ -90,7 +94,7 @@ export class ProfileEditFieldsPage extends Block<{}, IProfileEditFieldsPageRefs>
                       }}}
                       {{{ Input 
                           label="Фамилия" 
-                          value="${USER_INFO.second_name}"
+                          value=user.secondName
                           id="second_name"
                           ref="second_name"
                           placeholder="введите фамилию"
@@ -99,8 +103,8 @@ export class ProfileEditFieldsPage extends Block<{}, IProfileEditFieldsPageRefs>
                       }}}
                       {{{ Input 
                           label="Имя в чате" 
-                          value="${USER_INFO.display_name}"
-                          id="display_name"
+                          value=user.displayName
+                          id="displayName"
                           ref="display_name"
                           placeholder="введите имя"
                           styleType="profile"
@@ -108,7 +112,7 @@ export class ProfileEditFieldsPage extends Block<{}, IProfileEditFieldsPageRefs>
                       }}}
                       {{{ Input 
                           label="Телефон" 
-                          value="${USER_INFO.phone}"
+                          value=user.phone
                           id="phone"
                           ref="phone"
                           placeholder="введите номер телефона"
@@ -117,6 +121,7 @@ export class ProfileEditFieldsPage extends Block<{}, IProfileEditFieldsPageRefs>
                       }}}
                       </div>
                       <div class="profile-page__buttons">
+                        {{{ ErrorMessage ref="error" error=error }}}
                         {{{ Button
                             label="Сохранить"
                             onClick=onSave
@@ -131,3 +136,5 @@ export class ProfileEditFieldsPage extends Block<{}, IProfileEditFieldsPageRefs>
       `);
   }
 }
+
+export default connect(({ user }) => ({ user }))(ProfileEditFieldsPage);

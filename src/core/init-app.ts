@@ -7,16 +7,23 @@ const initApp = async () => {
   try {
     me = await AuthController.getUser();
   } catch (error) {
-    router.go('/login');
+    router.go("/login");
     return;
   }
 
   // const chats = await getChats();
   // window.store.set({user: me, chats});
-  window.store.set({user: me});
-
-  router.go('/profile');
-}
+  window.store.set({ user: me });
+  
+  const currentLocation = location.pathname;
+  const currentRoute = router.getRoute(currentLocation);
+  if (!currentRoute) {
+    // заменить потом на page-404
+    router.go("/profile");
+    return;
+  }
+  router.go(currentLocation);
+};
 
 // const initChatPage = async () => {
 //   const chats = await getChats();
@@ -26,4 +33,4 @@ const initApp = async () => {
 export {
   initApp,
   // initChatPage,
-}
+};

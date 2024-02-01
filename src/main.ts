@@ -17,6 +17,7 @@ import {
 } from "./pages";
 import { Store } from "./core/Store";
 import { AppState } from "./types";
+import { initApp } from "./core/init-app";
 
 declare global {
   interface Window {
@@ -66,5 +67,6 @@ document.addEventListener("DOMContentLoaded", () => {
     .use("/page-500", Page500)
     .use("/chats", ChatPage)
     .start();
-  router.go("/login");
+
+  initApp();
 });

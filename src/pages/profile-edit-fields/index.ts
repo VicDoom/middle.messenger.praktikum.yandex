@@ -1,2 +1,2 @@
 import "./profile-edit-fields.css";
-export { ProfileEditFieldsPage as default } from "./profile-edit-fields";
+export { default as ProfileEditFieldsPage } from "./profile-edit-fields";

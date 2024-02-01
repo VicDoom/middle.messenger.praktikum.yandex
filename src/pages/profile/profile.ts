@@ -2,31 +2,37 @@ import { Button } from "../../components/button";
 import { AvatarModal } from "./components";
 import { Block } from "../../core/Block";
 import { Validator } from "../../helpers";
-import { USER_INFO } from "../../mocks";
 import { DEFAULT_PROPS, Router } from "../../core/Router";
+import connect from "../../utils/connect";
+import { UserDTO } from "../../api/types";
+import { AuthController } from "../../controllers";
+
+const DEFAULT_USER_NAME = "Имя в чате не определено";
 
 type IProfilePageRefs = {
   changeAvatarModal: AvatarModal
   getAvatarButton: Button
 }
 
-export class ProfilePage extends Block<{}, IProfilePageRefs> {
-  constructor() {
+class ProfilePage extends Block<{}, IProfilePageRefs> {
+  constructor(props: UserDTO) {
     const router = new Router(DEFAULT_PROPS);
     super({
+      ...props,
       navigateProfileEditPage: () => router.go("/profile/edit-fields"),
       navigatePasswordEditPage: () => router.go("/profile/edit-password"),
       navigatePage404: () => router.go("/page-404"),
       navigatePage500: () => router.go("/page-500"),
       navigateChat: () => router.go("/chats"),
-      navigateLoginPage: () => router.go("/login"),
       validateLoginField: (value: string) => Validator.login(value),
       openAvatarModal: () => this.refs.changeAvatarModal.show(),
       closeAvatarModal: () => this.refs.changeAvatarModal.hide(),
+      navigateLogOut: () => AuthController.logout(),
     });
   }
 
   protected render(): string {
+    const displayName = window.store.getState().user?.displayName ?? DEFAULT_USER_NAME;
     return (`
       <div class="profile-page">
         {{{ ButtonBack onClick=navigateChat }}}
@@ -35,57 +41,57 @@ export class ProfilePage extends Block<{}, IProfilePageRefs> {
                     <div class="profile-page__avatar">
                         {{{ AvatarButton onClick=openAvatarModal }}}
                         <div class="profile-page__avatar-name">
-                            ${USER_INFO.first_name}
+                            ${ displayName }
                         </div>
                     </div>
                     <div class="profile-page__inputs">
                         {{{ Input 
                             label="Почта" 
-                            value="${USER_INFO.email}"
+                            value=user.email
                             id="email"
-                            placeholder="введите почту"
+                            placeholder="-"
                             styleType="profile"
                             disabled="true"
                         }}}
                         {{{ Input 
                             label="Логин" 
-                            value="${USER_INFO.login}"
+                            value=user.login
                             id="login"
                             ref="login"
-                            placeholder="введите логин"
+                            placeholder="-"
                             styleType="profile"
                             validate=validateLoginField
                             disabled="true"
                         }}}
                         {{{ Input 
                             label="Имя" 
-                            value="${USER_INFO.first_name}"
+                            value=user.firstName
                             id="first_name"
-                            placeholder="введите имя"
+                            placeholder="-"
                             styleType="profile"
                             disabled="true"
                         }}}
                         {{{ Input 
                             label="Фамилия" 
-                            value="${USER_INFO.second_name}"
+                            value=user.secondName
                             id="second_name"
-                            placeholder="введите фамилию"
+                            placeholder="-"
                             styleType="profile"
                             disabled="true"
                         }}}
                         {{{ Input 
                             label="Имя в чате" 
-                            value="${USER_INFO.display_name}"
+                            value=user.displayName
                             id="display_name"
-                            placeholder="введите имя"
+                            placeholder="-"
                             styleType="profile"
                             disabled="true"
                         }}}
                         {{{ Input 
                             label="Телефон" 
-                            value="${USER_INFO.phone}"
+                            value=user.phone
                             id="phone"
-                            placeholder="введите номер телефона"
+                            placeholder="-"
                             styleType="profile"
                             disabled="true"
                         }}}
@@ -107,7 +113,7 @@ export class ProfilePage extends Block<{}, IProfilePageRefs> {
                             type="link"
                             label="Выйти"
                             color="red"
-                            onClick=navigateLoginPage
+                            onClick=navigateLogOut
                         }}}
                         {{{ Divider }}}
                         <div>Временные кнопки для перехода на 404 и 500 страницы, будут удалены после ревью</div>
@@ -133,3 +139,5 @@ export class ProfilePage extends Block<{}, IProfilePageRefs> {
       `);
   }
 }
+
+export default connect(({ user }) => ({ user }))(ProfilePage);

@@ -16,4 +16,4 @@ export const transformUser = (data: UserDTO): User => {
     phone: data.phone,
     email: data.email,
   };
-};
+}; 

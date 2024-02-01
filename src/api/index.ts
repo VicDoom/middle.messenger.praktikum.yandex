@@ -36,7 +36,7 @@ export default class HTTPTransport {
 
   get: THTTPMethod = (url, options) => {
     return this.request(
-      `${this._apiUrl}${url}${queryStringify(options?.data)}`, 
+      `${this._apiUrl}${url}${options?.data ? queryStringify(options?.data) : ""}`, 
       { ...options, method: METHODS.GET },
       options?.timeout,
     );

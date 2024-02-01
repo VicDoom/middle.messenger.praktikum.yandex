@@ -41,6 +41,13 @@ export class Input extends Block<IInputProps, IInputRefs, HTMLInputElement> {
     return this.refs.input.element?.value;
   }
 
+  public resetValue() {
+    if (this.refs.input.element) {
+      this.refs.input.element.value = this.props.value ?? "";
+      this.refs.errorLine.setProps({ error: false });
+    }
+  }
+
   componentDidMount(): void {
     if (this.refs.input.element) {
       this.refs.input.element.value = this.props.value ?? "";

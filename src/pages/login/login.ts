@@ -30,6 +30,12 @@ export class LoginPage extends Block<{}, TLoginPageRefs> {
     });
   }
 
+  componentWillUnmount(): void {
+    this.refs.login.resetValue();
+    this.refs.password.resetValue();
+    this.refs.error.setProps({ error: false });
+  }
+
   protected render(): string {
     return (`
       {{#> CenterLayout }}
