@@ -1,11 +1,13 @@
 import { Block, IProps } from "../../../../core/Block";
+import connect from "../../../../utils/connect";
 
 interface IAvatarButtonProps extends IProps {
+  avatarHref: string | null;
   events: { click: () => void };
   onClick: () => void;
 }
 
-export class AvatarButton extends Block<IAvatarButtonProps> {
+class AvatarButton extends Block<IAvatarButtonProps> {
   constructor(props: IAvatarButtonProps) {
     super(props);
   }
@@ -17,9 +19,10 @@ export class AvatarButton extends Block<IAvatarButtonProps> {
   }
 
   protected render(): string {
+    const avatar = this.props.avatarHref ?? "{{icons 'icon-avatar'}}";
     return (`
       <div class="profile-page__avatar-image">
-        <img src={{icons "icon-avatar"}} alt="avatar">
+        <img src=${avatar} alt='avatar'>
         <div class="profile-page__avatar-image-text">
           Поменять аватар
         </div>
@@ -27,3 +30,5 @@ export class AvatarButton extends Block<IAvatarButtonProps> {
     `);
   }
 }
+
+export default connect(({ avatarHref }) => ({ avatarHref }))(AvatarButton);

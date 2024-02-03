@@ -20,6 +20,8 @@ type TOptions = {
   data?: any,
   method: string,
   timeout?: number,
+  isFormData?: boolean;
+  responseType?: XMLHttpRequestResponseType;
 }
 
 type TOptionsWithoutMethod = Omit<TOptions, "method">;
@@ -55,7 +57,7 @@ export default class HTTPTransport {
   };
 
   request: THTTPRequest = (url, options, timeout = 5000) => {
-    const { method, data } = options;
+    const { method, data, isFormData, responseType } = options;
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
@@ -70,8 +72,12 @@ export default class HTTPTransport {
       xhr.ontimeout = reject;
       xhr.timeout = timeout;
       xhr.withCredentials = true;
+      xhr.responseType = responseType ?? "json";
+      if (isFormData) {
+        xhr.send(data);
+        return;
+      }
       xhr.setRequestHeader("Content-Type", "application/json");
-      xhr.responseType = "json";
       if (method === METHODS.GET || !data) {
 			  xhr.send();
       } else {

@@ -1,4 +1,3 @@
-import Handlebars from "handlebars";
 // import { Link } from "./link";
 import { Input } from "./input";
 import { Button } from "./button";
@@ -8,13 +7,11 @@ import { Modal } from "./modal";
 // import { Popup } from "./popup";
 import { ErrorMessage } from "./error-message";
 
-// Некоторые компоненты были оставлены в форме Partials
-Handlebars.registerPartial("Modal", Modal);
-
 export const Components = {
   Button,
   ButtonBack,
   Divider,
   ErrorMessage,
   Input,
+  Modal,
 };

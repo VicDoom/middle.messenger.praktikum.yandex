@@ -24,8 +24,9 @@ export interface ICurrentChat {
 export type AppState = {
   error: string | null,
   user: User | null,
-  isOpenDialogChat: boolean,
-  chats: Chat[]
+  isOpenEditAvatarModal: boolean,
+  chats: Chat[],
+  avatarHref?: string,
 }
 
 export type User = {

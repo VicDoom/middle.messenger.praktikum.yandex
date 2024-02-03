@@ -1,8 +1,7 @@
-import { TEditPasswordData, TEditProfileData, UserDTO } from "../api/types";
+import { TEditProfileData, UserDTO } from "../api/types";
 import { apiHasError, transformUser } from "../utils/api-helpers";
 import { UserApi } from "../api/user";
 import { Router } from "../core/Router";
-import { getUpdatedFields } from "../helpers";
 
 export class UserController {
   static async editProfile(data: TEditProfileData) {
@@ -20,8 +19,8 @@ export class UserController {
     router.go("/profile");
   }
 
-  static async editPassword(data: TEditPasswordData) {
-    const { response } = await UserApi.editPassword(data);
+  static async editPassword(data: FormData) {
+    const { response } = await UserApi.editAvatar(data);
     if (apiHasError(response)) {
       throw Error(response.reason);
     }
@@ -29,5 +28,23 @@ export class UserController {
     const router = new Router();
     // заменить на login
     router.go("/profile");
+  }
+
+  static async editAvatar() {
+    const form = new FormData();
+    const avatar = document.getElementById("avatar") as HTMLInputElement;
+    const avatarFile = avatar.files?.[0];
+    if (!avatarFile) {
+      throw new Error("Выберите файл!");
+    }
+    form.append("avatar", avatarFile);
+
+    const { response } = await UserApi.editAvatar(form);
+    if (apiHasError(response)) {
+      throw Error(response.reason);
+    }
+
+    const me = transformUser(response as UserDTO);
+    window.store.set({ user: me });
   }
 };

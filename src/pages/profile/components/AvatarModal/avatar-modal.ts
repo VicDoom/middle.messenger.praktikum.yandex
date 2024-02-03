@@ -1,37 +1,45 @@
 import { Button } from "../../../../components/button";
+import { ErrorMessage } from "../../../../components/error-message";
 import { Block, IProps } from "../../../../core/Block";
+import connect from "../../../../utils/connect";
 
 interface IAvatarModalProps extends IProps {
-  ref: Element;
+  isOpenEditAvatarModal: boolean
+  onClose: () => void,
+  onSave: () => void,
 }
 
-type TAvatarModal = {
+type TAvatarModalRef = {
   closeButton: Button,
+  error: ErrorMessage,
 }
 
-export class AvatarModal extends Block<IAvatarModalProps, TAvatarModal> {
+class AvatarModal extends Block<IAvatarModalProps, TAvatarModalRef> {
   constructor(props: IAvatarModalProps) {
-    super(props);
+    super({ ...props });
   }
 
-  componentDidMount(): void {
-    this.hide();
+  public setError(error: string) {
+    this.refs.error.setProps({ error });
   }
 
   protected render(): string {
     return (`
-      {{#> Modal id="profile-modal-add-avatar" ref="changeAvatarModal" }}
-          <div class="profile-modal-add-avatar__title">Загрузите файл</div>
-          {{{ Button label="Выбрать файл на компьютере" type="link" }}}
-          <div "profile-modal-add-avatar__control">
-            {{{ Button label="Поменять" page="profile" }}}
-            {{#if avatar_error}}
-              <div class="profile-modal-add-avatar__error">
-                Нужно выбрать файл
+      {{#Modal id="profile-modal-add-avatar" open=isOpenEditAvatarModal }}
+          <div class="modal__background"></div>
+          <div class="modal__content">
+              {{{ AvatarModalCloseButton onClose=onClose }}}
+              <div class="profile-modal-add-avatar__title">Загрузите файл</div>
+              <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" />
+              {{{ ErrorLine ref="error" error=error }}}
+              <div "profile-modal-add-avatar__control">
+                {{{ Button label="Поменять" page="profile" onClick=onSave }}}
               </div>
-            {{/if}}
+            </div>
           </div>
       {{/ Modal }}
     `);
   }
 }
+
+export default connect(({ isOpenEditAvatarModal }) => ({ isOpenEditAvatarModal }))(AvatarModal);

@@ -1,16 +1,15 @@
 import { Button } from "../../components/button";
-import { AvatarModal } from "./components";
 import { Block } from "../../core/Block";
 import { Validator } from "../../helpers";
 import { DEFAULT_PROPS, Router } from "../../core/Router";
 import connect from "../../utils/connect";
 import { UserDTO } from "../../api/types";
-import { AuthController } from "../../controllers";
+import { AuthController, ResourcesController, UserController } from "../../controllers";
 
 const DEFAULT_USER_NAME = "Имя в чате не определено";
 
 type IProfilePageRefs = {
-  changeAvatarModal: AvatarModal
+  avatarModal: any
   getAvatarButton: Button
 }
 
@@ -25,8 +24,9 @@ class ProfilePage extends Block<{}, IProfilePageRefs> {
       navigatePage500: () => router.go("/page-500"),
       navigateChat: () => router.go("/chats"),
       validateLoginField: (value: string) => Validator.login(value),
-      openAvatarModal: () => this.refs.changeAvatarModal.show(),
-      closeAvatarModal: () => this.refs.changeAvatarModal.hide(),
+      openAvatarModal: () => window.store.set({ isOpenEditAvatarModal: true }),
+      closeAvatarModal: () => window.store.set({ isOpenEditAvatarModal: false }),
+      onSaveAvatar: () => UserController.editAvatar().catch(error => this.refs.avatarModal.setError(error)),
       navigateLogOut: () => AuthController.logout(),
     });
   }
@@ -134,7 +134,7 @@ class ProfilePage extends Block<{}, IProfilePageRefs> {
                     </div>
                 </div>
             {{/CenterLayout}}
-            {{{ AvatarModal ref="changeAvatarModal" }}}
+            {{{ AvatarModal onSave=onSaveAvatar onClose=closeAvatarModal ref="avatarModal" }}}
         </div>
       `);
   }

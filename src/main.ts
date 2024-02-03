@@ -1,6 +1,7 @@
 import { Components } from "./components/index";
 import * as Layouts from "./layouts/index";
 import * as ChatComponents from "./pages/chat/components/index";
+import * as ProfileComponents from "./pages/profile/components/index";
 import Handlebars from "handlebars";
 import { registerHandlebarsHelpers } from "./core/register-handlebars-helpers";
 import { registerComponent } from "./core/register-component";
@@ -30,8 +31,9 @@ declare global {
 const initState: AppState = {
   error: null,
   user: null,
-  isOpenDialogChat: false,
+  isOpenEditAvatarModal: false,
   chats: [],
+  avatarHref: null,
 };
 
 window.store = new Store<AppState>(initState);
@@ -45,6 +47,7 @@ registerComponent("ButtonBack", Components.ButtonBack);
 registerComponent("Divider", Components.Divider);
 registerComponent("ErrorMessage", Components.ErrorMessage);
 registerComponent("Input", Components.Input);
+registerComponent("Modal", Components.Modal);
 registerComponent("ChatControl", ChatComponents.ChatControl);
 registerComponent("ChatElement", ChatComponents.ChatElement);
 registerComponent("ChatList", ChatComponents.ChatList);

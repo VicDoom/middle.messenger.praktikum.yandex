@@ -1,3 +1,4 @@
+import { ResourcesController } from "../controllers";
 import { AuthController } from "../controllers/auth-controller";
 import { Router } from "./Router";
 
@@ -14,6 +15,8 @@ const initApp = async () => {
   // const chats = await getChats();
   // window.store.set({user: me, chats});
   window.store.set({ user: me });
+
+  await ResourcesController.getAvatar(me.avatar);
   
   const currentLocation = location.pathname;
   const currentRoute = router.getRoute(currentLocation);
