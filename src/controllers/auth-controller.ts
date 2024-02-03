@@ -17,7 +17,9 @@ export class AuthController {
   static async login (data: TLoginRequestData) {
     const { response } = await AuthApi.login(data);
     if (apiHasError(response)) {
-      throw Error(response.reason);
+      if (response.reason !== "User already in system") {
+        throw Error(response.reason);
+      }
     }
 
     const me = await this.getUser();

@@ -69,6 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .use("/page-404", Page404)
     .use("/page-500", Page500)
     .use("/chats", ChatPage)
+    .start()
 
   initApp();
 });
