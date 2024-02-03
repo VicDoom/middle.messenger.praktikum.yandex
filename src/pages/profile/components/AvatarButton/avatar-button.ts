@@ -9,7 +9,7 @@ interface IAvatarButtonProps extends IProps {
 
 class AvatarButton extends Block<IAvatarButtonProps> {
   constructor(props: IAvatarButtonProps) {
-    super(props);
+    super({ ...props });
   }
 
   protected init(): void {
@@ -19,13 +19,16 @@ class AvatarButton extends Block<IAvatarButtonProps> {
   }
 
   protected render(): string {
-    const avatar = this.props.avatarHref ?? "{{icons 'icon-avatar'}}";
+    const withAvatar = !!this.props.avatarHref;
+    const avatar = withAvatar ? this.props.avatarHref : "{{icons 'icon-avatar'}}";
     return (`
       <div class="profile-page__avatar-image">
         <img src=${avatar} alt='avatar'>
-        <div class="profile-page__avatar-image-text">
-          Поменять аватар
-        </div>
+        ${!withAvatar ? (
+        `<div class="profile-page__avatar-image-text">
+            Поменять аватар
+          </div>`
+      ) : ""}
       </div>
     `);
   }

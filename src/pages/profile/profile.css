@@ -21,25 +21,36 @@
             justify-content: center;
             align-items: center;
             border-radius: 50%;
+            overflow: hidden;
             transition: 0.5s;
+            cursor: pointer;
+            & img {
+                object-fit: cover;
+                aspect-ratio: 1;
+                transition: 0.5s;
+            }
+            &:hover {
+                transition: 0.5s;
+                & img {
+                    opacity: 0.5;
+                }
+                .profile-page__avatar-image-text {
+                    display: block;
+                    opacity: 1;
+                    transition: 0.5s;
+                }
+            }
             &-text {
                 display: none;
-                color: var(--white);
+                opacity: 0;
+                color: var(--black);
                 position: absolute;
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
                 text-align: center;
                 transition: 0.5s;
-            }
-            &:hover {
-                background-color: var(--grey-primary);
                 cursor: pointer;
-                transition: 0.5s;
-                & > div {
-                    display: block;
-                    transition: 0.5s;
-                }
             }
         }
         &-name {

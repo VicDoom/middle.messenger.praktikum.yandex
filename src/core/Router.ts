@@ -29,8 +29,8 @@ export class Route<R extends RefType, B extends Block<{}, R>> {
 
   leave() {
     if (this._block) {
-      this._block.hide();
       this._block.componentWillUnmount();
+      this._block = null;
     }
   }
 

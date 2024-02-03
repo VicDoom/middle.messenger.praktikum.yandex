@@ -43,12 +43,6 @@ export class ProfileEditPasswordPage extends Block<{}, TProfileEditPasswordPageR
     });
   };
 
-  componentWillUnmount(): void {
-    this.refs.new_password.resetValue();
-    this.refs.repeat_new_password.resetValue();
-    this.refs.old_password.resetValue();
-  }
-
   protected render(): string {
     return (`
       <div class="profile-page profile-page--edit-password">

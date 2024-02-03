@@ -15,6 +15,7 @@ type IProfileEditFieldsPageRefs = {
     display_name: Input
     phone: Input
     error: ErrorMessage
+    avatarModal: any
 }
 
 class ProfileEditFieldsPage extends Block<{}, IProfileEditFieldsPageRefs> {
@@ -49,6 +50,11 @@ class ProfileEditFieldsPage extends Block<{}, IProfileEditFieldsPageRefs> {
       validateDisplayName: Validator.displayName,
       validateEmail: Validator.email,
       validatePhone: Validator.phone,
+      openAvatarModal: () => window.store.set({ isOpenEditAvatarModal: true }),
+      closeAvatarModal: () => window.store.set({ isOpenEditAvatarModal: false }),
+      onSaveAvatar: () => UserController.editAvatar()
+        .then(() => window.store.set({ isOpenEditAvatarModal: false }))
+        .catch(error => this.refs.avatarModal.setError(error)),
     });
   }
 
@@ -59,9 +65,7 @@ class ProfileEditFieldsPage extends Block<{}, IProfileEditFieldsPageRefs> {
             {{#> CenterLayout}}
                 <div class="profile-page__content">
                     <div class="profile-page__avatar">
-                        <div class="profile-page__avatar-image">
-                            <img src={{icons "icon-avatar"}} alt="avatar">
-                        </div>
+                      {{{ AvatarButton onClick=openAvatarModal }}}
                     </div>
                     <form class="profile-page__form" id="profile-edit-fields-page">
                       <div class="profile-page__inputs">
@@ -132,6 +136,7 @@ class ProfileEditFieldsPage extends Block<{}, IProfileEditFieldsPageRefs> {
                     </form>
                 </div>
             {{/CenterLayout}}
+            {{{ AvatarModal onSave=onSaveAvatar onClose=closeAvatarModal ref="avatarModal" }}}
         </div>  
       `);
   }

@@ -33,7 +33,7 @@ const initState: AppState = {
   user: null,
   isOpenEditAvatarModal: false,
   chats: [],
-  avatarHref: null,
+  avatarHref: undefined,
 };
 
 window.store = new Store<AppState>(initState);
@@ -69,7 +69,6 @@ document.addEventListener("DOMContentLoaded", () => {
     .use("/page-404", Page404)
     .use("/page-500", Page500)
     .use("/chats", ChatPage)
-    .start();
 
   initApp();
 });

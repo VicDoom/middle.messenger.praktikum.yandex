@@ -2,6 +2,7 @@ import { AuthApi } from "../api/auth";
 import { TCreateUser, TLoginRequestData, UserDTO } from "../api/types";
 import { apiHasError, transformUser } from "../utils/api-helpers";
 import { Router } from "../core/Router";
+import { ResourcesController } from ".";
 
 export class AuthController {
   static async getUser () {
@@ -21,6 +22,8 @@ export class AuthController {
 
     const me = await this.getUser();
     window.store.set({ user: me });
+
+    ResourcesController.getAvatar(me.avatar);
 
     const router = new Router();
     router.go("/profile");
@@ -44,6 +47,8 @@ export class AuthController {
     if (apiHasError(response)) {
       throw new Error(response.reason);
     }
+
+    window.store.set({ user: null, avatarHref: undefined, chats: [] });
 
     const router = new Router();
     router.go("/login");

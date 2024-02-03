@@ -4,7 +4,7 @@ import { Validator } from "../../helpers";
 import { DEFAULT_PROPS, Router } from "../../core/Router";
 import connect from "../../utils/connect";
 import { UserDTO } from "../../api/types";
-import { AuthController, ResourcesController, UserController } from "../../controllers";
+import { AuthController, UserController } from "../../controllers";
 
 const DEFAULT_USER_NAME = "Имя в чате не определено";
 
@@ -26,7 +26,9 @@ class ProfilePage extends Block<{}, IProfilePageRefs> {
       validateLoginField: (value: string) => Validator.login(value),
       openAvatarModal: () => window.store.set({ isOpenEditAvatarModal: true }),
       closeAvatarModal: () => window.store.set({ isOpenEditAvatarModal: false }),
-      onSaveAvatar: () => UserController.editAvatar().catch(error => this.refs.avatarModal.setError(error)),
+      onSaveAvatar: () => UserController.editAvatar()
+        .then(() => window.store.set({ isOpenEditAvatarModal: false }))
+        .catch(error => this.refs.avatarModal.setError(error)),
       navigateLogOut: () => AuthController.logout(),
     });
   }
@@ -140,4 +142,4 @@ class ProfilePage extends Block<{}, IProfilePageRefs> {
   }
 }
 
-export default connect(({ user }) => ({ user }))(ProfilePage);
+export default connect(({ user, avatarHref }) => ({ user, avatarHref }))(ProfilePage);

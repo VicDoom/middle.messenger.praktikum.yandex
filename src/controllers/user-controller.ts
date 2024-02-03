@@ -2,6 +2,7 @@ import { TEditProfileData, UserDTO } from "../api/types";
 import { apiHasError, transformUser } from "../utils/api-helpers";
 import { UserApi } from "../api/user";
 import { Router } from "../core/Router";
+import { ResourcesController } from ".";
 
 export class UserController {
   static async editProfile(data: TEditProfileData) {
@@ -46,5 +47,7 @@ export class UserController {
 
     const me = transformUser(response as UserDTO);
     window.store.set({ user: me });
+
+    await ResourcesController.getAvatar();
   }
 };

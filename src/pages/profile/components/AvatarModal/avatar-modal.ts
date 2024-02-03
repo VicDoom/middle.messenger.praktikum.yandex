@@ -29,7 +29,7 @@ class AvatarModal extends Block<IAvatarModalProps, TAvatarModalRef> {
           <div class="modal__background"></div>
           <div class="modal__content">
               {{{ AvatarModalCloseButton onClose=onClose }}}
-              <div class="profile-modal-add-avatar__title">Загрузите файл</div>
+              <div class="profile-modal-add-avatar__title">Загрузите аватар</div>
               <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" />
               {{{ ErrorLine ref="error" error=error }}}
               <div "profile-modal-add-avatar__control">
