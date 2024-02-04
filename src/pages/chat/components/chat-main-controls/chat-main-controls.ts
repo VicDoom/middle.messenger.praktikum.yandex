@@ -6,31 +6,37 @@ import { MainControlButton, MainControlInput } from "./components";
 registerComponent("MainControlInput", MainControlInput);
 registerComponent("MainControlButton", MainControlButton);
 
+interface IChatMainControlsProps {
+  sendMessage: (message: string) => void,
+}
+
 type TChatMainControlsRefs = {
   main_control_input: MainControlInput
 }
 
-const sendMessage = (message?: string): void => {
+const sendMessage = (message: string, sendCallback: (value: string) => void): void => {
   const error = Validator.message(message);
   if (error) {
     console.log(error);
     return;
   }
-  console.log(message);
+  sendCallback(message);
 };
 
 export class ChatMainControls extends Block<{}, TChatMainControlsRefs> {
-  constructor() {
+  constructor(props: IChatMainControlsProps) {
     super({
       onKeyUp: (event: KeyboardEvent) => { 
         if (event.key === "Enter") {
           const message = this.refs.main_control_input.element?.value;
-          sendMessage(message);
+          sendMessage(message ?? "", props.sendMessage);
+          this.refs.main_control_input.resetValue();
         }
       },
       onSubmit: () => {
         const message = this.refs.main_control_input.element?.value;
-        sendMessage(message);
+        sendMessage(message ?? "", props.sendMessage);
+        this.refs.main_control_input.resetValue();
       },
     });
   }

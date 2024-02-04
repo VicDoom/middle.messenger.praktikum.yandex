@@ -13,6 +13,20 @@ export type UserDTO = {
   email: string;
 };
 
+type LastMessage = {
+  user: UserDTO,
+  time: string,
+  content: string
+}
+
+export type ChatDTO = {
+  id: number,
+  title: string,
+  avatar: string | null,
+  unread_count: number,
+  last_message: LastMessage | null
+}
+
 export type TCreateUser = Omit<UserDTO, "avatar" | "display_name" | "id">  & {
   password: string;
 }
@@ -38,4 +52,23 @@ export type TEditProfileData = {
 export type TEditPasswordData = {
   oldPassword: string,
   newPassword: string,
+}
+
+export type TMessageDTO = {
+  chat_id: number;
+  time: string;
+  type: string;
+  user_id: string;
+  content: string;
+  file?: TFileDTO;
+}
+
+export type TFileDTO = {
+  id: number;
+  user_id: number;
+  path: string;
+  filename: string;
+  content_type: string;
+  content_size: number;
+  upload_date: string;
 }

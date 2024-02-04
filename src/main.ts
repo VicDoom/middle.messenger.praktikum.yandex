@@ -1,7 +1,6 @@
 import { Components } from "./components/index";
 import * as Layouts from "./layouts/index";
 import * as ChatComponents from "./pages/chat/components/index";
-import * as ProfileComponents from "./pages/profile/components/index";
 import Handlebars from "handlebars";
 import { registerHandlebarsHelpers } from "./core/register-handlebars-helpers";
 import { registerComponent } from "./core/register-component";
@@ -33,6 +32,7 @@ const initState: AppState = {
   user: null,
   isOpenEditAvatarModal: false,
   chats: [],
+  selectedChat: null,
   avatarHref: undefined,
 };
 

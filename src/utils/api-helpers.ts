@@ -1,8 +1,17 @@
-import { APIError, UserDTO } from "../api/types";
-import { User } from "../types";
+import { APIError, ChatDTO, UserDTO } from "../api/types";
+import { Chat, User } from "../types";
+import { API_HOST } from "./constants";
 
 export function apiHasError (response: any): response is APIError {
   return response?.reason;
+}
+
+const buildPathToResource = (resource: string | null) => {
+  if(!resource) {
+    return null;
+  }
+
+  return `${API_HOST}/resources/${resource}`
 }
 
 export const transformUser = (data: UserDTO): User => {
@@ -17,3 +26,26 @@ export const transformUser = (data: UserDTO): User => {
     email: data.email,
   };
 }; 
+
+export const transformChats = (data: ChatDTO[]): Chat[] => {
+  return data.map(chat => ({
+    avatar: buildPathToResource(chat.avatar),
+    id: chat.id,
+    title: chat.title,
+    unreadCount: chat.unread_count,
+    lastMessage: chat.last_message ? {
+      content: chat.last_message.content,
+      time: chat.last_message.time,
+      user: {
+        id: chat.last_message.user.id,
+        login: chat.last_message.user.login,
+        firstName: chat.last_message.user.first_name,
+        secondName: chat.last_message.user.second_name,
+        displayName: chat.last_message.user.display_name,
+        avatar: chat.last_message.user.avatar,
+        phone: chat.last_message.user.phone,
+        email: chat.last_message.user.email,
+      },
+    } : null,
+  }));
+}

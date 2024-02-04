@@ -1,3 +1,4 @@
+import { ChatsController } from "../../../../controllers";
 import { Block } from "../../../../core/Block";
 import { registerComponent } from "../../../../core/register-component";
 import { NavigationInput, NavigationProfile } from "./components";
@@ -14,7 +15,9 @@ export class ChatNavigationHeader extends Block<{}, TChatNavigationHeaderRefs> {
     super({
       onKeyUp: (event: KeyboardEvent) => { 
         if (event.key === "Enter") {
-          console.log(this.refs.navigation_input.element?.value);
+          ChatsController.getChats(
+            this.refs.navigation_input.element?.value,
+          ).then(chats => window.store.set({ chats }));
         }
       },
     });

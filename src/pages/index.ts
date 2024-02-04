@@ -5,4 +5,4 @@ export { default as RegisterPage } from "./register";
 export { ProfilePage } from "./profile";
 export { ProfileEditFieldsPage } from "./profile-edit-fields";
 export { default as ProfileEditPasswordPage } from "./profile-edit-password";
-export { default as ChatPage } from "./chat";
+export { ChatPage } from "./chat";

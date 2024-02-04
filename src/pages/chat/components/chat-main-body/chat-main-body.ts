@@ -13,13 +13,13 @@ export class ChatMainBody extends Block<IChatMainBody> {
 
   protected render(): string {
     const { messages } = this.props;
-    const formattedMessages = messages.map((value) => ({ ...value, date: getTime(value.date) }));
+    const formattedMessages = messages?.map((value) => ({ ...value, date: getTime(value.date) }));
     return (`
       <div class="chat-main-body">
         {{#each messages}}
             
         {{/each}}
-        ${formattedMessages.map(({ id, message, date, isYours }) => (
+        ${formattedMessages?.map(({ id, message, date, isYours }) => (
         `
           <div 
                 class='chat-main-body__message ${isYours && "chat-main-body__message--yours"}'

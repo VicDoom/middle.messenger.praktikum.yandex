@@ -1,7 +1,9 @@
 import { Block, IProps } from "../../../../core/Block";
+import { SelectedChat } from "../../../../types";
+import connect from "../../../../utils/connect";
 
 interface IChatMainHeaderProps extends IProps {
-  user: string;
+  title: string
 }
 
 export class ChatMainHeader extends Block<IChatMainHeaderProps> {
@@ -15,7 +17,7 @@ export class ChatMainHeader extends Block<IChatMainHeaderProps> {
         <div class="chat-main-header__profile">
             <div class="chat-main-header__profile-avatar"></div>
             <div class="chat-main-header__profile-name">
-                {{current_user}}
+              {{ title }}
             </div>
         </div>
         <div class="chat-main-header__controls">
@@ -33,6 +35,8 @@ export class ChatMainHeader extends Block<IChatMainHeaderProps> {
     `);
   }
 }
+
+// export default connect(({ selectedChat }) => ({ selectedChat }))(ChatMainHeader);
 
 // {{#> Popup id="popup-change-lobby" position="bottom-left"}}
 //             <div 

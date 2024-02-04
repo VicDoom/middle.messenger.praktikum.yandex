@@ -1,9 +1,9 @@
 import { Block, IProps } from "../../../../core/Block";
-import { IChatElement } from "../../../../types";
+import { Chat } from "../../../../types";
 
 export interface IChatListProps extends IProps {
   selectedId: string;
-  chats: IChatElement[],
+  chats: Chat[],
   onSelect: (id: string) => void,
 }
 
@@ -16,17 +16,18 @@ export class ChatList extends Block<IChatListProps> {
   }
 
   protected render(): string {
-    const { chats, selectedId } = this.props;
+    const { chats } = this.props;
+    const selectedChatId = window.store.getState().selectedChat?.id;
     return (`
     <div class="chat-list">
-      ${chats.map(({ id, user, message, date, messageNumber }) => (
+      ${chats.map(({ id, title, avatar, unreadCount, lastMessage }) => (
         `{{{ ChatElement 
              id='${id}'
-             user='${user}'
-             message='${message}'
-             date='${date}'
-             messageNumber='${messageNumber}' 
-             currentChat='${id === selectedId}'
+             title='${title}'
+             message='${lastMessage?.content}'
+             time='${lastMessage?.time ?? ""}'
+             messageNumber='${unreadCount}' 
+             currentChat='${id === selectedChatId}'
              onClick=onSelect
           }}}`
       )).join("")}

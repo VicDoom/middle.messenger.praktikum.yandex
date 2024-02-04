@@ -26,7 +26,14 @@ export type AppState = {
   user: User | null,
   isOpenEditAvatarModal: boolean,
   chats: Chat[],
+  selectedChat: SelectedChat | null,
   avatarHref?: string,
+}
+
+export type SelectedChat = {
+  id: number;
+  title: string;
+  token: string;
 }
 
 export type User = {

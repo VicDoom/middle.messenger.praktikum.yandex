@@ -1,4 +1,4 @@
-import { ResourcesController } from "../controllers";
+import { ChatsController, ResourcesController } from "../controllers";
 import { AuthController } from "../controllers/auth-controller";
 import { Router } from "./Router";
 
@@ -12,9 +12,8 @@ const initApp = async () => {
     return;
   }
 
-  // const chats = await getChats();
-  // window.store.set({user: me, chats});
-  window.store.set({ user: me });
+  const chats = await ChatsController.getChats();
+  window.store.set({ user: me, chats });
 
   await ResourcesController.getAvatar(me.avatar);
   
