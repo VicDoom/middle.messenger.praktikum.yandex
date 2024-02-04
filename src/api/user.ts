@@ -1,5 +1,5 @@
 import HTTPTransport from "./index";
-import { TEditPasswordData, TEditProfileData } from "./types";
+import { TEditPasswordData, TEditProfileData, TSearchUser } from "./types";
 
 const authApi = new HTTPTransport("/user");
 
@@ -12,5 +12,8 @@ export class UserApi {
   }
   static async editAvatar(data: FormData): Promise<XMLHttpRequest> {
     return authApi.put("/profile/avatar", { data, isFormData: true });
+  }
+  static async search(data: TSearchUser): Promise<XMLHttpRequest> {
+    return authApi.post("/search", { data });
   }
 }

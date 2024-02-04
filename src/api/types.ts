@@ -55,10 +55,10 @@ export type TEditPasswordData = {
 }
 
 export type TMessageDTO = {
-  chat_id: number;
+  id: number;
   time: string;
-  type: string;
-  user_id: string;
+  type: "message" | "file";
+  user_id: number;
   content: string;
   file?: TFileDTO;
 }
@@ -71,4 +71,8 @@ export type TFileDTO = {
   content_type: string;
   content_size: number;
   upload_date: string;
+}
+
+export type TSearchUser = {
+  login: string;
 }

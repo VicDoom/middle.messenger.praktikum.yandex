@@ -31,7 +31,10 @@ const initState: AppState = {
   error: null,
   user: null,
   isOpenEditAvatarModal: false,
+  isOpenAddUserChatModal: false,
+  isOpenDeleteUserChatModal: false,
   chats: [],
+  messages: [],
   selectedChat: null,
   avatarHref: undefined,
 };
@@ -48,6 +51,7 @@ registerComponent("Divider", Components.Divider);
 registerComponent("ErrorMessage", Components.ErrorMessage);
 registerComponent("Input", Components.Input);
 registerComponent("Modal", Components.Modal);
+registerComponent("Popup", Components.Popup);
 registerComponent("ChatControl", ChatComponents.ChatControl);
 registerComponent("ChatElement", ChatComponents.ChatElement);
 registerComponent("ChatList", ChatComponents.ChatList);
@@ -55,6 +59,8 @@ registerComponent("ChatNavigationHeader", ChatComponents.ChatNavigationHeader);
 registerComponent("ChatMainBody", ChatComponents.ChatMainBody);
 registerComponent("ChatMainControls", ChatComponents.ChatMainControls);
 registerComponent("ChatMainHeader", ChatComponents.ChatMainHeader);
+registerComponent("ChatAddUserModal", ChatComponents.ChatAddUserModal);
+registerComponent("ChatDeleteUserModal", ChatComponents.ChatDeleteUserModal);
 
 registerHandlebarsHelpers();
 

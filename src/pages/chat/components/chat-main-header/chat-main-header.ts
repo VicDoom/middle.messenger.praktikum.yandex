@@ -1,14 +1,27 @@
+import { Popup } from "../../../../components/popup";
 import { Block, IProps } from "../../../../core/Block";
-import { SelectedChat } from "../../../../types";
-import connect from "../../../../utils/connect";
 
 interface IChatMainHeaderProps extends IProps {
-  title: string
+  title: string,
+  handlePopup: () => void,
 }
 
-export class ChatMainHeader extends Block<IChatMainHeaderProps> {
+type TChatMainHeaderRefs = {
+  popupControls: Popup,
+}
+
+export class ChatMainHeader extends Block<IChatMainHeaderProps, TChatMainHeaderRefs> {
   constructor(props: IChatMainHeaderProps) {
-    super(props);
+    super({
+      ...props,
+      handlePopup: (() => {
+        let isOpen = false;
+        return () => {
+          this.refs.popupControls.setProps({ open: !isOpen });
+          isOpen = !isOpen;
+        };
+      })(),
+    });
   }
 
   protected render(): string {
@@ -21,36 +34,16 @@ export class ChatMainHeader extends Block<IChatMainHeaderProps> {
             </div>
         </div>
         <div class="chat-main-header__controls">
-            <div 
-                class="chat-main-header__control-wrapper"
-                onclick="getElementById('popup-change-lobby').classList.toggle('popup--opened')"
-            >
+            <div class="chat-main-header__control-wrapper">
                 {{{ ChatControl 
                     style="chat-main-header__expand"
                     icon-name="icon-expand"
+                    onClick=handlePopup
                 }}}
+                {{{ ChatMainPopup ref="popupControls" }}}
             </div>
         </div>
       </div>
     `);
   }
 }
-
-// export default connect(({ selectedChat }) => ({ selectedChat }))(ChatMainHeader);
-
-// {{#> Popup id="popup-change-lobby" position="bottom-left"}}
-//             <div 
-//                 class="popup-change-lobby__control"
-//                 onclick="getElementById('modal-add-user').classList.toggle('modal--opened')"
-//             >
-//                 <img src={{icons "icon-add"}} alt="add">
-//                 <span>Добавить пользователя</span>
-//             </div>
-//             <div 
-//                 class="popup-change-lobby__control"
-//                 onclick="getElementById('modal-delete-user').classList.toggle('modal--opened')"
-//             >
-//                 <img src={{icons "icon-delete"}} alt="delete">
-//                 <span>Удалить пользователя</span>
-//             </div>
-//         {{/ Popup}}

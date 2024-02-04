@@ -17,6 +17,7 @@ interface IInputProps {
   type?: string;
   validate: (value: string) => boolean;
   onBlur: () => void;
+  onKeyUp?: () => void;
   events?: { [name: string]: () => void };
 }
 
@@ -79,6 +80,7 @@ export class Input extends Block<IInputProps, IInputRefs, HTMLInputElement> {
             className="input__field {{#if helper-text}} input__field--error{{/if}}"
             name=${id}
             onBlur=onBlur
+            onKeyUp=onKeyUp
             disabled=${disabled}
         }}}
         {{{ ErrorLine ref="errorLine" }}}

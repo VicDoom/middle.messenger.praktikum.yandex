@@ -1,5 +1,5 @@
-import { APIError, ChatDTO, UserDTO } from "../api/types";
-import { Chat, User } from "../types";
+import { APIError, ChatDTO, TMessageDTO, UserDTO } from "../api/types";
+import { Chat, Message, User } from "../types";
 import { API_HOST } from "./constants";
 
 export function apiHasError (response: any): response is APIError {
@@ -48,4 +48,14 @@ export const transformChats = (data: ChatDTO[]): Chat[] => {
       },
     } : null,
   }));
+}
+
+export const transformMessage = (data: TMessageDTO): Message => {
+  return {
+    id: data.id,
+    userId: data.user_id,
+    type: data.type,
+    time: data.time,
+    content: data.content,
+  }
 }

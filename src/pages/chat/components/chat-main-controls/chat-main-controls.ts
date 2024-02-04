@@ -1,4 +1,4 @@
-import { Block } from "../../../../core/Block";
+import { Block, IProps } from "../../../../core/Block";
 import { registerComponent } from "../../../../core/register-component";
 import { Validator } from "../../../../helpers";
 import { MainControlButton, MainControlInput } from "./components";
@@ -6,40 +6,43 @@ import { MainControlButton, MainControlInput } from "./components";
 registerComponent("MainControlInput", MainControlInput);
 registerComponent("MainControlButton", MainControlButton);
 
-interface IChatMainControlsProps {
+interface IChatMainControlsProps extends IProps {
   sendMessage: (message: string) => void,
+  onKeyUp: (event: KeyboardEvent) => void,
+  onSubmit: () => void,
 }
 
 type TChatMainControlsRefs = {
   main_control_input: MainControlInput
 }
 
-const sendMessage = (message: string, sendCallback: (value: string) => void): void => {
-  const error = Validator.message(message);
-  if (error) {
-    console.log(error);
-    return;
-  }
-  sendCallback(message);
-};
-
-export class ChatMainControls extends Block<{}, TChatMainControlsRefs> {
+export class ChatMainControls extends Block<IChatMainControlsProps, TChatMainControlsRefs> {
   constructor(props: IChatMainControlsProps) {
     super({
+      ...props,
       onKeyUp: (event: KeyboardEvent) => { 
         if (event.key === "Enter") {
           const message = this.refs.main_control_input.element?.value;
-          sendMessage(message ?? "", props.sendMessage);
-          this.refs.main_control_input.resetValue();
+          this._sendMessage(message ?? "", props.sendMessage);
+          // this.refs.main_control_input.resetValue();
         }
       },
       onSubmit: () => {
         const message = this.refs.main_control_input.element?.value;
-        sendMessage(message ?? "", props.sendMessage);
-        this.refs.main_control_input.resetValue();
+        this._sendMessage(message ?? "", props.sendMessage);
+        // this.refs.main_control_input.resetValue();
       },
     });
   }
+
+  private _sendMessage = (message: string, sendCallback: (value: string) => void): void => {
+    const error = Validator.message(message);
+    if (error) {
+      console.log(error);
+      return;
+    }
+    sendCallback(message);
+  };
 
   protected render(): string {
     return (`

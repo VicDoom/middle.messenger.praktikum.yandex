@@ -1,30 +1,43 @@
-interface SocketProps {
+interface SocketProps<T> {
   api: string;
   userId: number;
   chatId: number;
   token: string;
+  getMessagesHandler: (value: T[]) => void,
+  openConnectionHandler: () => void,
 }
 
-export class Socket {
+const PING_INTERVAL = 20000;
+
+export class Socket<T> {
   socket: WebSocket;
   private _userId: number;
   private _token: string;
   private _chatId: number;
-  constructor(props: SocketProps) {
+  private _ping: number;
+  private _getMessagesHandler: (value: T[]) => void;
+  private _openConnectionHandler: () => void;
+  constructor(props: SocketProps<T>) {
     const { api, userId, chatId, token } = props;
     this._userId = userId;
     this._chatId = chatId;
     this._token = token;
     this.socket = new WebSocket(`${api}/${userId}/${chatId}/${token}`);
 
-    this.socket.addEventListener("open", this._openConnection);
-    this.socket.addEventListener("close", this._closeConnection);
+    this.socket.addEventListener("open", this._openConnection.bind(this));
+    this.socket.addEventListener("close", this._closeConnection.bind(this));
     this.socket.addEventListener("error", this._errorCallback);
-    this.socket.addEventListener("message", this._messageCallback);
+    this.socket.addEventListener("message", this._messageCallback.bind(this));
+
+    this._getMessagesHandler = props.getMessagesHandler;
+    this._openConnectionHandler = props.openConnectionHandler;
+
+    this._ping = setInterval(() => this._pingCallback(), PING_INTERVAL);
   }
 
-  private _openConnection() {
+  protected _openConnection() {
     console.log("Connection completed");
+    this._openConnectionHandler();
   }
 
   private _closeConnection(event: CloseEvent) {
@@ -35,6 +48,7 @@ export class Socket {
     }
 
     console.log(`Код: ${event.code} | Причина: ${event.reason}`);
+    clearInterval(this._ping);
   }
 
   private _errorCallback(event: Event) {
@@ -43,6 +57,19 @@ export class Socket {
 
   private _messageCallback(event: MessageEvent) {
     console.log("Получены данные", event.data);
+    const data = JSON.parse(event.data);
+    if (data.type === "pong") {
+      return;
+    }
+    this._getMessagesHandler(data);
+  }
+
+  private _pingCallback() {
+    this.socket.send(
+      JSON.stringify({
+        type: "ping",
+      }),
+    );
   }
 
   public sendMessage(message: string) {

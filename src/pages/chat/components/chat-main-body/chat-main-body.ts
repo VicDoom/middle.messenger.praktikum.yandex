@@ -1,35 +1,36 @@
 import { Block, IProps } from "../../../../core/Block";
-import { getTime } from "../../../../helpers";
-import { IChatMessage } from "../../../../types";
+import { getTime, sortMessages } from "../../../../helpers";
+import { Message } from "../../../../types";
+import connect from "../../../../utils/connect";
 
-interface IChatMainBody extends IProps {
-  messages: IChatMessage[];
+interface IChatMainBodyProps extends IProps {
+  messages?: Message[],
 }
 
-export class ChatMainBody extends Block<IChatMainBody> {
-  constructor(props: IChatMainBody) {
+class ChatMainBody extends Block<IChatMainBodyProps> {
+  constructor(props: IChatMainBodyProps) {
     super(props);
   }
 
   protected render(): string {
-    const { messages } = this.props;
-    const formattedMessages = messages?.map((value) => ({ ...value, date: getTime(value.date) }));
+    const messages = sortMessages(window.store.getState().messages);
+    const currentUserId = window.store.getState().user?.id;
     return (`
       <div class="chat-main-body">
         {{#each messages}}
             
         {{/each}}
-        ${formattedMessages?.map(({ id, message, date, isYours }) => (
+        ${messages?.map(({ id, content, time, userId }) => (
         `
           <div 
-                class='chat-main-body__message ${isYours && "chat-main-body__message--yours"}'
+                class='chat-main-body__message ${userId === currentUserId && "chat-main-body__message--yours"}'
                 key=${id}
             >
                 <div class="chat-main-body__message-text">
-                    ${message}
+                    ${content}
                 </div>
                 <div class="chat-main-body__message-date">
-                    ${date}
+                    ${getTime(new Date(time))}
                 </div>
           </div>
           `
@@ -38,3 +39,5 @@ export class ChatMainBody extends Block<IChatMainBody> {
     `);
   }
 }
+
+export default connect(({ messages }) => ({ messages }))(ChatMainBody);

@@ -4,7 +4,7 @@ import { Button } from "./button";
 import { Divider } from "./divider";
 import { ButtonBack } from "./button-back";
 import { Modal } from "./modal";
-// import { Popup } from "./popup";
+import { Popup } from "./popup";
 import { ErrorMessage } from "./error-message";
 
 export const Components = {
@@ -14,4 +14,5 @@ export const Components = {
   ErrorMessage,
   Input,
   Modal,
+  Popup,
 };

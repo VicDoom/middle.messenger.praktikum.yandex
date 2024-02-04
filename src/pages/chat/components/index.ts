@@ -5,3 +5,5 @@ export { ChatMainHeader } from "./chat-main-header";
 export { ChatMainBody } from "./chat-main-body";
 export { ChatMainControls } from "./chat-main-controls";
 export { ChatControl } from "./chat-control";
+export { ChatAddUserModal } from "./chat-add-user-modal";
+export { ChatDeleteUserModal } from "./chat-delete-user-modal";

@@ -50,4 +50,14 @@ export class UserController {
 
     await ResourcesController.getAvatar();
   }
+
+  static async search(login: string) {
+    const { response } = await UserApi.search({ login });
+    if (apiHasError(response)) {
+      throw Error(response.reason);
+    }
+
+    const users = (response as UserDTO[]).map(user => transformUser(user));
+    return users;
+  }
 };

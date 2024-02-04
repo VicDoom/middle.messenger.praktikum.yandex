@@ -9,7 +9,6 @@ interface IChatProps extends IProps {
   selectedChat: SelectedChat,
   onSelect: (id: string) => void,
   sendMessage: (message: string) => void,
-  getMessages: () => void,
 }
 
 type TChatPageRefs = {
@@ -21,20 +20,20 @@ class ChatPage extends Block<IChatProps, TChatPageRefs> {
   constructor(props: IChatProps) {
     super({
       ...props,
-      onSelect: (id: string) => { 
+      onSelect: async (id: string) => { 
         this.refs.chat_list.setProps({ selectedId: id });
         const selectedChatId = Number(id);
         const selectedChat = props.chats.find(chat => chat.id === selectedChatId)!;
-        ChatsController.getChatToken(selectedChatId)
-          .then(token => window.store.set({ selectedChat: { id: selectedChatId, title: selectedChat.title, token } }))
+        await ChatsController.getChatToken(selectedChatId)
+          .then(token => window.store.set({ 
+            messages: [], 
+            selectedChat: { id: selectedChatId, title: selectedChat.title, token },
+          }))
           .catch(error => console.log(error));
-        // this._createSocket();
+        this._createSocket();
       },
       sendMessage: (message: string) => {
         this._socket?.sendMessage(message);
-      },
-      getMessages: () => {
-        this._socket?.getMessages();
       },
     });
     this._socket = null;
@@ -69,6 +68,8 @@ class ChatPage extends Block<IChatProps, TChatPageRefs> {
               {{{ ChatMainControls sendMessage=sendMessage }}}
             </div>` 
         : ""}
+        {{{ ChatAddUserModal }}}
+        {{{ ChatDeleteUserModal }}}
       </div>
     `);
   }
@@ -82,11 +83,11 @@ export default connect(({ chats, user, selectedChat }) => ({ chats, user, select
 //                 {{{ Input label="Логин" id="login-add-user" }}}
 //                 {{{ Button label="Добавить" }}}
 //             </div>
-//         {{/ Modal}}
+//         {{/ Modal }}
 //         {{#> Modal id="modal-delete-user"}}
 //             <div class="chat-page__modal">
 //                 <div>Удалить пользователя</div>
 //                 {{{ Input label="Логин" id="login-delete-user" }}}
 //                 {{{ Button label="Удалить" }}}
 //             </div>
-//         {{/ Modal}}
+//         {{/ Modal }}

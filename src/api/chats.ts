@@ -10,4 +10,16 @@ export class ChatsApi {
   static async getChatToken(id: number): Promise<XMLHttpRequest> {
     return chatsApi.post(`/token/${id}`);
   }
+
+  static async getUsers(id: number): Promise<XMLHttpRequest> {
+    return chatsApi.get(`/${id}/users`);
+  }
+
+  static async addUser(userId: number, chatId: number): Promise<XMLHttpRequest> {
+    return chatsApi.put("/users", { data: { users: [userId], chatId } });
+  }
+
+  static async deleteUser(userId: number, chatId: number): Promise<XMLHttpRequest> {
+    return chatsApi.delete("/users", { data: { users: [userId], chatId } });
+  }
 }

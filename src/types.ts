@@ -25,7 +25,10 @@ export type AppState = {
   error: string | null,
   user: User | null,
   isOpenEditAvatarModal: boolean,
+  isOpenAddUserChatModal: boolean,
+  isOpenDeleteUserChatModal: boolean,
   chats: Chat[],
+  messages: Message[],
   selectedChat: SelectedChat | null,
   avatarHref?: string,
 }
@@ -59,4 +62,12 @@ export type Chat = {
   avatar: Nullable<string>,
   unreadCount: number,
   lastMessage: LastMessage | null
+}
+
+export type Message = {
+  id: number;
+  time: string;
+  type: "message" | "file";
+  userId: number;
+  content: string;
 }

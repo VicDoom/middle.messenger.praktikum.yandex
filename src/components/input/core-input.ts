@@ -6,7 +6,8 @@ interface ICoreInputProps {
   disabled: boolean,
   type: string;
   onBlur: (e: Event) => void,
-  events: { [name: string]: (e: Event) => void };
+  onKeyUp: (e: KeyboardEvent) => void,
+  events: { [name: string]: (e: Event | KeyboardEvent) => void };
 }
 
 export class CoreInput extends Block<ICoreInputProps> {
@@ -15,6 +16,7 @@ export class CoreInput extends Block<ICoreInputProps> {
       ...props,
       events: {
         blur: (e) => props.onBlur(e),
+        keyup: (e) => props.onKeyUp(e as KeyboardEvent),
       },
     });
   };
