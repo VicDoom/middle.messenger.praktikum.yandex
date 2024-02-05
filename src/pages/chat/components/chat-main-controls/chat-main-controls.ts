@@ -22,26 +22,23 @@ export class ChatMainControls extends Block<IChatMainControlsProps, TChatMainCon
       ...props,
       onKeyUp: (event: KeyboardEvent) => { 
         if (event.key === "Enter") {
-          const message = this.refs.main_control_input.element?.value;
-          this._sendMessage(message ?? "", props.sendMessage);
-          // this.refs.main_control_input.resetValue();
+          this._sendMessage();
         }
       },
-      onSubmit: () => {
-        const message = this.refs.main_control_input.element?.value;
-        this._sendMessage(message ?? "", props.sendMessage);
-        // this.refs.main_control_input.resetValue();
-      },
+      onSubmit: () => this._sendMessage(),
     });
   }
 
-  private _sendMessage = (message: string, sendCallback: (value: string) => void): void => {
+  private _sendMessage = (): void => {
+    const message = this.refs.main_control_input.element?.value;
+    const sendCallback = this.props.sendMessage;
     const error = Validator.message(message);
     if (error) {
       console.log(error);
       return;
     }
-    sendCallback(message);
+    sendCallback(message ?? "");
+    this.refs.main_control_input.resetValue();
   };
 
   protected render(): string {

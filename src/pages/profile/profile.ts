@@ -5,11 +5,12 @@ import { DEFAULT_PROPS, Router } from "../../core/Router";
 import connect from "../../utils/connect";
 import { UserDTO } from "../../api/types";
 import { AuthController, UserController } from "../../controllers";
+import { AvatarModal } from "./components/AvatarModal/avatar-modal";
 
 const DEFAULT_USER_NAME = "Имя в чате не определено";
 
 type IProfilePageRefs = {
-  avatarModal: any
+  avatarModal: AvatarModal
   getAvatarButton: Button
 }
 

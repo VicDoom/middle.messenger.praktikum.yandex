@@ -6,6 +6,7 @@ import { UserController } from "../../controllers";
 import { ErrorMessage } from "../../components/error-message";
 import connect from "../../utils/connect";
 import { UserDTO } from "../../api/types";
+import { AvatarModal } from "../profile/components/AvatarModal/avatar-modal";
 
 type IProfileEditFieldsPageRefs = {
     email: Input
@@ -15,7 +16,7 @@ type IProfileEditFieldsPageRefs = {
     display_name: Input
     phone: Input
     error: ErrorMessage
-    avatarModal: any
+    avatarModal: AvatarModal
 }
 
 class ProfileEditFieldsPage extends Block<{}, IProfileEditFieldsPageRefs> {

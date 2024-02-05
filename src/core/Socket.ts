@@ -58,11 +58,15 @@ export class Socket<T> {
 
   private _messageCallback(event: MessageEvent) {
     console.log("Получены данные", event.data);
-    const data = JSON.parse(event.data);
-    if (SKIP_MESSAGE_TYPE.includes(data.type)) {
-      return;
+    try {
+      const data = JSON.parse(event.data);
+      if (SKIP_MESSAGE_TYPE.includes(data.type)) {
+        return;
+      }
+      this._getMessagesHandler(data);
+    } catch(e) {
+      throw new Error("Impossible to parse income data");
     }
-    this._getMessagesHandler(data);
   }
 
   private _pingCallback() {

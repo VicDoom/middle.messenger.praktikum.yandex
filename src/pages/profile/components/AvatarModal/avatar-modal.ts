@@ -14,7 +14,7 @@ type TAvatarModalRef = {
   error: ErrorMessage,
 }
 
-class AvatarModal extends Block<IAvatarModalProps, TAvatarModalRef> {
+export class AvatarModal extends Block<IAvatarModalProps, TAvatarModalRef> {
   constructor(props: IAvatarModalProps) {
     super({ ...props });
   }

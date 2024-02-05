@@ -47,7 +47,7 @@ export class UserController {
     const me = transformUser(response as UserDTO);
     window.store.set({ user: me });
 
-    await ResourcesController.getAvatar();
+    await ResourcesController.getAvatar(me.avatar);
   }
 
   static async search(login: string) {

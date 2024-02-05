@@ -20,14 +20,15 @@ export class MainControlInput extends Block<IMainControlInputProps, TMainControl
   }
 
   resetValue() {
-    if (this.refs.main_control_input.element) {
-      this.refs.main_control_input.element.value = "";
+    if (this.element?.value) {
+      this.element.value = "";
     }
   }
 
   protected render(): string {
     return (`
-      <input 
+      <input
+        ref="main_control_input"
         class="chat-main-controls__input-component"
         type="text"
         placeholder="Сообщение"
