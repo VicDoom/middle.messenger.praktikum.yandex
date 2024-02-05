@@ -24,7 +24,7 @@ export class ChatElement extends Block<IChatElementProps> {
   protected render(): string {
     const { id, title, message, time, messageNumber, currentChat } = this.props;
     const formattedCurrentChat = currentChat === "true" ? true : false;
-    const formattedMessageTime = getTime(new Date(time));
+    const formattedMessageTime = getTime(time);
     const messageNumberElement = 
       Number(messageNumber) ? (
         `<div class="chat-element__info-number">${messageNumber}</div>`
@@ -39,7 +39,7 @@ export class ChatElement extends Block<IChatElementProps> {
                   ${title}
                 </div>
                 <div class="chat-element__message-text">
-                  ${message}
+                  ${message ?? ""}
                 </div>
             </div>
             <div class="chat-element__info">

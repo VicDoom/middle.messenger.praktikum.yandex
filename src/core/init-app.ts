@@ -12,18 +12,12 @@ const initApp = async () => {
     return;
   }
 
-  const chats = await ChatsController.getChats();
-  window.store.set({ user: me, chats });
+  await ChatsController.getChats();
+  window.store.set({ user: me });
 
   await ResourcesController.getAvatar(me.avatar);
   
   const currentLocation = location.pathname;
-  const currentRoute = router.getRoute(currentLocation);
-  if (!currentRoute) {
-    // заменить потом на page-404
-    router.go("/profile");
-    return;
-  }
   router.go(currentLocation);
 };
 

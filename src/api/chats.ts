@@ -3,6 +3,10 @@ import HTTPTransport from "./index";
 const chatsApi = new HTTPTransport("/chats");
 
 export class ChatsApi {
+  static async create(title: string): Promise<XMLHttpRequest> {
+    return chatsApi.post("", { data: { title } });
+  }
+
   static async getChats(title?: string): Promise<XMLHttpRequest> {
     return chatsApi.get("", { data: { title: title ?? "" } });
   }

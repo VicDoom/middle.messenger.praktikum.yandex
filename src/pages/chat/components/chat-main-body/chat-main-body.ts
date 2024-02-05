@@ -30,7 +30,7 @@ class ChatMainBody extends Block<IChatMainBodyProps> {
                     ${content}
                 </div>
                 <div class="chat-main-body__message-date">
-                    ${getTime(new Date(time))}
+                    ${getTime(time)}
                 </div>
           </div>
           `

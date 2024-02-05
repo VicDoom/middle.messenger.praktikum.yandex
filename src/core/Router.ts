@@ -3,6 +3,7 @@ import { Block, RefType } from "./Block";
 
 interface IRouter {
   rootQuery: string;
+  errorRoute: string;
 }
 
 interface IRoute extends IRouter {};
@@ -49,12 +50,14 @@ export class Route<R extends RefType, B extends Block<{}, R>> {
   }
 }
 
-export const DEFAULT_PROPS = {
+export const DEFAULT_PROPS: IRouter = {
   rootQuery: "main",
+  errorRoute: "/page-404",
 };
 
 export class Router<R extends RefType, B extends Block<{}, R>> {
   private _rootQuery!: string;
+  private _errorRoute!: string;
   // @ts-expect-error для реализации сингтона нужно задать статичное значение с передаваемыми типами 
   // (ts запрещает такие значения)
   static __instance: Router<R, B>;
@@ -66,7 +69,7 @@ export class Router<R extends RefType, B extends Block<{}, R>> {
     if (!props) {
       props = DEFAULT_PROPS;
     }
-    const { rootQuery } = props;
+    const { rootQuery, errorRoute } = props;
 
     if (Router.__instance) {
       return Router.__instance;
@@ -76,12 +79,13 @@ export class Router<R extends RefType, B extends Block<{}, R>> {
     this.history = window.history;
     this._currentRoute = null;
     this._rootQuery = rootQuery;
+    this._errorRoute = errorRoute;
 
     Router.__instance = this;
   }
 
   use(pathname: string, block: {new (...args: any): B}) {
-    const route = new Route<R, B>(pathname, block, { rootQuery: this._rootQuery });
+    const route = new Route<R, B>(pathname, block, { rootQuery: this._rootQuery, errorRoute: this._errorRoute });
     this.routes.push(route);
     return this;
   }
@@ -96,6 +100,14 @@ export class Router<R extends RefType, B extends Block<{}, R>> {
 
   _onRoute(pathname: string) {
     const route = this.getRoute(pathname);
+    if (!route) {
+      const errorRoute = this.getRoute(this._errorRoute);
+      if (errorRoute) {
+        this._currentRoute = errorRoute;
+      }
+      errorRoute?.render();
+      return;
+    }
 
     if (this._currentRoute) {
       this._currentRoute.leave();

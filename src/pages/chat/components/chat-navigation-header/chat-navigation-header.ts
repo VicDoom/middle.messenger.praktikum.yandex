@@ -1,10 +1,11 @@
 import { ChatsController } from "../../../../controllers";
 import { Block } from "../../../../core/Block";
 import { registerComponent } from "../../../../core/register-component";
-import { NavigationInput, NavigationProfile } from "./components";
+import { NavigationCreateButton, NavigationInput, NavigationProfile } from "./components";
 
 registerComponent("NavigationInput", NavigationInput);
 registerComponent("NavigationProfile", NavigationProfile);
+registerComponent("NavigationCreateButton", NavigationCreateButton);
 
 type TChatNavigationHeaderRefs = {
   navigation_input: NavigationInput,
@@ -27,6 +28,7 @@ export class ChatNavigationHeader extends Block<{}, TChatNavigationHeaderRefs> {
     return (`
       <div class="chat-navigation-header">
         <div class="chat-navigation-header__profile">
+          {{{ NavigationCreateButton }}}
           {{{ NavigationProfile }}}
         </div>
         <div class="chat-navigation-search-wrapper">

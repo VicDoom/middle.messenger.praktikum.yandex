@@ -7,3 +7,4 @@ export { ChatMainControls } from "./chat-main-controls";
 export { ChatControl } from "./chat-control";
 export { ChatAddUserModal } from "./chat-add-user-modal";
 export { ChatDeleteUserModal } from "./chat-delete-user-modal";
+export { ChatCreateModal } from "./chat-create-modal";

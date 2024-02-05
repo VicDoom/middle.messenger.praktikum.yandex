@@ -2,18 +2,29 @@ import { ChatsApi } from "../api/chats";
 import { apiHasError, transformChats } from "../utils/api-helpers";
 
 export class ChatsController {
-  static async getChats (title?: string) {
-    const { response } = await ChatsApi.getChats(title);
-    if (apiHasError(response)) {
+  static async create(title: string) {
+    const { response, status } = await ChatsApi.create(title);
+    if (apiHasError(response, status)) {
       throw Error(response.reason);
     }
-
+    
+    await this.getChats();
+    window.store.set({ isOpenCreateChatModal: false });
+    return response;
+  }
+  static async getChats (title?: string) {
+    const { response, status } = await ChatsApi.getChats(title);
+    if (apiHasError(response, status)) {
+      throw Error(response.reason);
+    }
+    const chats = transformChats(response);
+    window.store.set({ chats });
     return transformChats(response);
   }
 
   static async getChatToken(id: number) {
-    const { response } = await ChatsApi.getChatToken(id);
-    if (apiHasError(response)) {
+    const { response, status } = await ChatsApi.getChatToken(id);
+    if (apiHasError(response, status)) {
       throw Error(response.reason);
     }
 
@@ -21,8 +32,8 @@ export class ChatsController {
   }
 
   static async getUsers(id: number) {
-    const { response } = await ChatsApi.getUsers(id);
-    if (apiHasError(response)) {
+    const { response, status } = await ChatsApi.getUsers(id);
+    if (apiHasError(response, status)) {
       throw Error(response.reason);
     }
 
@@ -30,8 +41,8 @@ export class ChatsController {
   }
 
   static async addUser(userId: number, chatId: number) {
-    const { response } = await ChatsApi.addUser(userId, chatId);
-    if (apiHasError(response)) {
+    const { response, status } = await ChatsApi.addUser(userId, chatId);
+    if (apiHasError(response, status)) {
       throw Error(response.reason);
     }
 
@@ -39,8 +50,8 @@ export class ChatsController {
   }
 
   static async deleteUser(userId: number, chatId: number) {
-    const { response } = await ChatsApi.deleteUser(userId, chatId);
-    if (apiHasError(response)) {
+    const { response, status } = await ChatsApi.deleteUser(userId, chatId);
+    if (apiHasError(response, status)) {
       throw Error(response.reason);
     }
 

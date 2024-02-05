@@ -27,6 +27,7 @@ export type AppState = {
   isOpenEditAvatarModal: boolean,
   isOpenAddUserChatModal: boolean,
   isOpenDeleteUserChatModal: boolean,
+  isOpenCreateChatModal: boolean,
   chats: Chat[],
   messages: Message[],
   selectedChat: SelectedChat | null,

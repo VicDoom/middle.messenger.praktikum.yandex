@@ -1,8 +1,13 @@
 import { APIError, ChatDTO, TMessageDTO, UserDTO } from "../api/types";
+import { Router } from "../core/Router";
 import { Chat, Message, User } from "../types";
 import { API_HOST } from "./constants";
 
-export function apiHasError (response: any): response is APIError {
+export function apiHasError (response: any, status: number): response is APIError {
+  if (status === 500) {
+    const router = new Router();
+    router.go("/page-500");
+  }
   return response?.reason;
 }
 

@@ -8,6 +8,7 @@ interface SocketProps<T> {
 }
 
 const PING_INTERVAL = 20000;
+const SKIP_MESSAGE_TYPE = ["pong", "user connected"];
 
 export class Socket<T> {
   socket: WebSocket;
@@ -58,7 +59,7 @@ export class Socket<T> {
   private _messageCallback(event: MessageEvent) {
     console.log("Получены данные", event.data);
     const data = JSON.parse(event.data);
-    if (data.type === "pong") {
+    if (SKIP_MESSAGE_TYPE.includes(data.type)) {
       return;
     }
     this._getMessagesHandler(data);

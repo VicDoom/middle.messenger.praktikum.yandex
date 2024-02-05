@@ -7,7 +7,7 @@ import { ResourcesController } from ".";
 export class AuthController {
   static async getUser () {
     const data = await AuthApi.me();
-    if (apiHasError(data.response)) {
+    if (apiHasError(data.response, data.status)) {
       throw Error(data.response.reason);
     }
 
@@ -15,8 +15,8 @@ export class AuthController {
   }
 
   static async login (data: TLoginRequestData) {
-    const { response } = await AuthApi.login(data);
-    if (apiHasError(response)) {
+    const { response, status } = await AuthApi.login(data);
+    if (apiHasError(response, status)) {
       if (response.reason !== "User already in system") {
         throw Error(response.reason);
       }
@@ -32,8 +32,8 @@ export class AuthController {
   }
 
   static async register(data: TCreateUser) {
-    const { response } = await AuthApi.register(data);
-    if (apiHasError(response)) {
+    const { response, status } = await AuthApi.register(data);
+    if (apiHasError(response, status)) {
       throw new Error(response.reason);
     }
 
@@ -45,8 +45,8 @@ export class AuthController {
   }
 
   static async logout() {
-    const { response } = await AuthApi.logout();
-    if (apiHasError(response)) {
+    const { response, status } = await AuthApi.logout();
+    if (apiHasError(response, status)) {
       throw new Error(response.reason);
     }
 

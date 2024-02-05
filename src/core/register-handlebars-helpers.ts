@@ -10,6 +10,7 @@ import iconForward from "/public/icons/icon-forward.svg";
 import iconPin from "/public/icons/icon-pin.svg";
 import iconSearch from "/public/icons/icon-search.svg";
 import iconSend from "/public/icons/icon-send.svg";
+import iconCreate from "/public/icons/icon-create.svg";
 
 export const registerHandlebarsHelpers = () => {
   const Icons: { [name: string]: string } = {
@@ -23,6 +24,7 @@ export const registerHandlebarsHelpers = () => {
     "icon-pin": iconPin,
     "icon-search": iconSearch,
     "icon-send": iconSend,
+    "icon-create": iconCreate,
   };
 
   Handlebars.registerHelper("defaultValue", function (value: string, defaultValue: string) {

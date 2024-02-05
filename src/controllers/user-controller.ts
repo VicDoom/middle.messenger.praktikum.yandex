@@ -8,8 +8,8 @@ export class UserController {
   static async editProfile(data: TEditProfileData) {
     // const currentUserInfo = window.store.getState().user;
     // const changes = getUpdatedFields(currentUserInfo, data);
-    const { response } = await UserApi.editProfile(data);
-    if (apiHasError(response)) {
+    const { response, status } = await UserApi.editProfile(data);
+    if (apiHasError(response, status)) {
       throw Error(response.reason);
     }
 
@@ -21,8 +21,8 @@ export class UserController {
   }
 
   static async editPassword(data: FormData) {
-    const { response } = await UserApi.editAvatar(data);
-    if (apiHasError(response)) {
+    const { response, status } = await UserApi.editAvatar(data);
+    if (apiHasError(response, status)) {
       throw Error(response.reason);
     }
 
@@ -40,8 +40,8 @@ export class UserController {
     }
     form.append("avatar", avatarFile);
 
-    const { response } = await UserApi.editAvatar(form);
-    if (apiHasError(response)) {
+    const { response, status } = await UserApi.editAvatar(form);
+    if (apiHasError(response, status)) {
       throw Error(response.reason);
     }
 
@@ -52,8 +52,8 @@ export class UserController {
   }
 
   static async search(login: string) {
-    const { response } = await UserApi.search({ login });
-    if (apiHasError(response)) {
+    const { response, status } = await UserApi.search({ login });
+    if (apiHasError(response, status)) {
       throw Error(response.reason);
     }
 

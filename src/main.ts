@@ -33,6 +33,7 @@ const initState: AppState = {
   isOpenEditAvatarModal: false,
   isOpenAddUserChatModal: false,
   isOpenDeleteUserChatModal: false,
+  isOpenCreateChatModal: false,
   chats: [],
   messages: [],
   selectedChat: null,
@@ -61,11 +62,12 @@ registerComponent("ChatMainControls", ChatComponents.ChatMainControls);
 registerComponent("ChatMainHeader", ChatComponents.ChatMainHeader);
 registerComponent("ChatAddUserModal", ChatComponents.ChatAddUserModal);
 registerComponent("ChatDeleteUserModal", ChatComponents.ChatDeleteUserModal);
+registerComponent("ChatCreateModal", ChatComponents.ChatCreateModal);
 
 registerHandlebarsHelpers();
 
 document.addEventListener("DOMContentLoaded", () => {
-  const router = new Router({ rootQuery: "main" });
+  const router = new Router({ rootQuery: "main", errorRoute: "/page-404" });
   router
     .use("/profile", ProfilePage)
     .use("/profile/edit-fields", ProfileEditFieldsPage)

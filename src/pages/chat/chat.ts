@@ -70,6 +70,7 @@ class ChatPage extends Block<IChatProps, TChatPageRefs> {
         : ""}
         {{{ ChatAddUserModal }}}
         {{{ ChatDeleteUserModal }}}
+        {{{ ChatCreateModal }}}
       </div>
     `);
   }

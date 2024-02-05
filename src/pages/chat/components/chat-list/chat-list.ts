@@ -24,7 +24,7 @@ export class ChatList extends Block<IChatListProps> {
         `{{{ ChatElement 
              id='${id}'
              title='${title}'
-             message='${lastMessage?.content}'
+             message='${lastMessage?.content ?? ""}'
              time='${lastMessage?.time ?? ""}'
              messageNumber='${unreadCount}' 
              currentChat='${id === selectedChatId}'
