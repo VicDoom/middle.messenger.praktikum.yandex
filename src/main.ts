@@ -69,11 +69,11 @@ registerHandlebarsHelpers();
 document.addEventListener("DOMContentLoaded", () => {
   const router = new Router({ rootQuery: "main", errorRoute: "/page-404" });
   router
+    .use("/", LoginPage)
     .use("/profile", ProfilePage)
     .use("/settings", ProfileEditFieldsPage)
     .use("/settings-password", ProfileEditPasswordPage)
     .use("/sign-up", RegisterPage)
-    .use("/login", LoginPage)
     .use("/page-404", Page404)
     .use("/page-500", Page500)
     .use("/messenger", ChatPage)

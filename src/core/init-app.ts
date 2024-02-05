@@ -5,10 +5,15 @@ import { Router } from "./Router";
 const initApp = async () => {
   let me = null;
   const router = new Router();
+  const currentLocation = location.pathname;
   try {
     me = await AuthController.getUser();
   } catch (error) {
-    router.go("/login");
+    if (currentLocation !== "/sign-up") {
+      router.go("/");
+      return;
+    }
+    router.go(currentLocation);
     return;
   }
 
@@ -16,15 +21,8 @@ const initApp = async () => {
   window.store.set({ user: me });
 
   await ResourcesController.getAvatar(me.avatar);
-  
-  const currentLocation = location.pathname;
   router.go(currentLocation);
 };
-
-// const initChatPage = async () => {
-//   const chats = await getChats();
-//   window.store.set({chats});
-// }
 
 export {
   initApp,

@@ -95,10 +95,11 @@ export class Router<R extends RefType, B extends Block<{}, R>> {
       // @ts-expect-error в PopStateEvent содержится pathname, ошибка ts
       this._onRoute(event.currentTarget?.location.pathname);
     };
-    this._onRoute(window.location.pathname);
+    // this._onRoute(window.location.pathname);
   }
 
   _onRoute(pathname: string) {
+    console.log(pathname);
     const route = this.getRoute(pathname);
     if (!route) {
       const errorRoute = this.getRoute(this._errorRoute);

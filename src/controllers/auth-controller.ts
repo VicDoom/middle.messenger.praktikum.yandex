@@ -53,6 +53,6 @@ export class AuthController {
     window.store.set({ user: null, avatarHref: undefined, chats: [] });
 
     const router = new Router();
-    router.go("/login");
+    router.go("/");
   }
 };

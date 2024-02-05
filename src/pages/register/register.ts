@@ -20,7 +20,7 @@ export class RegisterPage extends Block<{}, TRegisterPageRefs> {
   constructor() {
     const router = new Router(DEFAULT_PROPS);
     super({
-      navigateLogin: () => router.go("/login"),
+      navigateLogin: () => router.go("/"),
       validateEmail: Validator.email,
       validateLogin: Validator.login,
       validateName: Validator.name,
