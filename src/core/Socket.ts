@@ -90,4 +90,8 @@ export class Socket<T> {
       }),
     );
   }
+
+  public close() {
+    this.socket.close();
+  }
 }

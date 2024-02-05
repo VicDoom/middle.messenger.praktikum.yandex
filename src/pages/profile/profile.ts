@@ -118,21 +118,6 @@ class ProfilePage extends Block<{}, IProfilePageRefs> {
                             onClick=navigateLogOut
                         }}}
                         {{{ Divider }}}
-                        <div>Временные кнопки для перехода на 404 и 500 страницы, будут удалены после ревью</div>
-                        {{{ Divider }}}
-                        {{{ Button
-                            type="link"
-                            label="404 ошибка"
-                            color="red"
-                            onClick=navigatePage404
-                        }}}
-                        {{{ Divider }}}
-                        {{{ Button
-                            type="link"
-                            label="500 ошибка"
-                            color="red"
-                            onClick=navigatePage500
-                        }}}
                     </div>
                 </div>
             {{/CenterLayout}}

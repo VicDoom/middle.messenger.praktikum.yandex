@@ -45,4 +45,8 @@ export class SocketController {
   public resetMessages(): void {
     window.store.set({ messages: [] });
   }
+
+  public closeConnection() {
+    this.socket.close();
+  }
 }

@@ -54,7 +54,11 @@ export class ChatsController {
     if (apiHasError(response, status)) {
       throw Error(response.reason);
     }
-
     window.store.set({ isOpenDeleteUserChatModal: false });
+    const isCurrentDeleted = window.store.getState().user?.id === userId;
+    if (isCurrentDeleted) {
+      window.store.set({ selectedChat: null });
+      await this.getChats();
+    }
   }
 };

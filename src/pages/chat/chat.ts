@@ -20,10 +20,11 @@ class ChatPage extends Block<IChatProps, TChatPageRefs> {
   constructor(props: IChatProps) {
     super({
       ...props,
-      onSelect: async (id: string) => { 
+      onSelect: async (id: string) => {
         this.refs.chat_list.setProps({ selectedId: id });
         const selectedChatId = Number(id);
-        const selectedChat = props.chats.find(chat => chat.id === selectedChatId)!;
+        const chats = window.store.getState().chats;
+        const selectedChat = chats.find(chat => chat.id === selectedChatId)!;
         await ChatsController.getChatToken(selectedChatId)
           .then(token => window.store.set({ 
             messages: [], 
@@ -44,6 +45,9 @@ class ChatPage extends Block<IChatProps, TChatPageRefs> {
     const userId = state.user?.id;
     const { id, token } = state.selectedChat!;
     if (userId && id && token) {
+      if (this._socket) {
+        this._socket.closeConnection();
+      }
       this._socket = new SocketController({ userId, chatId: id, token });
     }
   }
