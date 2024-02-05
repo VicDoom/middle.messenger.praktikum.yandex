@@ -99,7 +99,6 @@ export class Router<R extends RefType, B extends Block<{}, R>> {
   }
 
   _onRoute(pathname: string) {
-    console.log(pathname);
     const route = this.getRoute(pathname);
     if (!route) {
       const errorRoute = this.getRoute(this._errorRoute);
