@@ -5,7 +5,7 @@ export class Page500 extends Block<{}> {
   constructor() {
     const router = new Router(DEFAULT_PROPS);
     super({
-      onClick: () => router.go("/chats"),
+      onClick: () => router.go("/messenger"),
     });
   }
 

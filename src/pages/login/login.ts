@@ -14,7 +14,7 @@ export class LoginPage extends Block<{}, TLoginPageRefs> {
   constructor() {
     const router = new Router(DEFAULT_PROPS);
     super({
-      navigateRegister: () => router.go("/register"),
+      navigateRegister: () => router.go("/sign-up"),
       onLogin: () => {
         const login = this.refs.login.value();
         const password = this.refs.password.value();

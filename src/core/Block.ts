@@ -1,7 +1,6 @@
 import EventBus from "./EventBus";
 import { nanoid } from "nanoid";
 import Handlebars from "handlebars";
-import { render } from "../helpers";
 
 export type RefType = {
   [key: string]: Element | HTMLInputElement | Block<IProps, RefType>

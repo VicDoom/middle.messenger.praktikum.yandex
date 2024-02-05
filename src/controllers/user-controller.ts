@@ -20,14 +20,13 @@ export class UserController {
     router.go("/profile");
   }
 
-  static async editPassword(data: FormData) {
-    const { response, status } = await UserApi.editAvatar(data);
+  static async editPassword(newPassword: string, oldPassword: string) {
+    const { response, status } = await UserApi.editPassword({ newPassword, oldPassword });
     if (apiHasError(response, status)) {
       throw Error(response.reason);
     }
 
     const router = new Router();
-    // заменить на login
     router.go("/profile");
   }
 

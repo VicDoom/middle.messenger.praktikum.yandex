@@ -70,13 +70,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const router = new Router({ rootQuery: "main", errorRoute: "/page-404" });
   router
     .use("/profile", ProfilePage)
-    .use("/profile/edit-fields", ProfileEditFieldsPage)
-    .use("/profile/edit-password", ProfileEditPasswordPage)
-    .use("/register", RegisterPage)
+    .use("/settings", ProfileEditFieldsPage)
+    .use("/settings-password", ProfileEditPasswordPage)
+    .use("/sign-up", RegisterPage)
     .use("/login", LoginPage)
     .use("/page-404", Page404)
     .use("/page-500", Page500)
-    .use("/chats", ChatPage)
+    .use("/messenger", ChatPage)
     .start()
 
   initApp();

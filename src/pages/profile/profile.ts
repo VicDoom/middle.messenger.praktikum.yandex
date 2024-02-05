@@ -18,11 +18,11 @@ class ProfilePage extends Block<{}, IProfilePageRefs> {
     const router = new Router(DEFAULT_PROPS);
     super({
       ...props,
-      navigateProfileEditPage: () => router.go("/profile/edit-fields"),
-      navigatePasswordEditPage: () => router.go("/profile/edit-password"),
+      navigateProfileEditPage: () => router.go("/settings"),
+      navigatePasswordEditPage: () => router.go("/settings-password"),
       navigatePage404: () => router.go("/page-404"),
       navigatePage500: () => router.go("/page-500"),
-      navigateChat: () => router.go("/chats"),
+      navigateChat: () => router.go("/messenger"),
       validateLoginField: (value: string) => Validator.login(value),
       openAvatarModal: () => window.store.set({ isOpenEditAvatarModal: true }),
       closeAvatarModal: () => window.store.set({ isOpenEditAvatarModal: false }),

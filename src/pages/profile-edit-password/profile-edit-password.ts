@@ -30,7 +30,7 @@ export class ProfileEditPasswordPage extends Block<{}, TProfileEditPasswordPageR
           return;
         }
         console.log({ oldPassword, newPassword, repeatNewPassword });
-        UserController.editPassword({ oldPassword, newPassword }).catch(error => this.refs.error.setProps({ error }));
+        UserController.editPassword(newPassword, oldPassword).catch(error => this.refs.error.setProps({ error }));
       },
       validatePassword: Validator.password,
       validateRepeatPassword: (value: string) => { 

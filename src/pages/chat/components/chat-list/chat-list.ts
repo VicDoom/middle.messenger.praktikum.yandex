@@ -20,7 +20,7 @@ export class ChatList extends Block<IChatListProps> {
     const selectedChatId = window.store.getState().selectedChat?.id;
     return (`
     <div class="chat-list">
-      ${chats.map(({ id, title, avatar, unreadCount, lastMessage }) => (
+      ${chats.map(({ id, title, unreadCount, lastMessage }) => (
         `{{{ ChatElement 
              id='${id}'
              title='${title}'
