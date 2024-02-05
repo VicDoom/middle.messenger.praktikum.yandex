@@ -13,7 +13,7 @@
         top: 100%;
         right: 0;
     }
-    &--opened {
+    &--open {
         display: flex;
     }
 }

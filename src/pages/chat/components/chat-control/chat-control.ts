@@ -2,11 +2,17 @@ import { Block, IProps } from "../../../../core/Block";
 
 interface IChatControlProps extends IProps {
   style?: string;
+  onClick: () => void;
 }
 
 export class ChatControl extends Block<IChatControlProps> {
   constructor(props: IChatControlProps) {
-    super(props);
+    super({
+      ...props,
+      events: {
+        click: () => this.props.onClick(),
+      },
+    });
   }
 
   protected render(): string {

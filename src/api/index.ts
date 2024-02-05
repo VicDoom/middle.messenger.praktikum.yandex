@@ -1,3 +1,5 @@
+import { API_HOST } from "../utils/constants";
+
 const METHODS = {
   GET: "GET",
   PUT: "PUT",
@@ -7,42 +9,55 @@ const METHODS = {
 
 function queryStringify(data?: Document | XMLHttpRequestBodyInit | null) {
   const results: string[] = [];
-  Object.entries(data as object).forEach(entry => {
+  Object.entries(data ?? {}).forEach(entry => {
     const [key, value] = entry;
     results.push(`${key}=${value.toString()}`);
   });
   return `?${results.join("&")}`;
 }
 
-interface IOptions {
-  data?: Document | XMLHttpRequestBodyInit | null,
+type TOptions = {
+  data?: any,
   method: string,
-  timeout: number,
+  timeout?: number,
+  isFormData?: boolean;
+  responseType?: XMLHttpRequestResponseType;
 }
 
+type TOptionsWithoutMethod = Omit<TOptions, "method">;
+
+type THTTPMethod = 
+  <T>(url: string, options?: TOptionsWithoutMethod, timeout?: number) => Promise<XMLHttpRequest | T | any>
+type THTTPRequest = (url: string, options: TOptions, timeout?: number) => Promise<XMLHttpRequest>
+
 export default class HTTPTransport {
-  get = (url: string, options: IOptions) => {
+  private _apiUrl: string = "";
+  constructor(apiPath: string) {
+    this._apiUrl = `${API_HOST}${apiPath}`;
+  };
+
+  get: THTTPMethod = (url, options) => {
     return this.request(
-      `${url}${queryStringify(options.data)}`, 
+      `${this._apiUrl}${url}${options?.data ? queryStringify(options?.data) : ""}`, 
       { ...options, method: METHODS.GET },
-      options.timeout,
+      options?.timeout,
     );
   };
 
-  put = (url: string, options: IOptions) => {
-    return this.request(url, { ...options, method: METHODS.PUT }, options.timeout);
+  put: THTTPMethod = (url, options) => {
+    return this.request(`${this._apiUrl}${url}`, { ...options, method: METHODS.PUT }, options?.timeout);
   };
 
-  post = (url: string, options: IOptions) => {
-    return this.request(url, { ...options, method: METHODS.POST }, options.timeout);
+  post: THTTPMethod = (url, options) => {
+    return this.request(`${this._apiUrl}${url}`, { ...options, method: METHODS.POST }, options?.timeout);
   };
 
-  delete = (url: string, options: IOptions) => {
-    return this.request(url, { ...options, method: METHODS.DELETE }, options.timeout);
+  delete: THTTPMethod = (url, options) => {
+    return this.request(`${this._apiUrl}${url}`, { ...options, method: METHODS.DELETE }, options?.timeout);
   };
 
-  request = (url: string, options: IOptions, timeout = 5000) => {
-    const { method, data } = options;
+  request: THTTPRequest = (url, options, timeout = 5000) => {
+    const { method, data, isFormData, responseType } = options;
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
@@ -56,11 +71,18 @@ export default class HTTPTransport {
       xhr.onerror = reject;
       xhr.ontimeout = reject;
       xhr.timeout = timeout;
+      xhr.withCredentials = true;
+      xhr.responseType = responseType ?? "json";
+      if (isFormData) {
+        xhr.send(data);
+        return;
+      }
+      xhr.setRequestHeader("Content-Type", "application/json");
       if (method === METHODS.GET || !data) {
 			  xhr.send();
       } else {
-        xhr.send(data);
+        xhr.send(JSON.stringify(data));
       }
     });
   };
-}
+};

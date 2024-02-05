@@ -1,1 +1,1 @@
-export { AvatarButton } from "./avatar-button";
+export { default as AvatarButton } from "./avatar-button";

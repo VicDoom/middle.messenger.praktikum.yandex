@@ -1,6 +1,8 @@
+import { ErrorMessage } from "../../components/error-message";
 import { Input } from "../../components/input";
+import { AuthController } from "../../controllers";
 import { Block } from "../../core/Block";
-import { navigate } from "../../core/navigate";
+import { DEFAULT_PROPS, Router } from "../../core/Router";
 import { Validator } from "../../helpers";
 
 type TRegisterPageRefs = {
@@ -11,12 +13,14 @@ type TRegisterPageRefs = {
     phone: Input;
     password: Input;
     repeat_password: Input;
+    error: ErrorMessage;
 }
 
 export class RegisterPage extends Block<{}, TRegisterPageRefs> {
   constructor() {
+    const router = new Router(DEFAULT_PROPS);
     super({
-      navigateLogin: () => navigate("login"),
+      navigateLogin: () => router.go("/"),
       validateEmail: Validator.email,
       validateLogin: Validator.login,
       validateName: Validator.name,
@@ -31,27 +35,28 @@ export class RegisterPage extends Block<{}, TRegisterPageRefs> {
         return false;
       },
       onRegister: () => {
-        const email = this.refs.email.value();
-        const login = this.refs.login.value();
-        const firstName = this.refs.first_name.value();
-        const secondName = this.refs.second_name.value();
-        const phone = this.refs.phone.value();
-        const password = this.refs.password.value();
+        const newUser = {
+          email: this.refs.email.value()!,
+          login: this.refs.login.value()!,
+          first_name: this.refs.first_name.value()!,
+          second_name: this.refs.second_name.value()!,
+          phone: this.refs.phone.value()!,
+          password: this.refs.password.value()!,
+        };
         const repeatPassword = this.refs.repeat_password.value();
         if (!(
-          !Validator.email(email)
-          && !Validator.login(login)
-          && !Validator.name(firstName)
-          && !Validator.name(secondName)
-          && !Validator.phone(phone)
-          && !Validator.password(password)
+          !Validator.email(newUser.email)
+          && !Validator.login(newUser.login)
+          && !Validator.name(newUser.first_name)
+          && !Validator.name(newUser.second_name)
+          && !Validator.phone(newUser.phone)
+          && !Validator.password(newUser.password)
           && !Validator.password(repeatPassword)
-          && !Validator.repeatPassword(password, repeatPassword)
+          && !Validator.repeatPassword(newUser.password, repeatPassword)
         )) {
           return;
         }
-        console.log({ email, login, firstName, secondName, phone, password, repeatPassword });
-        navigate("login");
+        AuthController.register(newUser).catch(error => this.refs.error.setProps({ error }));
       },
     });
   }
@@ -62,9 +67,10 @@ export class RegisterPage extends Block<{}, TRegisterPageRefs> {
         {{#> FormLayout }}
             <div class="form-info register-page">
                 <div class="form-info__title">Регистрация</div>
-                <div class="form-info__inputs">
+                <form id="register-form">
+                  <div class="form-info__inputs">
                     {{{ Input 
-                        label="Почта" 
+                        label="Почта"
                         id="email"
                         ref="email"
                         placeholder="введите почту"
@@ -85,7 +91,7 @@ export class RegisterPage extends Block<{}, TRegisterPageRefs> {
                         validate=validateName
                     }}}
                     {{{ Input 
-                        label="Фамилия" 
+                        label="Фамилия"
                         id="second_name"
                         ref="second_name"
                         placeholder="введите фамилию"
@@ -99,7 +105,7 @@ export class RegisterPage extends Block<{}, TRegisterPageRefs> {
                         validate=validatePhone
                     }}}
                     {{{ Input 
-                        label="Пароль" 
+                        label="Пароль"
                         id="password"
                         ref="password"
                         placeholder="введите пароль"
@@ -107,19 +113,22 @@ export class RegisterPage extends Block<{}, TRegisterPageRefs> {
                         validate=validatePassword
                     }}}
                     {{{ Input 
-                        label="Пароль (еще раз)" 
+                        label="Пароль (еще раз)"
                         id="repeat_password"
                         ref="repeat_password"
                         placeholder="повторите пароль"
                         type="password"
                         validate=validateRepeatPassword
                     }}}
-                </div>
-                <div class="form-info__buttons">
+                  </div>
+                  <div class="form-info__buttons">
+                    {{{ ErrorMessage error=error ref="error" }}}
                     {{{ Button
                         label="Зарегистрироваться"
                         page="register"
                         onClick=onRegister
+                        action="submit"
+                        id="register-form"
                     }}}
                     {{{ Button
                         label="Войти"
@@ -127,7 +136,8 @@ export class RegisterPage extends Block<{}, TRegisterPageRefs> {
                         type="link"
                         onClick=navigateLogin
                     }}}
-                </div>
+                  </div>
+                </form>
             </div>
         {{/ FormLayout }}
       {{/ CenterLayout }}
