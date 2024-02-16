@@ -3,9 +3,9 @@ import { getTime } from "../../../../helpers";
 
 interface IChatElementProps extends IProps {
   id: string;
-  user: string;
+  title: string;
   message: string;
-  date: string;
+  time: string;
   messageNumber?: number;
   currentChat: string;
   onClick: (id: string) => void;
@@ -22,11 +22,11 @@ export class ChatElement extends Block<IChatElementProps> {
   }
 
   protected render(): string {
-    const { id, user, message, date, messageNumber, currentChat } = this.props;
+    const { id, title, message, time, messageNumber, currentChat } = this.props;
     const formattedCurrentChat = currentChat === "true" ? true : false;
-    const formattedTime = getTime(new Date(date));
+    const formattedMessageTime = getTime(time);
     const messageNumberElement = 
-      +(messageNumber ?? 0) ? (
+      Number(messageNumber) ? (
         `<div class="chat-element__info-number">${messageNumber}</div>`
       ) : "";
     return (`
@@ -36,14 +36,14 @@ export class ChatElement extends Block<IChatElementProps> {
             <div class="chat-element__avatar"></div>
             <div class="chat-element__message">
                 <div class="chat-element__message-user">
-                  ${user}
+                  ${title}
                 </div>
                 <div class="chat-element__message-text">
-                  ${message}
+                  ${message ?? ""}
                 </div>
             </div>
             <div class="chat-element__info">
-                <div class="chat-element__info-date">${formattedTime}</div>
+                <div class="chat-element__info-date">${formattedMessageTime}</div>
                 ${messageNumberElement}
             </div>
         </div>

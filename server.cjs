@@ -10,3 +10,7 @@ app.use(express.static(path.join(__dirname, './dist')));
 app.listen(port, () => {
     console.log(`Express server is running on port ${port}`);
 });
+
+app.get('*', (_req, res) => {
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});

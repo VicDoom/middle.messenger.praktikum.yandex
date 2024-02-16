@@ -126,7 +126,9 @@ export class Block<
     this.componentWillUnmount();
   }
 
-  componentWillUnmount() {}
+  componentWillUnmount() {
+    this.element?.remove();
+  }
 
   setProps = (nextProps: unknown) => {
     if (!nextProps) {
@@ -231,7 +233,7 @@ export class Block<
   }
 
   show() {
-    this.getContent()!.style.display = "block";
+    this.getContent()!.style.display = "";
   }
 
   hide() {

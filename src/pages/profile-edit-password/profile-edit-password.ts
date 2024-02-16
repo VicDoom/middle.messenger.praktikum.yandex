@@ -1,21 +1,25 @@
+import { ErrorMessage } from "../../components/error-message";
 import { Input } from "../../components/input";
+import { UserController } from "../../controllers";
 import { Block } from "../../core/Block";
-import { navigate } from "../../core/navigate";
+import { DEFAULT_PROPS, Router } from "../../core/Router";
 import { Validator } from "../../helpers/validator";
 
 type TProfileEditPasswordPageRefs = {
   old_password: Input
   new_password: Input
   repeat_new_password: Input
+  error: ErrorMessage
 }
 
 export class ProfileEditPasswordPage extends Block<{}, TProfileEditPasswordPageRefs> {
   constructor() {
+    const router = new Router(DEFAULT_PROPS);
     super({
-      navigateBack: () => navigate("profile"),
+      navigateBack: () => router.go("/profile"),
       onSave: () => {
-        const oldPassword = this.refs.old_password.value();
-        const newPassword = this.refs.new_password.value();
+        const oldPassword = this.refs.old_password.value()!;
+        const newPassword = this.refs.new_password.value()!;
         const repeatNewPassword = this.refs.repeat_new_password.value();
         if (!(
           !Validator.password(oldPassword)
@@ -26,7 +30,7 @@ export class ProfileEditPasswordPage extends Block<{}, TProfileEditPasswordPageR
           return;
         }
         console.log({ oldPassword, newPassword, repeatNewPassword });
-        navigate("profile");
+        UserController.editPassword(newPassword, oldPassword).catch(error => this.refs.error.setProps({ error }));
       },
       validatePassword: Validator.password,
       validateRepeatPassword: (value: string) => { 
@@ -81,6 +85,7 @@ export class ProfileEditPasswordPage extends Block<{}, TProfileEditPasswordPageR
                     }}}
                   </div>
                   <div class="profile-page__buttons">
+                    {{{ ErrorMessage ref="error" error=error }}}
                     {{{ Button
                         label="Сохранить"
                         onClick=onSave

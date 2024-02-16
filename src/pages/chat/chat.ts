@@ -1,22 +1,55 @@
-import { Block } from "../../core/Block";
-import { CHAT_ELEMENTS, CURRENT_CHAT } from "../../mocks";
+import { ChatsController, SocketController } from "../../controllers";
+import { Block, IProps } from "../../core/Block";
+import { Chat, SelectedChat } from "../../types";
+import connect from "../../utils/connect";
 import { IChatListProps } from "./components/chat-list/chat-list";
+
+interface IChatProps extends IProps {
+  chats: Chat[],
+  selectedChat: SelectedChat,
+  onSelect: (id: string) => void,
+  sendMessage: (message: string) => void,
+}
 
 type TChatPageRefs = {
   chat_list: Block<IChatListProps>
 }
 
-export class ChatPage extends Block<{}, TChatPageRefs> {
-  constructor() {
+class ChatPage extends Block<IChatProps, TChatPageRefs> {
+  _socket: SocketController | null;
+  constructor(props: IChatProps) {
     super({
-      chats: CHAT_ELEMENTS,
-      currentUser: CURRENT_CHAT.user,
-      messages: CURRENT_CHAT.messages,
-      onSelect: (id: string) => { 
+      ...props,
+      onSelect: async (id: string) => {
         this.refs.chat_list.setProps({ selectedId: id });
-        console.log(`Был выбран чат с id ${id}`);
+        const selectedChatId = Number(id);
+        const chats = window.store.getState().chats;
+        const selectedChat = chats.find(chat => chat.id === selectedChatId)!;
+        await ChatsController.getChatToken(selectedChatId)
+          .then(token => window.store.set({ 
+            messages: [], 
+            selectedChat: { id: selectedChatId, title: selectedChat.title, token },
+          }))
+          .catch(error => console.log(error));
+        this._createSocket();
+      },
+      sendMessage: (message: string) => {
+        this._socket?.sendMessage(message);
       },
     });
+    this._socket = null;
+  }
+
+  protected _createSocket() {
+    const state = window.store.getState();
+    const userId = state.user?.id;
+    const { id, token } = state.selectedChat!;
+    if (userId && id && token) {
+      if (this._socket) {
+        this._socket.closeConnection();
+      }
+      this._socket = new SocketController({ userId, chatId: id, token });
+    }
   }
 
   protected render(): string {
@@ -30,29 +63,36 @@ export class ChatPage extends Block<{}, TChatPageRefs> {
                 {{{ ChatList ref="chat_list" chats=chats onSelect=onSelect }}}
             </div>
         </div>
-        <div class="chat-page-main">
-            {{{ ChatMainHeader current_user=currentUser }}}
-            {{{ Divider }}}
-            {{{ ChatMainBody messages=messages }}}
-            {{{ Divider }}}
-            {{{ ChatMainControls }}}
-        </div>
-        {{#> Modal id="modal-add-user"}}
-            <div class="chat-page__modal">
-                <div>Добавить пользователя</div>
-                {{{ Input label="Логин" id="login-add-user" }}}
-                {{{ Button label="Добавить" }}}
-            </div>
-        {{/ Modal}}
-        {{#> Modal id="modal-delete-user"}}
-            <div class="chat-page__modal">
-                <div>Удалить пользователя</div>
-                {{{ Input label="Логин" id="login-delete-user" }}}
-                {{{ Button label="Удалить" }}}
-            </div>
-        {{/ Modal}}
+        ${window.store.getState().selectedChat 
+        ? `<div class="chat-page-main">
+              {{{ ChatMainHeader title=selectedChat.title }}}
+              {{{ Divider }}}
+              {{{ ChatMainBody }}}
+              {{{ Divider }}}
+              {{{ ChatMainControls sendMessage=sendMessage }}}
+            </div>` 
+        : ""}
+        {{{ ChatAddUserModal }}}
+        {{{ ChatDeleteUserModal }}}
+        {{{ ChatCreateModal }}}
       </div>
     `);
   }
 }
 
+export default connect(({ chats, user, selectedChat }) => ({ chats, user, selectedChat }))(ChatPage);
+
+// {{#> Modal id="modal-add-user"}}
+//             <div class="chat-page__modal">
+//                 <div>Добавить пользователя</div>
+//                 {{{ Input label="Логин" id="login-add-user" }}}
+//                 {{{ Button label="Добавить" }}}
+//             </div>
+//         {{/ Modal }}
+//         {{#> Modal id="modal-delete-user"}}
+//             <div class="chat-page__modal">
+//                 <div>Удалить пользователя</div>
+//                 {{{ Input label="Логин" id="login-delete-user" }}}
+//                 {{{ Button label="Удалить" }}}
+//             </div>
+//         {{/ Modal }}

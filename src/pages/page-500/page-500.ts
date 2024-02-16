@@ -1,10 +1,11 @@
 import { Block } from "../../core/Block";
-import { navigate } from "../../core/navigate";
+import { DEFAULT_PROPS, Router } from "../../core/Router";
 
 export class Page500 extends Block<{}> {
   constructor() {
+    const router = new Router(DEFAULT_PROPS);
     super({
-      onClick: () => navigate("chat"),
+      onClick: () => router.go("/messenger"),
     });
   }
 

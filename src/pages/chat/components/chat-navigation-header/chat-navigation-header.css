@@ -4,7 +4,7 @@
     &__profile {
         width: auto;
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-between;
         padding-bottom: 16px;
         &-wrapper {
             display: block;
