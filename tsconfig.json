@@ -1,12 +1,13 @@
 {
     "compilerOptions": {
-      "target": "ES2015",
+      "target": "es2015",
       "useDefineForClassFields": false,
-      "module": "ES2015",
-      "lib": ["ES2020", "WebWorker.ImportScripts", "DOM", "DOM.Iterable"],
+      "module": "es2015",
+      "lib": ["es2015", "WebWorker.ImportScripts", "DOM", "DOM.Iterable"],
       "skipLibCheck": true,
   
-      "moduleResolution": "node",
+      "moduleResolution": "Node",
+      "esModuleInterop": true,
       "resolveJsonModule": true,
       "isolatedModules": true,
       "noEmit": true,
@@ -19,8 +20,14 @@
       "sourceMap": true,
       "strictNullChecks": true
     },
+    "ts-node": {
+      "esm": true,
+      "experimentalSpecifierResolution": "node",
+      "transpileOnly": true
+    },
     "include": [
-      "src",
+      "/**/*.ts",
       "index.d.ts"
-    ]
+    ],
+    "exclude": ["node-modules"]
 }
