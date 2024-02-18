@@ -19,6 +19,6 @@ export class AvatarModalCloseButton extends Block<IAvatarModalCloseButtonProps, 
       <div class="modal__close">
         <img src={{icons "icon-close"}} alt="close">
       </div>
-    `)
+    `);
   }
 };

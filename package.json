@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "engines": {
-    "node": "16.13.2"
+    "node": "21.6.1"
   },
   "type": "module",
   "scripts": {
@@ -12,16 +12,37 @@
     "start": "vite build & node server.cjs",
     "preview": "vite preview",
     "express": "node server.cjs",
-    "lint": "eslint . --ext .ts,.tsx"
+    "lint": "eslint . --ext .ts,.tsx",
+    "test": "mocha --exit",
+    "prepare": "husky install"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint && npm run test"
+    }
   },
   "devDependencies": {
+    "@babel/preset-env": "7.23.9",
+    "@babel/preset-typescript": "7.23.3",
+    "@babel/register": "7.23.7",
+    "@types/chai": "4.3.11",
+    "@types/mocha": "10.0.6",
+    "@types/sinon": "^17.0.3",
+    "@types/sinon-chai": "3.2.12",
+    "chai": "4.3.7",
     "dotenv": "16.3.1",
     "eslint": "8.56.0",
-    "stylelint": "^16.1.0",
+    "husky": "8.0.0",
+    "jsdom": "24.0.0",
+    "mocha": "10.3.0",
+    "sinon": "17.0.1",
+    "sinon-chai": "3.7.0",
+    "stylelint": "16.1.0",
+    "ts-node": "10.9.2",
     "typescript": "5.3.3",
-    "vite": "5.0.8",
+    "vite": "5.1.3",
     "vite-plugin-eslint": "1.8.1",
-    "vite-plugin-stylelint": "^5.3.1"
+    "vite-plugin-stylelint": "5.3.1"
   },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "6.15.0",
@@ -31,6 +52,6 @@
     "postcss": "8.4.32",
     "postcss-custom-properties": "13.3.3",
     "postcss-nested": "6.0.1",
-    "vite-plugin-handlebars": "1.6.0"
+    "vite-plugin-handlebars": "2.0.0"
   }
 }

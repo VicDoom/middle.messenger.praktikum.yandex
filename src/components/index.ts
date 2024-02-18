@@ -1,4 +1,3 @@
-// import { Link } from "./link";
 import { Input } from "./input";
 import { Button } from "./button";
 import { Divider } from "./divider";
