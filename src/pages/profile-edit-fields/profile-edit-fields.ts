@@ -33,7 +33,7 @@ class ProfileEditFieldsPage extends Block<{}, IProfileEditFieldsPageRefs> {
           second_name: this.refs.second_name.value()!,
           display_name: this.refs.display_name.value()!,
           phone: this.refs.phone.value()!,
-        }
+        };
         if (!(
           !Validator.login(editUser.login) && 
           !Validator.email(editUser.email) &&

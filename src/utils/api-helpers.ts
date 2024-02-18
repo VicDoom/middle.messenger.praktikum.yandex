@@ -9,15 +9,15 @@ export function apiHasError (response: any, status: number): response is APIErro
     router.go("/page-500");
   }
   return response?.reason;
-}
+};
 
 const buildPathToResource = (resource: string | null) => {
   if(!resource) {
     return null;
   }
 
-  return `${API_HOST}/resources/${resource}`
-}
+  return `${API_HOST}/resources/${resource}`;
+};
 
 export const transformUser = (data: UserDTO): User => {
   return {
@@ -53,7 +53,7 @@ export const transformChats = (data: ChatDTO[]): Chat[] => {
       },
     } : null,
   }));
-}
+};
 
 export const transformMessage = (data: TMessageDTO): Message => {
   return {
@@ -62,5 +62,5 @@ export const transformMessage = (data: TMessageDTO): Message => {
     type: data.type,
     time: data.time,
     content: data.content,
-  }
-}
+  };
+};

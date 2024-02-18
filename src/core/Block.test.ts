@@ -29,7 +29,7 @@ describe("Block", () => {
           <span id="text">{{text}}</span>
           <button>{{text-button}}</button>
           <span id="error">{{error}}</span>
-        </div>`
+        </div>`;
       }
     };
 
