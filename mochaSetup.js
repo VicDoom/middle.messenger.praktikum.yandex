@@ -1,10 +1,10 @@
 import { JSDOM } from "jsdom";
-// import { Components } from "./src/components/index.ts";
-// import { registerComponent } from './src/core/register-component.ts';
+import { Components } from "./src/components/index.ts";
+import { registerComponent } from './src/core/register-component.ts';
 
-// Object.entries(Components).forEach(
-//   ([componentName, component]) => registerComponent(componentName, component)
-// )
+Object.entries(Components).forEach(
+  ([componentName, component]) => registerComponent(componentName, component)
+)
 
 // jsdom
 const jsdom = new JSDOM(`<body></body>`);
