@@ -13,7 +13,7 @@
     "preview": "vite preview",
     "express": "node server.cjs",
     "lint": "eslint . --ext .ts,.tsx",
-    "test": "mocha",
+    "test": "mocha --exit",
     "prepare": "husky install"
   },
   "husky": {
