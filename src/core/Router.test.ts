@@ -1,8 +1,8 @@
 import { Block, RefType } from "./Block";
 import { Router } from "./Router";
 import { expect } from "chai";
-import { LOCALHOST_HREF } from "../utils/constants";
 import sinon from "sinon";
+import { LOCALHOST_HREF } from "../utils/constants";
 
 describe("Router", () => {
   let TestRouter: Router<RefType, Block<{}, RefType, HTMLElement>>;

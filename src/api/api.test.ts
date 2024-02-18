@@ -35,49 +35,49 @@ describe("HTTPTransport", () => {
 
     const expectedURL = "?id=0&name=Name";
 
-    expect(request.url).to.eq(`${apiMock}${expectedURL}`);
+    expect(request?.url).to.eq(`${apiMock}${expectedURL}`);
   });
 
   it("GET request", async () => {
     api.get("");
     const request = fakeRequest;
 
-    expect(request.method).to.eq("GET");
+    expect(request?.method).to.eq("GET");
   });
 
   it("POST request", async () => {
     api.post("", { data: mockBody });
     const request = fakeRequest;
 
-    expect(request.url).to.eq(apiMock);
-    expect(request.requestBody).to.eq(JSON.stringify(mockBody));
-    expect(request.method).to.eq("POST");
+    expect(request?.url).to.eq(apiMock);
+    expect(request?.requestBody).to.eq(JSON.stringify(mockBody));
+    expect(request?.method).to.eq("POST");
   });
 
   it("PUT request", async () => {
     api.put("", { data: mockBody });
     const request = fakeRequest;
 
-    expect(request.url).to.eq(apiMock);
-    expect(request.requestBody).to.eq(JSON.stringify(mockBody));
-    expect(request.method).to.eq("PUT");
+    expect(request?.url).to.eq(apiMock);
+    expect(request?.requestBody).to.eq(JSON.stringify(mockBody));
+    expect(request?.method).to.eq("PUT");
   });
 
   it("PUT request Form Data", async () => {
     api.put("", { data: mockFormData, isFormData: true });
     const request = fakeRequest;
 
-    expect(request.url).to.eq(apiMock);
-    expect(request.requestBody).to.eq(mockFormData);
-    expect(request.method).to.eq("PUT");
+    expect(request?.url).to.eq(apiMock);
+    expect(request?.requestBody).to.eq(mockFormData);
+    expect(request?.method).to.eq("PUT");
   });
 
   it("DELETE request", async () => {
     api.delete("", { data: mockBody });
     const request = fakeRequest;
 
-    expect(request.url).to.eq(apiMock);
-    expect(request.requestBody).to.eq(JSON.stringify(mockBody));
-    expect(request.method).to.eq("DELETE");
+    expect(request?.url).to.eq(apiMock);
+    expect(request?.requestBody).to.eq(JSON.stringify(mockBody));
+    expect(request?.method).to.eq("DELETE");
   });
 });
