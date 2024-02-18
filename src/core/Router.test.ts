@@ -4,7 +4,7 @@ import { expect } from "chai";
 import { LOCALHOST_HREF } from "../utils/constants";
 import sinon from "sinon";
 
-describe.only("Router", () => {
+describe("Router", () => {
   let TestRouter: Router<RefType, Block<{}, RefType, HTMLElement>>;
   const clock = sinon.useFakeTimers();
 
@@ -12,17 +12,17 @@ describe.only("Router", () => {
     const router = new Router({ rootQuery: "main", errorRoute: "/error" });
     class DefaultPage extends Block<{}, {}> {
       protected render(): string {
-        return "<div id='default-page'></div>"
+        return "<div id='default-page'></div>";
       }
     }
     class HomePage extends Block<{}, {}> {
       protected render(): string {
-        return "<div id='home-page'></div>"
+        return "<div id='home-page'></div>";
       }
     }
     class ErrorPage extends Block<{}, {}> {
       protected render(): string {
-        return "<div id='error-page'></div>"
+        return "<div id='error-page'></div>";
       }
     }
     router
