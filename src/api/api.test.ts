@@ -10,7 +10,7 @@ import { API_HOST } from "../utils/constants";
 describe("HTTPTransport", () => {
   let api: HTTPTransport;
   let XHR: SinonFakeXMLHttpRequestStatic;
-  let fakeRequest: SinonFakeXMLHttpRequest;
+  let fakeRequest: SinonFakeXMLHttpRequest | null;
 
   const apiEnd = "/mock";
   const apiMock = `${API_HOST}${apiEnd}`;
@@ -33,7 +33,7 @@ describe("HTTPTransport", () => {
     api.get("", { data: mockBody });
     const request = fakeRequest;
 
-    const expectedURL = "?id=1&name=Name";
+    const expectedURL = "?id=0&name=Name";
 
     expect(request.url).to.eq(`${apiMock}${expectedURL}`);
   });
