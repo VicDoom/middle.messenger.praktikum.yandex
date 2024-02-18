@@ -12,7 +12,7 @@ const SKIP_MESSAGE_TYPE = ["pong", "user connected"];
 
 export class Socket<T> {
   socket: WebSocket;
-  private _ping: number;
+  private _ping: NodeJS.Timeout;
   private _getMessagesHandler: (value: T[]) => void;
   private _openConnectionHandler: () => void;
   _userId: number;
